@@ -5,7 +5,6 @@
 @section('containt')
 <div class="container">
     <div class="login">
-        <i class="bi bi-zoom-out"></i>asd
         <form id='login' method='POST' action="{{route('makeLogin')}}">
             @include('login_form')
         </form>
