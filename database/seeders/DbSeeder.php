@@ -21,6 +21,24 @@ class DbSeeder extends Seeder
                     'Direction'=>'ltr'
                 ],
                 'english'=>[
+                    'Menu'=>[
+                        'SystemLang'=>'Edit my language',          
+                        'Home'=>'Home',
+                        'Knows'=>'Knows',
+                        'Contracts'=>'Contracts',
+                        'Patent'=>'Patent',
+                        'Receipt'=>'Receipt',
+                        'Branches'=>'Branches',
+                        'ChangeLanguage'=>'Change language',
+                        'TestCultures'=>[
+                            'Name'=>'Test cultures',
+                            'Item'=>[
+                                'Test'=>'Test',
+                                'Cultures'=>'Cultures',
+                                'Packages'=>'Packages',
+                            ]
+                        ],
+                    ],
                     'AllNamesLanguage'=>[
                         'english'=>'English language'
                     ],
@@ -72,6 +90,17 @@ class DbSeeder extends Seeder
                         'HintUserCodePassword'=>'Enter code',
                         'UserEmailExist'=>'This email already exists.',
                         'AdminLogin'=>'seccessfully register admin'
+                    ],
+                    'Admin'=>[
+                        'Title'=>'Admin user',
+                    ],
+
+                    'AppSettingAdmin'=>[
+                        'Offcanvas'=>'Dark offcanvas',
+                        'Logout'=>'Logout',
+                        'AdminDashboard'=>'Salamatak for medical analysis and radiology',
+                        'BranchesCompany'=>'Select branches',
+                        'BranchMain'=>'Branch main',
                     ],
                 ]
             ]);

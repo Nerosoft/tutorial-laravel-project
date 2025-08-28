@@ -1,3 +1,15 @@
 .modal-header{
     justify-content: space-between;
 }
+.mybranch_active, .mybranch:hover{
+    background-color: orange;
+}
+.my_active{
+    color: orange !important;
+}
+.style_icon_menu{
+    width: 30px;
+}
+.offcanvas-body{
+    background-color: gray;
+}

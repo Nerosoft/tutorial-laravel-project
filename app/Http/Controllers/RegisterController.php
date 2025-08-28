@@ -34,7 +34,7 @@ class RegisterController extends LoginRegister implements ViewLanguage
         $this->getDb()->save();
         request()->session()->put('userId', request()->input('id'));
         request()->session()->put('superId', request()->input('id'));
-        return redirect()->route('home')->with('success',  $this->successfully);
+        return redirect()->route('Home')->with('success',  $this->successfully);
     }
     function getDb(){
         return $this->ob;
