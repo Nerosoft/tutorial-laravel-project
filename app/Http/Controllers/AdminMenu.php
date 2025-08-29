@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\mydb;
 class AdminMenu extends SettingPage
 {
-    function __construct(MyDatabase $obj, $state){
+    function __construct(MyDatabase | TableData $obj, $state){
         parent::__construct($obj->getDb()['Setting']['Language'],
         $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['Title'],
         $obj->getDb()['Setting']['Direction']);

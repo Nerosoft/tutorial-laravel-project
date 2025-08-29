@@ -30,7 +30,7 @@ class IsLogin
         )
             return $next($request);
         else if($request->session()->exists('userId') && $state === 'test')
-            return redirect()->route('home');
+            return redirect()->route('Home');
         else
             return redirect('/login');
     }

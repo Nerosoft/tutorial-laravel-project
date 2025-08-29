@@ -1,2 +1,5 @@
 @extends('layout')
-@extends('nav_admin')
+@section('containt')
+@include('nav_admin')
+@endsection
+

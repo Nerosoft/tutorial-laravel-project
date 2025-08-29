@@ -16,7 +16,7 @@ class Auth
     public function handle(Request $request, Closure $next, $state): Response
     {
         if($request->session()->exists('userId') && $state === 'admin')
-            return redirect()->route('home');
+            return redirect()->route('Home');
         else
             return $next($request);
     }
