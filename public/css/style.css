@@ -9,11 +9,16 @@
 }
 .style_icon_menu{
     width: 30px;
+    margin: 7px;
 }
 .offcanvas-body{
     background-color: gray;
 }
 
-.container{
+.start-page{
     margin-top: 57px;
+}
+
+.pointer{
+    cursor: pointer;
 }

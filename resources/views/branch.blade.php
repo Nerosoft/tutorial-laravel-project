@@ -1,7 +1,9 @@
 @extends('layout')
 @section('containt')
-<div class="container">
+<div class="start-page container">
     @include('nav_admin')
+    <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
+    @include('model_branch')
     <table id="example" class="table table-striped" >
         <thead>
             <tr>
@@ -32,7 +34,9 @@
                 <td>{{$branch->getCountry()}}</td>
                 <td>{{$branch->getFollowId()}}</td>
                 <td>
-                   
+                    @include('model_delete', ['name'=>$branch->getName(), 'index'=>$index])
+                   <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm($('#editForm{{$index}}').find('#brance-rays-name'), $('#editForm{{$index}}').find('#brance-rays-phone'), $('#editForm{{$index}}').find('#brance-rays-country'), $('#editForm{{$index}}').find('#brance-rays-governments'), $('#editForm{{$index}}').find('#brance-rays-city'), $('#editForm{{$index}}').find('#brance-rays-street'), $('#editForm{{$index}}').find('#brance-rays-building'), $('#editForm{{$index}}').find('#brance-rays-address'), $('#editForm{{$index}}').find('#brance-rays-follow option'), '#editModel{{$index}}', '{{$branch->getName()}}', '{{$branch->getPhone()}}', '{{$branch->getGovernments()}}', '{{$branch->getCity()}}', '{{$branch->getStreet()}}', '{{$branch->getBuilding()}}', '{{$branch->getAddress()}}', '{{$branch->getCountry()}}', '{{$branch->getFollowId()}}')"/>
+                    @include('model_branch')
                 </td>
             </tr>
             @endforeach            

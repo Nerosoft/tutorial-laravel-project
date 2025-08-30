@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class Page extends TableInformation
 {
-    function __construct(TableData $obj, $state){
+    function __construct(TableData | ViewLanguage2 $obj, $state){
         if(
         Route::currentRouteName() === 'branchMain'||
         Route::currentRouteName() === 'language.changeLanguage'||
@@ -25,6 +25,7 @@ class Page extends TableInformation
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
             ];
+            $this->successfulyMessage = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['MessageModelEdit'];
             $obj->makeValidation();
         }
         else if(

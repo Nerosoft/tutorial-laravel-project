@@ -25,7 +25,7 @@ class IsLogin
         // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Knows' 
         // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Patent'
         // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Receipt'
-        // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branch'
+        // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branches'
         // || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'ChangeLanguage'
         )
             return $next($request);

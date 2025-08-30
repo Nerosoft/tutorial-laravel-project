@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\mydb;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class BranchesController extends Page implements TableData
 {
@@ -33,7 +35,7 @@ class BranchesController extends Page implements TableData
         return $this->view;
     }
     public function getDataTable(){
-        return mydb::find(request()->session()->get('superId'))['Branches']?Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->getDataBase()[$this->language]['SelectBranchBox']):array();
+        return mydb::find(request()->session()->get('superId'))['Branches']?Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']):array();
     }
     function getDb(){
         return $this->ob;
@@ -64,10 +66,57 @@ class BranchesController extends Page implements TableData
         ]);
     }
     function makeValidation(){
-
+        $keys = $this->makeValidation2();
+        array_push($this->roll['id'], Rule::in(array_keys($keys)));
+    }
+    function makeAddBranch(){
+        request()->validate($this->roll, $this->message);
+        $this->obj->save();
+        $myBranch = $this->getDb()->toArray();
+        unset($myBranch['User']);
+        unset($myBranch['Branches']);
+        $myBranch['_id'] = array_key_last($this->obj['Branches']);
+        mydb::insert($myBranch);
+        return back()->with('success', $this->successfulyMessage);
+    }
+    function makeEditBranch(){
+        request()->validate($this->roll, $this->message);
+        $this->obj->save();
+        return back()->with('success', $this->successfulyMessage);
     }
     public function makeValidation2(){
-
+        $this->roll['brance_rays_name'] = ['required', 'min:3'];
+        $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
+        $this->roll['brance_rays_governments'] = ['required', 'min:3'];
+        $this->roll['brance_rays_city'] = ['required', 'min:3'];
+        $this->roll['brance_rays_street'] = ['required', 'min:3'];
+        $this->roll['brance_rays_building'] = ['required', 'min:3'];
+        $this->roll['brance_rays_address'] = ['required', 'min:3'];
+        $this->roll['brance_rays_country'] = ['required', 'min:3'];
+        $this->roll['brance_rays_follow'] = ['required', Rule::in(array_keys($this->branchInputOutput))];
+        $this->message['brance_rays_name.min'] = $this->error10;
+        $this->message['brance_rays_name.required'] = $this->error1;
+        $this->message['brance_rays_phone.regex'] = $this->error11;
+        $this->message['brance_rays_phone.required'] = $this->error2;
+        $this->message['brance_rays_governments.min'] = $this->error12;
+        $this->message['brance_rays_governments.required'] = $this->error3;
+        $this->message['brance_rays_city.min'] = $this->error13;
+        $this->message['brance_rays_city.required'] = $this->error4;
+        $this->message['brance_rays_street.min'] = $this->error14;
+        $this->message['brance_rays_street.required'] = $this->error5;
+        $this->message['brance_rays_building.min'] = $this->error15;
+        $this->message['brance_rays_building.required'] = $this->error6;
+        $this->message['brance_rays_address.min'] = $this->error16;
+        $this->message['brance_rays_address.required'] = $this->error7;
+        $this->message['brance_rays_country.min'] = $this->error17;
+        $this->message['brance_rays_country.required'] = $this->error8;
+        $this->message['brance_rays_follow.required'] = $this->error9;
+        $this->message['brance_rays_follow.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranceRaysFollowValue'];
+        $this->obj = mydb::find(request()->session()->get('superId'));
+        $arr = (array)$this->obj['Branches'];
+        $arr[isset($arr[request()->input('id')])?request()->input('id'):Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        $this->obj['Branches'] = $arr;
+        return $arr;
     }
     public function getRouteDelete(){
         return route('branch.delete');

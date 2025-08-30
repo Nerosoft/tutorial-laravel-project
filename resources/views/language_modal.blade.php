@@ -1,4 +1,4 @@
-<button form='login' type='submit' class="btn btn-primary" onclick="validForm()">{{$lang->button3}}</button>
+<button form='login' type='submit' class="btn btn-primary" onclick="validForm('#login')">{{$lang->button3}}</button>
 <button type="button" onClick="openForm('#exampleModal')" class="btn btn-success">{{$lang->button1}}</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

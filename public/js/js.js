@@ -40,3 +40,23 @@ function createToast(message, type){
     $(this).remove();
     });
 };
+
+
+function validForm(form){
+    $(form).addClass('was-validated');
+}
+
+function handleInputPhone(event, error1, error2) {
+    if (event.validity.valueMissing)
+        event.setCustomValidity(error1);
+    else if (event.validity.patternMismatch)
+        event.setCustomValidity(error2);
+    else
+        event.setCustomValidity('');
+}
+function handleInputSelect(event, error1) {
+    if (event.validity.valueMissing)
+        event.setCustomValidity(error1);
+    else
+        event.setCustomValidity('');
+}
