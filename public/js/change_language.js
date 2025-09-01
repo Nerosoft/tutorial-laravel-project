@@ -6,5 +6,5 @@ let setting = [
 
 function displayModel(form, value){
     openForm(form);
-    $(index).find('#lang_name').val(value);
+    $(form).find('#lang_name').val(value);
 }
