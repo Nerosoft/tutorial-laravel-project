@@ -1,7 +1,7 @@
 @extends('layout')
 @section('containt')
+@include('nav_admin')
 <div class="start-page container">
-    @include('nav_admin')
     <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
     @include('model_branch')
     <table id="example" class="table table-striped" >

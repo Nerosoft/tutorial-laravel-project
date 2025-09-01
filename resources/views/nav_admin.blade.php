@@ -8,6 +8,22 @@
     </ul>
  
 
+    <div class="dropdown">
+      <a class="btn btn-danger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{$lang->selectBox3}}
+      </a>
+      <ul class="dropdown-menu">        
+      @foreach($lang->MyBranch as $keyBranch=>$branch)
+      <form class="form_branch" method="POST" action="{{ route('branchMain') }}">
+        @csrf
+        <input type="hidden" value="{{$keyBranch}}" name="id">
+        <li class="dropdown-item">
+            <button type="submit" class="{{request()->session()->get('userId') === $keyBranch? 'btn btn-danger' : 'btn btn-primary'}}">{{$branch->getName()}}</button>
+        </li>
+      </form>
+      @endforeach
+      </ul>
+  </div>
 
 
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">

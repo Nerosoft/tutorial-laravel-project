@@ -35,7 +35,7 @@ class BranchesController extends Page implements TableData
         return $this->view;
     }
     public function getDataTable(){
-        return mydb::find(request()->session()->get('superId'))['Branches']?Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']):array();
+        return Branch::fromArray(array_reverse($this->getDb()['Branches']??(array)mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
     }
     function getDb(){
         return $this->ob;
@@ -71,17 +71,17 @@ class BranchesController extends Page implements TableData
     }
     function makeAddBranch(){
         request()->validate($this->roll, $this->message);
-        $this->obj->save();
+        $this->getDb()->save();
         $myBranch = $this->getDb()->toArray();
         unset($myBranch['User']);
         unset($myBranch['Branches']);
-        $myBranch['_id'] = array_key_last($this->obj['Branches']);
+        $myBranch['_id'] = array_key_last($this->getDb()['Branches']);
         mydb::insert($myBranch);
         return back()->with('success', $this->successfulyMessage);
     }
     function makeEditBranch(){
         request()->validate($this->roll, $this->message);
-        $this->obj->save();
+        $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeValidation2(){
@@ -112,10 +112,10 @@ class BranchesController extends Page implements TableData
         $this->message['brance_rays_country.required'] = $this->error8;
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranceRaysFollowValue'];
-        $this->obj = mydb::find(request()->session()->get('superId'));
-        $arr = (array)$this->obj['Branches'];
+        $this->ob = request()->session()->get('userId') === request()->session()->get('superId') ? $this->getDb() : mydb::find(request()->session()->get('superId'));
+        $arr = (array)$this->getDb()['Branches'];
         $arr[isset($arr[request()->input('id')])?request()->input('id'):Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
-        $this->obj['Branches'] = $arr;
+        $this->getDb()['Branches'] = $arr;
         return $arr;
     }
     public function getRouteDelete(){

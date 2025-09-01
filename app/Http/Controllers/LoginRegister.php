@@ -9,10 +9,10 @@ use Illuminate\Validation\Rule;
 class LoginRegister extends SettingPage
 {
     function __construct($state, ViewLanguage $obj){
-        $this->errorUserEmail = $obj->getDb()[isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']][$state]['UserEmail'];
-        $this->errorUserEmailRequired = $obj->getDb()[isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']][$state]['UserEmailRequired'];
-        $this->errorUserPassword = $obj->getDb()[isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']][$state]['UserPassword'];
-        $this->errorUserPasswordRequired = $obj->getDb()[isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']][$state]['UserPasswordRequired'];
+        $this->errorUserEmail = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserEmail'] ?? $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserEmail'];
+        $this->errorUserEmailRequired = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserEmailRequired']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserEmailRequired'];
+        $this->errorUserPassword = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserPassword']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserPassword'];
+        $this->errorUserPasswordRequired = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserPasswordRequired']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserPasswordRequired'];
         if(Route::currentRouteName() === 'makeLogin' || Route::currentRouteName() === 'makeRegister'){
             parent::__construct(isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']);
             $this->roll = [
@@ -35,37 +35,37 @@ class LoginRegister extends SettingPage
         }else if(isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))])){
             parent::__construct(unserialize(request()->cookie($obj->getDb()['_id'])),
             $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['Title'],
-            $obj->getDb()['Setting']['Direction']);
+            $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]['Html']['Direction']);
             $obj->setupViewLang();
-            $this->button1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonLanguage'];
-            $this->button2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonSaveLanguage'];
-            $this->button3 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonLoginUser'];
-            $this->label1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelSettingLanguage'];
+            $this->button1 = $obj->getDb()[$this->language][$state]['ButtonLanguage'];
+            $this->button2 = $obj->getDb()[$this->language][$state]['ButtonSaveLanguage'];
+            $this->button3 = $obj->getDb()[$this->language][$state]['ButtonLoginUser'];
+            $this->label1 = $obj->getDb()[$this->language][$state]['LabelSettingLanguage'];
             $this->myAppId = $obj->getDb()['_id'];
-            $this->label2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelUserEmail'];
-            $this->label3 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelUserPassword'];
-            $this->label4 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelLoginUser'];
-            $this->hint1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['HintUserEmail'];
-            $this->hint2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['HintUserPassword'];
-            foreach ($obj->getDb()[$obj->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value)
+            $this->label2 = $obj->getDb()[$this->language][$state]['LabelUserEmail'];
+            $this->label3 = $obj->getDb()[$this->language][$state]['LabelUserPassword'];
+            $this->label4 = $obj->getDb()[$this->language][$state]['LabelLoginUser'];
+            $this->hint1 = $obj->getDb()[$this->language][$state]['HintUserEmail'];
+            $this->hint2 = $obj->getDb()[$this->language][$state]['HintUserPassword'];
+            foreach ($obj->getDb()[$this->language]['AllNamesLanguage'] as $key => $value)
                     $this->myRadios[$key] = new MyLanguage($value);
         }else{
             Cookie::queue($obj->getDb()['_id'], serialize($obj->getDb()['Setting']['Language']),2628000);
             parent::__construct($obj->getDb()['Setting']['Language'],
             $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['Title'],
-            $obj->getDb()['Setting']['Direction']);
+            $obj->getDb()[$obj->getDb()['Setting']['Language']]['Html']['Direction']);
             $obj->setupViewLang();
-            $this->button1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonLanguage'];
-            $this->button2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonSaveLanguage'];
-            $this->button3 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['ButtonLoginUser'];
-            $this->label1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelSettingLanguage'];
+            $this->button1 = $obj->getDb()[$this->language][$state]['ButtonLanguage'];
+            $this->button2 = $obj->getDb()[$this->language][$state]['ButtonSaveLanguage'];
+            $this->button3 = $obj->getDb()[$this->language][$state]['ButtonLoginUser'];
+            $this->label1 = $obj->getDb()[$this->language][$state]['LabelSettingLanguage'];
             $this->myAppId = $obj->getDb()['_id'];
-            $this->label2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelUserEmail'];
-            $this->label3 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelUserPassword'];
-            $this->label4 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['LabelLoginUser'];
-            $this->hint1 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['HintUserEmail'];
-            $this->hint2 = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['HintUserPassword'];
-            foreach ($obj->getDb()[$obj->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value)
+            $this->label2 = $obj->getDb()[$this->language][$state]['LabelUserEmail'];
+            $this->label3 = $obj->getDb()[$this->language][$state]['LabelUserPassword'];
+            $this->label4 = $obj->getDb()[$this->language][$state]['LabelLoginUser'];
+            $this->hint1 = $obj->getDb()[$this->language][$state]['HintUserEmail'];
+            $this->hint2 = $obj->getDb()[$this->language][$state]['HintUserPassword'];
+            foreach ($obj->getDb()[$this->language]['AllNamesLanguage'] as $key => $value)
                     $this->myRadios[$key] = new MyLanguage($value);
         }
     }
