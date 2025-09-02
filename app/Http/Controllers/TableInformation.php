@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class TableInformation extends AdminMenu
 {
-    function __construct(TableData $obj, $state){
+    function __construct(TableData | ViewLanguage $obj, $state){
         parent::__construct($obj, $state);
         $this->table1 = $obj->getDb()[$this->language]['TableInfo']['Ssearch'];
         $this->table2 = $obj->getDb()[$this->language]['TableInfo']['InfoEmpty'];

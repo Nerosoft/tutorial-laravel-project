@@ -67,5 +67,5 @@
         </table>
     </div>
 <script src="{{asset('js/change_language.js')}}" type="text/javascript"></script>
-@extends('table_setting')
+@include('table_setting')
 @endsection

@@ -41,7 +41,7 @@ class Menu
         });
     }
     public function getIconByKey($key){
-        if($key === 'Home')//--
+        if($key === 'Admin')//--
             return 'box-arrow-left.svg';
         else if($key === 'SystemLang')
                 return 'gear.svg';  
@@ -65,5 +65,35 @@ class Menu
             return 'hospital.svg';
         else if($key === 'Patent')
             return 'people-fill.svg';
+        else if($key === 'Login')
+            return 'arrows.svg';
+        else if($key === 'Register')
+            return 'arrows.svg';
+        else if($key === 'Menu')
+            return 'menu-button-fill.svg';
+        else if($key === 'TableInfo')
+            return 'person-add.svg';
+        else if($key === 'AppSettingAdmin')
+            return 'box.svg';
+        else if($key === 'SelectTestBox')
+            return 'hospital.svg';
+        else if($key === 'SelectBranchBox')
+            return 'gear.svg';
+        else if($key === 'SelectNationalityBox')
+            return 'clipboard2-x-fill.svg';
+        else if($key === 'SelectGenderBox')
+            return 'arrow-left-right.svg';
+        else if($key === 'PaymentMethodBox')
+            return 'globe-americas.svg';
+        else if($key === 'OptionTestBox')
+            return 'pencil.svg';
+        else if($key === 'CutomLang')
+            return 'badge-3d-fill.svg';
+        else if($key === 'AllNamesLanguage')
+            return 'bag-check-fill.svg';
+        else if($key === 'CheckBox')
+            return 'balloon-heart.svg';
+        else //if($key === 'Html')
+            return 'bar-chart-line-fill.svg';
     }
 }

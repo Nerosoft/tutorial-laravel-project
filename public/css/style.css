@@ -8,8 +8,8 @@
     width: 30px;
     margin: 7px;
 }
-.offcanvas-body{
-    background-color: gray;
+.offcanvas-body, .dropdown-menu{
+    background-color: gray!important;
 }
 
 .start-page{
