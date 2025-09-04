@@ -3,10 +3,9 @@
 <h4>{{$lang->label4}}</h4>
 <div class="form-group">
     <label for="email">{{$lang->label2}}</label>
-    <input type="text" class="form-control" id="email" name="email"
+    <input type="email" class="form-control" id="email" name="email"
         value="{{old('email')}}" placeholder="{{$lang->hint1}}"
         title="{{$lang->hint1}}"
-        email
         required 
         oninvalid="IsEmail(this, '{{$lang->errorUserEmailRequired}}', '{{$lang->errorUserEmail}}')"
         oninput="IsEmail(this, '{{$lang->errorUserEmailRequired}}', '{{$lang->errorUserEmail}}')">

@@ -52,6 +52,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
         $this->model2 = $this->getDb()[$this->language]['SystemLang']['TitleDirection'];
         $this->button2 = $this->getDb()[$this->language]['SystemLang']['SaveDirection'];
         $this->button3 = $this->getDb()[$this->language]['SystemLang']['SaveText'];
+        $this->WordHint = $this->getDb()[$this->language]['SystemLang']['WordHint'];
     }
     function makeValidation(){
         $this->roll = [

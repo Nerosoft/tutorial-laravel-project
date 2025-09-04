@@ -8,10 +8,6 @@ class Menu
     private $ChangeLanguage;
     private $TestCultures;
     private $Branches;
-    private $Knows;
-    private $Contracts;
-    private $Receipt;
-    private $Patent;
     /**
      * Create a new class instance.
      */
@@ -29,10 +25,6 @@ class Menu
             $this->Home = $ob->getDb()[$language]['Menu']['Home'];
             $this->TestCultures = new MenuItem($ob->getDb()[$language]['Menu']['TestCultures']['Name'], $ob->getDb()[$language]['Menu']['TestCultures']['Item']);
             $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
-            $this->Receipt = $ob->getDb()[$language]['Menu']['Receipt'];
-            $this->Patent = $ob->getDb()[$language]['Menu']['Patent'];
-            $this->Knows = $ob->getDb()[$language]['Menu']['Knows'];
-            $this->Contracts = $ob->getDb()[$language]['Menu']['Contracts'];
         }
     }
     public function getMenu(){
@@ -55,16 +47,8 @@ class Menu
             return 'globe.svg';
         else if($key === 'Packages')
             return 'box.svg';
-        else if($key === 'Knows')
-            return 'lightbulb.svg';
-        else if($key === 'Contracts')
-            return 'pencil.svg';
-        else if($key === 'Receipt')
-            return 'person-add.svg';
         else if($key === 'Branches')
             return 'hospital.svg';
-        else if($key === 'Patent')
-            return 'people-fill.svg';
         else if($key === 'Login')
             return 'arrows.svg';
         else if($key === 'Register')
@@ -79,20 +63,10 @@ class Menu
             return 'hospital.svg';
         else if($key === 'SelectBranchBox')
             return 'gear.svg';
-        else if($key === 'SelectNationalityBox')
-            return 'clipboard2-x-fill.svg';
-        else if($key === 'SelectGenderBox')
-            return 'arrow-left-right.svg';
-        else if($key === 'PaymentMethodBox')
-            return 'globe-americas.svg';
-        else if($key === 'OptionTestBox')
-            return 'pencil.svg';
         else if($key === 'CutomLang')
             return 'badge-3d-fill.svg';
         else if($key === 'AllNamesLanguage')
             return 'bag-check-fill.svg';
-        else if($key === 'CheckBox')
-            return 'balloon-heart.svg';
         else //if($key === 'Html')
             return 'bar-chart-line-fill.svg';
     }

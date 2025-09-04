@@ -44,6 +44,8 @@
                                                                 <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
                                                             </div>
                                                                 <input
+                                                                title="{{$lang->WordHint}}"
+                                                                placeholder="{{$lang->WordHint}}"
                                                                 minlength="3" 
                                                                 required
                                                                 oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
@@ -85,7 +87,9 @@
                                                                         <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
                                                                     </div>
                                                                         <input
-                                                                        minlength="3" 
+                                                                        minlength="3"
+                                                                        title="{{$lang->WordHint}}" 
+                                                                        placeholder="{{$lang->WordHint}}" 
                                                                         required 
                                                                         oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
                                                                         oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
@@ -131,6 +135,8 @@
                                                             </div>
                                                                 <input 
                                                                 minlength="3" 
+                                                                title="{{$lang->WordHint}}"
+                                                                placeholder="{{$lang->WordHint}}"
                                                                 required
                                                                 oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
                                                                 oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
@@ -203,6 +209,8 @@
                                                 </div>
                                                     <input 
                                                     minlength="3" 
+                                                    title="{{$lang->WordHint}}"
+                                                    placeholder="{{$lang->WordHint}}"
                                                     required
                                                     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
                                                     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
@@ -243,6 +251,8 @@
                                                         </div>
                                                             <input 
                                                             minlength="3" 
+                                                            title="{{$lang->WordHint}}"
+                                                            placeholder="{{$lang->WordHint}}"
                                                             required
                                                             oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
                                                             oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
@@ -320,7 +330,9 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
                                                 </div>
                                                     <input 
-                                                    minlength="3" 
+                                                    minlength="3"
+                                                    title="{{$lang->WordHint}}" 
+                                                    placeholder="{{$lang->WordHint}}" 
                                                     required
                                                     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
                                                     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"

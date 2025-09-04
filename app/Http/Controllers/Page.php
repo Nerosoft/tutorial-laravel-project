@@ -14,11 +14,7 @@ class Page extends TableInformation
         Route::currentRouteName() === 'language.change'||
         Route::currentRouteName() === 'language.delete'||
         Route::currentRouteName() === 'language.copy'||
-        Route::currentRouteName() === 'editPatientServices'||
-        Route::currentRouteName() === 'editPatent'||
         Route::currentRouteName() === 'editTest'||
-        Route::currentRouteName() === 'editContract'||
-        Route::currentRouteName() === 'editKnows'||
         Route::currentRouteName() === 'editBranchRays'||
         Route::currentRouteName() === 'deleteItem'||
         Route::currentRouteName() === 'branch.delete'){
@@ -34,11 +30,7 @@ class Page extends TableInformation
         }
         else if(
         Route::currentRouteName() === 'lang.createLanguage'||
-        Route::currentRouteName() === 'createPatientServices'||
-        Route::currentRouteName() === 'createPatent'||
         Route::currentRouteName() === 'createTest'||
-        Route::currentRouteName() === 'createContract'||
-        Route::currentRouteName() === 'createKnows'||
         Route::currentRouteName() === 'addBranchRays'){
             $this->successfulyMessage = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['MessageModelCreate'];
             $obj->makeValidation2();
