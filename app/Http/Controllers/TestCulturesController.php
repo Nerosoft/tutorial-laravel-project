@@ -71,10 +71,12 @@ class TestCulturesController extends Page implements TableData
         ]);
     }
     public function makeAddTest($id){
+        request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditTest($id){
+        request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
