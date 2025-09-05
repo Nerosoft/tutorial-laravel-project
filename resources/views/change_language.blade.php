@@ -1,14 +1,12 @@
 @extends('layout')
 @section('containt')
 @include('nav_admin')
-    <div class="start-page container">   
-        <div class="text-left"> 
-            <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
-        <div>
+    <div class="start-page container">
+        <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
         @include('model_change_language')
-        <div class="text-center"> 
-            <h1 id="greeting">{{$lang->label3}}</h1>
-            <p id="description">{{$lang->label4}}</p>
+        <div class=""> 
+            <h1 id="greeting" class="text-center">{{$lang->label3}}</h1>
+            <p id="description" class="text-center">{{$lang->label4}}</p>
         <div>
         <table id="example" class="table table-striped">
             <thead>
