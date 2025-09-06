@@ -35,7 +35,7 @@ class MyController extends Page implements ViewLanguage2
         else if(request()->session()->get('superId') === request()->input('id') && Route::currentRouteName() === 'branchMain'){
             array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
             $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
-            $this->messageServer = (mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']??null]['Branches']['BranchesChange']).' '.(mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']??null]['AppSettingAdmin']['BranchMain']??null)??null;
+            $this->messageServer = (mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange']).' '.(mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
         }
         else if(Route::currentRouteName() === 'branchMain'){
             array_push($this->roll['id'], Rule::in(array_keys((array)mydb::find(request()->session()->get('superId'))['Branches'])));
