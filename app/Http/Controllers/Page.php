@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
+use App\Models\mydb;
 
 class Page extends TableInformation
 {
@@ -19,7 +21,7 @@ class Page extends TableInformation
         Route::currentRouteName() === 'deleteItem'||
         Route::currentRouteName() === 'branch.delete'){
             $this->roll = [
-                'id'=>['required']
+                'id'=>['required', Rule::in(array_keys($obj->getDb()[$state]??mydb::find(request()->session()->get('superId'))[$state]??$obj->getDb()[$obj->getDb()['Setting']['Language']]['AllNamesLanguage']))]
             ];
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
@@ -33,7 +35,7 @@ class Page extends TableInformation
         Route::currentRouteName() === 'createTest'||
         Route::currentRouteName() === 'addBranchRays'){
             $this->successfulyMessage = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['MessageModelCreate'];
-            $obj->makeValidation2();
+            $obj->makeValidation();
         }
         else{
             parent::__construct($obj, $state);

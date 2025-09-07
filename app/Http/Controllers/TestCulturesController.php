@@ -16,10 +16,6 @@ class TestCulturesController extends Page implements TableData
     public function getRouteDelete(){
         return route('deleteItem', request()->route('id'));
     }
-     public function makeValidation(){
-        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDb()[request()->route('id')])));
-        $this->makeValidation2();
-    }
     public function setupViewLang(){
         $this->table8 = $this->getDb()[$this->language][request()->route('id')]['TableName'];
         $this->table9 = $this->getDb()[$this->language][request()->route('id')]['TablePrice'];
@@ -34,7 +30,7 @@ class TestCulturesController extends Page implements TableData
         $this->hint2 = $this->getDb()[$this->language][request()->route('id')]['HintPrice'];
         $this->hint3 = $this->getDb()[$this->language][request()->route('id')]['HintShortcut'];
     }
-    public function makeValidation2(){
+    public function makeValidation(){
         $this->roll['name'] = ['required', 'min:3'];
         $this->roll['shortcut'] = ['required', 'min:3'];
         $this->roll['price'] = ['required', 'integer'];

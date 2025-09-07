@@ -7,6 +7,5 @@ use Illuminate\Http\Request;
 interface TableData extends ViewLanguage
 {
     public function getDataTable();
-    public function makeValidation2();
     public function getRouteDelete();
 }

@@ -17,7 +17,6 @@ class MyController extends Page implements ViewLanguage2
            $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
             $this->messageServer = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Delete'];
             $arr = (array)$this->getDb()['Branches'];
-            array_push($this->roll['id'], Rule::in(array_keys($arr)));
             array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
             unset($arr[request()->input('id')]);
             $this->getDb()['Branches'] = $arr;
@@ -27,24 +26,16 @@ class MyController extends Page implements ViewLanguage2
             $this->messageServer = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Delete'];
             $this->ob = mydb::find(request()->session()->get('superId'));
             $arr = (array)$this->getDb()['Branches'];
-            array_push($this->roll['id'], Rule::in(array_keys($arr)));
             array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
             unset($arr[request()->input('id')]);
             $this->getDb()['Branches'] = $arr;
-        }  
-        else if(request()->session()->get('superId') === request()->input('id') && Route::currentRouteName() === 'branchMain'){
-            array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
-            $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
-            $this->messageServer = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
         }
         else if(Route::currentRouteName() === 'branchMain'){
-            array_push($this->roll['id'], Rule::in(array_keys((array)mydb::find(request()->session()->get('superId'))['Branches'])));
             array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
             $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
             $this->messageServer = (mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']??null]['Branches']['BranchesChange']??null).' '.(mydb::find(request()->session()->get('superId'))['Branches'][request()->input('id')]['Name']??null);
         }
         else if(Route::currentRouteName() === 'language.delete'){
-            array_push($this->roll['id'], Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'])));
             array_push($this->roll['id'], Rule::notIn($this->getDb()['Setting']['Language']));
             $this->messageServer = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'];
             $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used'];
@@ -57,13 +48,11 @@ class MyController extends Page implements ViewLanguage2
         }
         //clint
         else if(Route::currentRouteName() === 'makeChangeLanguage'){
-            array_push($this->roll['id'], Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'])));
             array_push($this->roll['id'], Rule::notIn(unserialize(request()->cookie(request()->input('userAdmin')))??null));
             $this->messageServer = ($this->getDb()[request()->input('id')]['ChangeLanguage']['ChangeLang']??null).($this->getDb()[request()->input('id')]['AllNamesLanguage'][request()->input('id')]??null);
             $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used'];
         }//admin
         else{//'language.change'
-            array_push($this->roll['id'], Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'])));
             array_push($this->roll['id'], Rule::notIn($this->getDb()['Setting']['Language']));
             $this->messageServer = ($this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['ChangeLang']).($this->getDb()[request()->input('id')]['AllNamesLanguage'][request()->input('id')]??null);
             $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used'];
@@ -74,8 +63,12 @@ class MyController extends Page implements ViewLanguage2
     }
     public function __construct(){
         $this->ob = request()->session()->get('userId')?mydb::find(request()->session()->get('userId')):(mydb::find(request()->input('userAdmin'))?mydb::find(request()->input('userAdmin')):mydb::first());
-        parent::__construct($this, Route::currentRouteName() === 'branch.delete' || Route::currentRouteName() === 'branchMain'?'Branches':'ChangeLanguage');
-        request()->validate($this->roll, $this->message);
+        if(request()->session()->get('superId') === request()->input('id') && request()->input('id') != request()->session()->get('userId') && Route::currentRouteName() === 'branchMain')
+            $this->messageServer = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
+        else{
+            parent::__construct($this, Route::currentRouteName() === 'branch.delete' || Route::currentRouteName() === 'branchMain'?'Branches':'ChangeLanguage');
+            request()->validate($this->roll, $this->message);
+        }
     }
     public function makeChangeBranch(){   
         request()->session()->put('userId', request()->input('id'));

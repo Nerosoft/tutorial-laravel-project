@@ -65,10 +65,6 @@ class BranchesController extends Page implements TableData
             'active'=>'Branches',
         ]);
     }
-    function makeValidation(){
-        $keys = $this->makeValidation2();
-        array_push($this->roll['id'], Rule::in(array_keys($keys)));
-    }
     function makeAddBranch(){
         request()->validate($this->roll, $this->message);
         $this->getDb()->save();
@@ -84,7 +80,7 @@ class BranchesController extends Page implements TableData
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
-    public function makeValidation2(){
+    public function makeValidation(){
         $this->roll['brance_rays_name'] = ['required', 'min:3'];
         $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['brance_rays_governments'] = ['required', 'min:3'];
@@ -116,7 +112,6 @@ class BranchesController extends Page implements TableData
         $arr = (array)$this->getDb()['Branches'];
         $arr[isset($arr[request()->input('id')])?request()->input('id'):Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
         $this->getDb()['Branches'] = $arr;
-        return $arr;
     }
     public function getRouteDelete(){
         return route('branch.delete');

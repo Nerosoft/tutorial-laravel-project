@@ -45,10 +45,6 @@ class LangController extends Page implements TableData
         ]);
     }
     function makeValidation(){
-        $this->makeValidation2();
-        array_push($this->roll['id'], Rule::in(array_keys($this->allNames)));
-    }
-    function makeValidation2(){
         $this->roll['lang_name'] = ['required', 'min:3'];
         $this->message['lang_name.required'] = $this->error1;
         $this->message['lang_name.min'] = $this->error2;
