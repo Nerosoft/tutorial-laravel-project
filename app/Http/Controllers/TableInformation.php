@@ -15,6 +15,5 @@ class TableInformation extends AdminMenu
         $this->table5 = $obj->getDb()[$this->language]['TableInfo']['LengthMenu'];
         $this->table6 = $obj->getDb()[$this->language]['TableInfo']['InfoFiltered'];
         $obj->setupViewLang();
-        $this->tableData = $obj->getDataTable();
     }
 }

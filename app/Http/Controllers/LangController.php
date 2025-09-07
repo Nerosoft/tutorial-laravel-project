@@ -15,7 +15,7 @@ class LangController extends Page implements TableData
         $this->allNames = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
         parent::__construct($this, 'ChangeLanguage');
     }
-     function index(){
+    function index(){
         return $this->view;
     }
     function getDataTable(){
@@ -55,9 +55,6 @@ class LangController extends Page implements TableData
             $myLang['AllNamesLanguage'][request()->input('id')??$this->newKey] = request()->input('lang_name');
             $this->getDb()[$key] = $myLang;
         }
-    }
-    function getRouteDelete(){
-        return route('language.delete');
     }
     function makeAddLanguage(){
         $myLanguage = $this->getDb()['MyLanguage'];

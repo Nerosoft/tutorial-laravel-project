@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="deleteForm{{$index}}" action="{{ $lang->actionDelete }}" method="POST">
+                <form id="deleteForm{{$index}}" action="{{ $actionDelete }}" method="POST">
                     {{ $lang->messageModelDelete }}<spam>-{{ $name }}</spam>
                     @csrf
                     @include('my_id', ['myAppId'=>$index])

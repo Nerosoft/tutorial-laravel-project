@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($lang->tableData as $index=>$branch)
+            @foreach($lang->getDataTable() as $index=>$branch)
             <tr>
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$branch->getName()}}</td>
@@ -34,7 +34,7 @@
                 <td>{{$branch->getCountry()}}</td>
                 <td>{{$branch->getFollowId()}}</td>
                 <td>
-                    @include('model_delete', ['name'=>$branch->getName(), 'index'=>$index])
+                    @include('model_delete', ['name'=>$branch->getName(), 'actionDelete'=>route('branch.delete')])
                    <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm($('#editForm{{$index}}').find('#brance-rays-name'), $('#editForm{{$index}}').find('#brance-rays-phone'), $('#editForm{{$index}}').find('#brance-rays-country'), $('#editForm{{$index}}').find('#brance-rays-governments'), $('#editForm{{$index}}').find('#brance-rays-city'), $('#editForm{{$index}}').find('#brance-rays-street'), $('#editForm{{$index}}').find('#brance-rays-building'), $('#editForm{{$index}}').find('#brance-rays-address'), $('#editForm{{$index}}').find('#brance-rays-follow option'), '#editModel{{$index}}', '{{$branch->getName()}}', '{{$branch->getPhone()}}', '{{$branch->getGovernments()}}', '{{$branch->getCity()}}', '{{$branch->getStreet()}}', '{{$branch->getBuilding()}}', '{{$branch->getAddress()}}', '{{$branch->getCountry()}}', '{{$branch->getFollowId()}}')"/>
                     @include('model_branch')
                 </td>

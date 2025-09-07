@@ -13,9 +13,6 @@ class TestCulturesController extends Page implements TableData
     public function getDataTable(){
         return $this->getDb()[request()->route('id')]?Test::fromArray(array_reverse($this->getDb()[request()->route('id')]), $this->inputOutPut):array();
     }
-    public function getRouteDelete(){
-        return route('deleteItem', request()->route('id'));
-    }
     public function setupViewLang(){
         $this->table8 = $this->getDb()[$this->language][request()->route('id')]['TableName'];
         $this->table9 = $this->getDb()[$this->language][request()->route('id')]['TablePrice'];

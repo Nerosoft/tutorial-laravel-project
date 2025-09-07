@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($lang->tableData as $index=>$myLang)
+                @foreach($lang->getDataTable() as $index=>$myLang)
                 <tr>
                     <th>{{$loop->index+1}}</th>
                     <th>{{$myLang->getName()}}</th>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         @if($index !== $lang->language)
-                        @include('model_delete', ['name'=>$myLang->getName()])
+                        @include('model_delete', ['name'=>$myLang->getName(), 'actionDelete'=>route('language.delete')])
                         @endif
                     </th>
                 </tr>

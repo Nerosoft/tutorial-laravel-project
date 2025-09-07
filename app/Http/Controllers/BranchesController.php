@@ -114,7 +114,4 @@ class BranchesController extends Page implements TableData
         $arr[isset($arr[request()->input('id')])?request()->input('id'):Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
         $this->getDb()['Branches'] = $arr;
     }
-    public function getRouteDelete(){
-        return route('branch.delete');
-    }
 }

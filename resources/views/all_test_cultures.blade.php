@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($lang->tableData as $index=>$test)
+            @foreach($lang->getDataTable() as $index=>$test)
             <tr>
                 <th>{{$loop->index+1}}</th>
                 <th>{{$test->getName()}}</th>
@@ -24,7 +24,7 @@
                 <th>{{$test->getPrice()}}</th>
                 <th>{{$test->getInputOutputLabId()}}</th>
                 <th>
-                @include('model_delete', ['name'=>$test->getName()])
+                @include('model_delete', ['name'=>$test->getName(), 'actionDelete'=>route('deleteItem', request()->route('id'))])
                 <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#name'), $('#editForm{{$index}}').find('#shortcut'), $('#editForm{{$index}}').find('#price'), $('#editForm{{$index}}').find('#input-output-lab option'), '{{$test->getName()}}', '{{$test->getShortcut()}}', '{{$test->getPrice()}}', '{{$test->getInputOutputLabId()}}')"/>
                 @include('create_edit_tests')
                 </th>

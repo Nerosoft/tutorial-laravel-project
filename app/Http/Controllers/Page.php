@@ -49,7 +49,6 @@ class Page extends TableInformation
             $this->messageModelDelete = $obj->getDb()[$this->language][$state]['MessageModelDelete'];
             $this->buttonModelDelete = $obj->getDb()[$this->language][$state]['ButtonModelDelete'];
             $this->successfully1 = $obj->getDb()[$this->language][$state]['LoadMessage'];
-            $this->actionDelete = $obj->getRouteDelete();
         }
     }
 }
