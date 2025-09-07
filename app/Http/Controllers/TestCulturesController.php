@@ -31,6 +31,7 @@ class TestCulturesController extends Page implements TableData
         $this->hint3 = $this->getDb()[$this->language][request()->route('id')]['HintShortcut'];
     }
     public function makeValidation(){
+        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
         $this->roll['name'] = ['required', 'min:3'];
         $this->roll['shortcut'] = ['required', 'min:3'];
         $this->roll['price'] = ['required', 'integer'];

@@ -27,7 +27,6 @@ class Page extends TableInformation
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
             ];
-            $this->successfulyMessage = $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['MessageModelEdit'];
             $obj->makeValidation();
         }
         else if(

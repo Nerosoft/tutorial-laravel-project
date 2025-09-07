@@ -45,6 +45,7 @@ class LangController extends Page implements TableData
         ]);
     }
     function makeValidation(){
+        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
         $this->roll['lang_name'] = ['required', 'min:3'];
         $this->message['lang_name.required'] = $this->error1;
         $this->message['lang_name.min'] = $this->error2;

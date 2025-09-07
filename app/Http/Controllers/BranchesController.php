@@ -81,6 +81,7 @@ class BranchesController extends Page implements TableData
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeValidation(){
+        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
         $this->roll['brance_rays_name'] = ['required', 'min:3'];
         $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['brance_rays_governments'] = ['required', 'min:3'];
