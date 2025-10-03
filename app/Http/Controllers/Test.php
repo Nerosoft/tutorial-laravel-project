@@ -10,18 +10,13 @@ class Test
     private $Shortcut;
     private $Price;
     private $InputOutputLab;
-    private $Id;
     //----------------------
-    public function __construct($Name, $Shortcut, $Price, $InputOutputLab, $id = null)
+    public function __construct($Name, $Shortcut, $Price, $InputOutputLab)
     {
         $this->Name = $Name;
         $this->Shortcut = $Shortcut;
         $this->Price = $Price;
         $this->InputOutputLab = $InputOutputLab;
-        $this->Id = $id;
-    }
-    public function getMyId(){
-        return $this->Id;
     }
     public function getShortcut(){
         return $this->Shortcut;
@@ -41,7 +36,7 @@ class Test
     public static function fromArray(array $data, $inputOutput): array {
         $test = array();
         foreach ($data as $key=>$data) 
-            $test[$key] =  new Test($data['Name'], $data['Shortcut'], $data['Price'], $inputOutput[$data['InputOutputLab']], $data['Id']);
+            $test[$key] =  new Test($data['Name'], $data['Shortcut'], $data['Price'], $inputOutput[$data['InputOutputLab']]);
         return $test;
     }
 }

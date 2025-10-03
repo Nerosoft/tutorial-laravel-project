@@ -43,7 +43,7 @@ class TestCulturesController extends Page implements TableData
         $this->message['input-output-lab.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
         $arr = (array)$this->getDb()[request()->route('id')];
-        $arr[Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier());
+        $arr[Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
         $this->getDb()[request()->route('id')] = $arr;
     }
     public function __construct(){
