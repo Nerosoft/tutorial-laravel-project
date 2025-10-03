@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\mydb;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 class TestCulturesController extends Page implements TableData
 {
     public function getDb(){
@@ -42,7 +43,7 @@ class TestCulturesController extends Page implements TableData
         $this->message['input-output-lab.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
         $arr = (array)$this->getDb()[request()->route('id')];
-        $myKey = request()->input('id')?request()->input('id'):$this->generateUniqueIdentifier();
+        $myKey = Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier();
         $arr[$myKey] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$myKey);
         $this->getDb()[request()->route('id')] = $arr;
     }
