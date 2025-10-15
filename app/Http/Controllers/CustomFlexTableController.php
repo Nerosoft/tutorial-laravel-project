@@ -40,15 +40,15 @@ class CustomFlexTableController extends Page implements TableData
             foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
                 $lang = $this->getDb()[$code];
                 $lang['Menu']['FlexTable'][$key] = request()->input('name');
-                $lang[$key] = $lang['TablePage'];
+                $lang[$key] = $lang['TablePage']['Info'];
                 $lang['CutomLang'][$key] = request()->input('name');
                 for ($i=0; $i < request()->input('input_number'); $i++) {
                     $key2 = $this->generateUniqueIdentifier();
-                    $lang[$key]['TableHead'][$key2] = $lang['CustomTable']['InputNameTable'];
-                    $lang[$key]['Label'][$key2] = $lang['CustomTable']['InputLabel'];
-                    $lang[$key]['Hint'][$key2] = $lang['CustomTable']['InputHint'];
-                    $lang[$key]['ErrorsMessageReq'][$key2] = $lang['CustomTable']['InputErrorsMessageReq'];
-                    $lang[$key]['ErrorsMessageInv'][$key2] = $lang['CustomTable']['InputErrorsMessageInv'];
+                    $lang[$key]['TableHead'][$key2] = $lang['TablePage']['Input']['InputNameTable'];
+                    $lang[$key]['Label'][$key2] = $lang['TablePage']['Input']['InputLabel'];
+                    $lang[$key]['Hint'][$key2] = $lang['TablePage']['Input']['InputHint'];
+                    $lang[$key]['ErrorsMessageReq'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageReq'];
+                    $lang[$key]['ErrorsMessageInv'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageInv'];
                 }
                 $this->getDb()[$code] = $lang;
             }
