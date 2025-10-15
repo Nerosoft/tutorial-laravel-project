@@ -402,13 +402,9 @@ class DbSeeder extends Seeder
                         'InputNumberTableIsInv'=>'Input Numper table Invalid',
                         'LabelInputNumber'=>'Input Numper',
                         'HintInputNumber'=>'enter Input Numper table',
-                        'InputNameTable'=>'Name',
-                        'InputLabel'=>'Name',
-                        'InputHint'=>'Enter name value',
-                        'InputErrorsMessageReq'=>'error name reqired',
-                        'InputErrorsMessageInv'=>'error name invalid',
                     ],
                     'TablePage'=>[
+                        'Info'=>[
                         'LoadMessage'=>'welcome in page table',
                         'ScreenModelDelete'=>'Screen delete table',
                         'MessageModelDelete'=>'Do you want to delete table',
@@ -426,6 +422,14 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete table',
                         'IdIsReq'=>'Id Required',
                         'IdIsInv'=>'Id Invalid',
+                        ],
+                        'Input'=>[
+                            'InputNameTable'=>'Name',
+                            'InputLabel'=>'Name',
+                            'InputHint'=>'Enter name value',
+                            'InputErrorsMessageReq'=>'error name reqired',
+                            'InputErrorsMessageInv'=>'error name invalid',
+                        ]
                     ],
                 ],
                 'english'=>[
