@@ -17,7 +17,6 @@ class HomeController extends AdminMenu implements MyDatabase
     function index(){
         return view('home',[
             'lang'=> $this,
-            'active'=>'Home',
         ]);
     }
 }

@@ -7,7 +7,9 @@ class Menu
     private $SystemLang;
     private $ChangeLanguage;
     private $TestCultures;
+    private $FlexTable;
     private $Branches;
+    private $CustomTable;
     /**
      * Create a new class instance.
      */
@@ -23,8 +25,16 @@ class Menu
             $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
             $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDb()[$language]['Menu']['Home'];
-            $this->TestCultures = new MenuItem($ob->getDb()[$language]['Menu']['TestCultures']['Name'], $ob->getDb()[$language]['Menu']['TestCultures']['Item']);
+            $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
+            $name = $allTest[array_key_first($allTest)];
+            unset($allTest[array_key_first($allTest)]);
+            $this->TestCultures = new MenuItem($name, $allTest);
+            $flexTable = $ob->getDb()[$language]['Menu']['FlexTable'];
+            $name = $flexTable[array_key_first($flexTable)];
+            unset($flexTable[array_key_first($flexTable)]);
+            $this->FlexTable = new MenuItem($name, $flexTable);
             $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
+            $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
         }
     }
     public function getMenu(){
@@ -33,7 +43,7 @@ class Menu
         });
     }
     public function getIconByKey($key){
-        if($key === 'Admin')//--
+        if($key === 'Home')//--
             return 'box-arrow-left.svg';
         else if($key === 'SystemLang')
                 return 'gear.svg';  
@@ -50,7 +60,7 @@ class Menu
         else if($key === 'Branches')
             return 'hospital.svg';
         else if($key === 'Login')
-            return 'arrows.svg';
+            return 'database-exclamation.svg';
         else if($key === 'Register')
             return 'arrows.svg';
         else if($key === 'Menu')
@@ -67,7 +77,13 @@ class Menu
             return 'badge-3d-fill.svg';
         else if($key === 'AllNamesLanguage')
             return 'bag-check-fill.svg';
-        else //if($key === 'Html')
+        else if($key === 'CustomTable')
+            return 'arrow-up-circle-fill.svg';
+        else if($key === 'TablePage')
+            return 'calendar4-event.svg';
+        else if($key === 'Html')
             return 'bar-chart-line-fill.svg';
+        else
+            return 'camera2.svg';
     }
 }

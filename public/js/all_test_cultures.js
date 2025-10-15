@@ -8,6 +8,7 @@ let setting = [
 ];
 
 function displayEditForm(id, name, shortcut, price, input_output_lab, nameTset, shortcutTest, priceTest, inputOutputLabTest){
+    removeClass(id);
     openForm(id);
     name.val(nameTset);
     shortcut.val(shortcutTest);

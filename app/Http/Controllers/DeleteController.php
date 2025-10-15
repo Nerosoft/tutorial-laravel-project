@@ -11,18 +11,20 @@ class DeleteController extends Page implements ViewLanguage2
         return $this->ob;
     }
     public function makeValidation(){
-        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDb()[request()->route('id')])));
+        $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['Delete'];
+        $arr = $this->getDb()[request()->route('id')];
+        unset($arr[request()->input('id')]);
+        if(empty($arr))
+            unset($this->getDb()[request()->route('id')]);
+        else
+            $this->getDb()[request()->route('id')] = $arr;
     }
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
         parent::__construct($this, request()->route('id'));
-        $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['Delete'];
     }
-    public function action($id){
+    public function action(){
         request()->validate($this->roll, $this->message);
-        $arr = $this->getDb()[request()->route('id')];
-        unset($arr[request()->input('id')]);
-        $this->getDb()[request()->route('id')] = $arr;
         $this->getDb()->save();
         return back()->with('success', $this->successfully1);
     }

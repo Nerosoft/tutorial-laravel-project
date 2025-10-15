@@ -30,9 +30,6 @@ class Test
     public function getInputOutputLabId(){
         return $this->InputOutputLab;
     }
-    public function getObject(){
-        return get_object_vars($this);
-    }
     public static function fromArray(array $data, $inputOutput): array {
         $test = array();
         foreach ($data as $key=>$data) 

@@ -28,7 +28,7 @@
                 oninput="handleInput(this ,'{{$lang->error8}}', '{{$lang->error9}}')">
             </div>
         </form>
-        @include('language_modal')
+        @include('all_model.language_modal')
     </div>
 </div>
 

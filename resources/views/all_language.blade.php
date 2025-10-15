@@ -1,12 +1,12 @@
 @extends('layout')
 @section('containt')
-@include('nav_admin')  
+@include('nav_language')  
 <div class="start-page container">
     <table id="example" class="table table-striped" >
         <thead>
             <tr>
                 <th>{{$lang->table9}}</th>
-                @if($active === 'SystemLang')
+                @if(isset($active))
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->table7}}</th>
@@ -17,347 +17,69 @@
             $index = 1
         @endphp
         <tbody id="table-data">
-            @if($active === 'SystemLang')
+            @if(isset($active))
                 @foreach($lang->getDataTable() as $myNameLang=>$data)
                     @foreach($data as $key=>$myData)
-                        @if($key === 'Menu')
-                            @foreach($myData as $key2=>$menu)      
+                        @foreach($myData as $key2=>$items)
+                            @if(is_array($items))
+                                @foreach($items as $key3=>$item)
+                                    <tr>
+                                        <th>{{$index++}}</th>
+                                        <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
+                                        <th>{{$item}}</th>
+                                        @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2, 'item'=>$key3])])
+                                    </tr>
+                                @endforeach
+                            @elseif($key === 'Html')
                                 <tr>
                                     <th>{{$index++}}</th>
                                     <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
-                                    <th>{{is_array($menu) ? $menu['Name'] : $menu}}</th>
-                                    <th>
-                                        <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">{{$lang->model1}}</h5>
-                                                        <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                            <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2]) }}" method="POST">
-                                                            @csrf
-                                                            <div class="input-group input-group-lg">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                            </div>
-                                                                <input
-                                                                title="{{$lang->WordHint}}"
-                                                                placeholder="{{$lang->WordHint}}"
-                                                                minlength="3" 
-                                                                required
-                                                                oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                type="text" name="word" id="word" value="{{is_array($menu) ? $menu['Name'] : $menu}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                            </div>
-                                                        </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{is_array($menu) ? $menu['Name'] : $menu}}')"/> 
-                                    </th>
+                                    <th>{{$items}}</th>
+                                    @include('all_model.direction', ['idForm'=>'editForm'.$index, 'idModel'=>'editModel'.$index, 'title'=>$lang->model2, 'button'=>$lang->button2, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2])])
                                 </tr>
-                                @if(is_array($menu))
-                                    @foreach($menu['Item'] as $key3=>$item)
-                                        <tr>
-                                            <th>{{$index++}}</th>
-                                            <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
-                                            <th>{{$item}}</th>
-                                            <th>
-                                                <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">{{$lang->model1}}</h5>
-                                                                <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                    <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2, 'item'=>$key3]) }}" method="POST">
-                                                                    @csrf
-                                                                    <div class="input-group input-group-lg">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                                    </div>
-                                                                        <input
-                                                                        minlength="3"
-                                                                        title="{{$lang->WordHint}}" 
-                                                                        placeholder="{{$lang->WordHint}}" 
-                                                                        required 
-                                                                        oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                        oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                        type="text" name="word" id="word" value="{{$item}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                                    </div>
-                                                                </form>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                                                </div> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{$item}}')"/>
-                                            </th>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            @endforeach
-                        @else
-                        @foreach($myData as $key2=>$item)
-                            <tr>
-                                <th>{{$index++}}</th>
-                                <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
-                                <th>{{$item}}</th>
-                                <th>
-                                    @if($key !== 'Html')
-                                        <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">{{$lang->model1}}</h5>
-                                                        <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                            <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2]) }}" method="POST">
-                                                            @csrf
-                                                            <div class="input-group input-group-lg">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                            </div>
-                                                                <input 
-                                                                minlength="3" 
-                                                                title="{{$lang->WordHint}}"
-                                                                placeholder="{{$lang->WordHint}}"
-                                                                required
-                                                                oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                                type="text" name="word" id="word" value="{{$item}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                            </div>
-                                                        </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                                        </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{$item}}')"/>
-                                    @else
-                                        <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">{{$lang->model2}}</h5>
-                                                        <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                            <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2]) }}" method="POST">
-                                                            @csrf
-                                                            <h3>{{$lang->label4}} <span id="label" class="badge text-bg-secondary"></span></h3>
-                                                            <select id="mySelectBox" name="word" class="form-select" aria-label="Default select example">
-                                                            <option class="dropdown-item" {{$item === 'ltr'? 'selected':''}} value="ltr">{{$lang->Left}}</option>
-                                                            <option class="dropdown-item" {{$item === 'rtl'? 'selected':''}} value="rtl">{{$lang->Right}}</option>
-                                                            </select>
-                                                        </form>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary">{{$lang->button3}}</button>
-                                                        </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm2('#editModel{{$index}}', $('#editForm{{$index}}').find('#mySelectBox option'), '{{$item}}')"/>
-                                    @endif
-                                </th>
-                            </tr>
+                            @else
+                                <tr>
+                                    <th>{{$index++}}</th>
+                                    <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
+                                    <th>{{$items}}</th>
+                                    @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2])])
+                                </tr>
+                            @endif
                         @endforeach
-                        @endif
                     @endforeach
                 @endforeach
-            @elseif($activeItem === 'Menu')
-                @foreach($lang->getDataTable() as $myKeyMenu=>$menu)      
-                    <tr>
-                        <th>{{$index++}}</th>
-                        <th>{{is_array($menu) ? $menu['Name'] : $menu}}</th>
-                        <th>
-                            <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{$lang->model1}}</h5>
-                                            <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                                <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$active, 'id'=>$activeItem, 'name'=>$myKeyMenu]) }}" method="POST">
-                                                @csrf
-                                                <div class="input-group input-group-lg">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                </div>
-                                                    <input 
-                                                    minlength="3" 
-                                                    title="{{$lang->WordHint}}"
-                                                    placeholder="{{$lang->WordHint}}"
-                                                    required
-                                                    oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                    oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                    type="text" name="word" id="word" value="{{is_array($menu) ? $menu['Name'] : $menu}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-                                            </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                            </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{is_array($menu) ? $menu['Name'] : $menu}}')"/> 
-                        </th>
-                    </tr>
-                    @if(is_array($menu))
-                        @foreach($menu['Item'] as $key3=>$item)
+            
+            @else
+                @foreach($lang->getDataTable() as $key=>$items)
+                    @if(is_array($items))
+                        @foreach($items as $key3=>$item)
                             <tr>
                                 <th>{{$index++}}</th>
                                 <th>{{$item}}</th>
-                                <th>
-                                    <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">{{$lang->model1}}</h5>
-                                                    <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                        <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$active, 'id'=>$activeItem, 'name'=>$myKeyMenu, 'item'=>$key3]) }}" method="POST">
-                                                        @csrf
-                                                        <div class="input-group input-group-lg">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                        </div>
-                                                            <input 
-                                                            minlength="3" 
-                                                            title="{{$lang->WordHint}}"
-                                                            placeholder="{{$lang->WordHint}}"
-                                                            required
-                                                            oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                            oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                            type="text" name="word" id="word" value="{{$item}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                        </div>
-                                                    </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                                    </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{$item}}')"/> 
-                                </th>
+                                @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key, 'item'=>$key3])])
                             </tr>
                         @endforeach
+                    @elseif(request()->route('id') === 'Html')
+                        <tr>
+                            <th>{{$index++}}</th>
+                            <th>{{$items}}</th>
+                            @include('all_model.direction', ['idForm'=>'editForm'.$index, 'idModel'=>'editModel'.$index, 'title'=>$lang->model2, 'button'=>$lang->button2, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key])])
+                            
+                        </tr>
+                    @else
+                        <tr>
+                            <th>{{$index++}}</th>
+                            <th>{{$items}}</th>
+                            @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key])])                            
+                        </tr>
                     @endif
                 @endforeach
-            @elseif($activeItem === 'Html')
-                @foreach($lang->getDataTable() as $key=>$data)
-                    <tr>
-                        <th>{{$index++}}</th>
-                        <th>{{$data}}</th>
-                        <th>
-                            <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{$lang->model2}}</h5>
-                                            <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                                <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$active, 'id'=>$activeItem, 'name'=>$key]) }}" method="POST">
-                                                @csrf
-                                                <h3>{{$lang->label4}} <span id="label" class="badge text-bg-secondary"></span></h3>
-                                                <select id="mySelectBox" name="word" class="form-select" aria-label="Default select example">
-                                                <option class="dropdown-item" {{$data === 'ltr'? 'selected':''}} value="ltr">{{$lang->Left}}</option>
-                                                <option class="dropdown-item" {{$data === 'rtl'? 'selected':''}} value="rtl">{{$lang->Right}}</option>
-                                                </select>
-                                            </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary">{{$lang->button3}}</button>
-                                            </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm2('#editModel{{$index}}', $('#editForm{{$index}}').find('#mySelectBox option'), '{{$data}}')"/>
-                        </th>
-                    </tr>
-                @endforeach
-            @else
-                @foreach($lang->getDataTable() as $key=>$data)
-                    <tr>
-                        <th>{{$index++}}</th>
-                        <th>{{$data}}</th>
-                        <th>
-                            <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{$lang->model1}}</h5>
-                                            <button type="button" onclick="closeForm('#editModel{{$index}}')" class="btn btn-dark">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                                <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$active, 'id'=>$activeItem, 'name'=>$key]) }}" method="POST">
-                                                @csrf
-                                                <div class="input-group input-group-lg">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label3}}</span>
-                                                </div>
-                                                    <input 
-                                                    minlength="3"
-                                                    title="{{$lang->WordHint}}" 
-                                                    placeholder="{{$lang->WordHint}}" 
-                                                    required
-                                                    oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                    oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-                                                    type="text" name="word" id="word" value="{{$data}}" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
-                                                </div>
-                                            </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" form="editForm{{$index}}" class="btn-save btn btn-primary" onclick="validForm('#editForm{{$index}}')">{{$lang->button3}}</button>
-                                            </div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{$data}}')"/>
-                        </th>
-                    </tr>
-                @endforeach
             @endif
-        </tbody>
-
-            
+        </tbody>       
         <tfoot>
             <tr>
                 <th>{{$lang->table9}}</th>
-                @if($active === 'SystemLang')
+                @if(isset($active))
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->table7}}</th>
@@ -367,7 +89,7 @@
         </table>
 </div>
 <script type="text/javascript">
-    let setting = @json($active === 'SystemLang') ? [
+    let setting = @json(isset($active)) ? [
                 { 'searchable': true },
                 { 'searchable': false },
                 { 'searchable': true },

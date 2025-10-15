@@ -3,9 +3,8 @@ let setting = [
     { 'searchable': true, className: "text-left" },
     { 'searchable': false }
 ];
-
-function displayModel(id, value){
+function displayEditForm(id, name){
     removeClass(id);
     openForm(id);
-    $(id).find('#lang_name').val(value);
+    $(id).find('#name').val(name);
 }

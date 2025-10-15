@@ -18,15 +18,14 @@ class SystemLangController extends TableInformation implements ViewLanguage
             $this->makeValidation();
         }else
             parent::__construct($this, 'SystemLang');
+
     }
-    public function index($nameLanguage = null, $id = 'SystemLang'){
+    public function index($nameLanguage = null, $id = null){
         return view('all_language', $nameLanguage === null?[
             'lang'=> $this,
-            'active'=>$id,
+            'active'=>'SystemLang',
         ]:[
             'lang'=> $this,
-            'active'=>$nameLanguage,
-            'activeItem'=>$id,
         ]);
     }
     public function getDataTable(){
@@ -65,7 +64,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
         $this->roll['word' ] = ['required', request()->route('id') !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])];
         $this->roll['myLang'] = ['required', Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage']))];
         $this->roll['name'] = ['required', function ($attribute, $value, $fail){
-            if(!isset($this->getDb()[request()->route('lang')][request()->route('id')][request()->route('name')]['Item'][request()->route('item')]) && request()->route('item') !== null){
+            if(request()->route('item') !== null && !isset($this->getDb()[request()->route('lang')][request()->route('id')][request()->route('name')][request()->route('item')])){
                 $fail($this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
                 $fail($this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
             }else if(!isset($this->getDb()[request()->route('lang')][request()->route('id')][request()->route('name')]))
@@ -83,12 +82,10 @@ class SystemLangController extends TableInformation implements ViewLanguage
     function makeEditLanguage($lang, $id, $name, $item = null){
         Validator::make([...request()->all(), 'myLang'=>$lang, 'id'=>$id, 'name'=>$name, 'item'=>$item], $this->roll, $this->message)->validate();
         $var1 = $this->getDb()[$lang];
-        if($id === 'Menu' && $item === null && is_array($var1[$id][$name]))
-            $var1[$id][$name]['Name'] = request()->input('word');
-        else if($id === 'Menu' && $item !== null)
-            $var1[$id][$name]['Item'][$item] = request()->input('word');
+        if($item === null)
+            $var1[$id][$name] = request()->input('word');
         else
-            $var1[$id === $lang ? $lang : $id][$name] = request()->input('word');
+            $var1[$id][$name][$item] = request()->input('word');
         $this->getDb()[$lang] = $var1;
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);

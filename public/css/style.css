@@ -11,11 +11,12 @@
 .offcanvas-body, .dropdown-menu{
     background-color: gray!important;
 }
-
 .start-page{
     margin-top: 57px;
 }
-
 .pointer{
     cursor: pointer;
+}
+.text-left{
+    text-align: left!important;
 }

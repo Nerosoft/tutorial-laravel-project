@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\mydb;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 
 class BranchesController extends Page implements TableData
 {
@@ -62,7 +63,6 @@ class BranchesController extends Page implements TableData
         $this->selectBox1 = $this->getDb()[$this->language]['Branches']['WithRaysOut'];
         $this->view = view('Branch', [
             'lang'=>$this,
-            'active'=>'Branches',
         ]);
     }
     function makeAddBranch(){
@@ -81,7 +81,7 @@ class BranchesController extends Page implements TableData
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches'][Route::currentRouteName() === 'editBranchRays'?'MessageModelEdit':'MessageModelCreate'];
         $this->roll['brance_rays_name'] = ['required', 'min:3'];
         $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['brance_rays_governments'] = ['required', 'min:3'];

@@ -8,7 +8,7 @@
         <form id='login' method='POST' action="{{route('makeLogin')}}">
             @include('login_form')
         </form>
-        @include('language_modal')
+        @include('all_model.language_modal')
     </div>
 </div>
 

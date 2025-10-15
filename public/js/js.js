@@ -45,6 +45,9 @@ function createToast(message, type){
 function validForm(form){
     $(form).addClass('was-validated');
 }
+function removeClass(id){
+    $(id).find('form').removeClass('was-validated');
+}
 
 function handleInputPhone(event, error1, error2) {
     if (event.validity.valueMissing)

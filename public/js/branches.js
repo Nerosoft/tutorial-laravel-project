@@ -13,6 +13,7 @@ let setting = [
 ];
 
 function displayEditForm(brance_rays_name, brance_rays_phone, brance_rays_country, brance_rays_governments, brance_rays_city, brance_rays_street, brance_rays_building, brance_rays_address, brance_rays_follow, id, nameTest, phoneTest, countryTest, governmentsTest, cityTest, streetTest, buildingTest, addressTest, followTest){
+    removeClass(id);
     openForm(id);
     brance_rays_name.val(nameTest);
     brance_rays_phone.val(phoneTest);

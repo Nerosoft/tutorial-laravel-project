@@ -29,7 +29,7 @@ class TestCulturesController extends Page implements TableData
         $this->hint3 = $this->getDb()[$this->language][request()->route('id')]['HintShortcut'];
     }
     public function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
+        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')][Route::currentRouteName() === 'editTest'?'MessageModelEdit':'MessageModelCreate'];
         $this->roll['name'] = ['required', 'min:3'];
         $this->roll['shortcut'] = ['required', 'min:3'];
         $this->roll['price'] = ['required', 'integer'];
@@ -61,15 +61,9 @@ class TestCulturesController extends Page implements TableData
         return view('all_test_cultures',[
                 'lang'=> $this,
                 'active'=>'TestCultures',
-                'activeItem'=>$id,        
         ]);
     }
-    public function makeAddTest($id){
-        request()->validate($this->roll, $this->message);
-        $this->getDb()->save();
-        return back()->with('success', $this->successfulyMessage);
-    }
-    public function makeEditTest($id){
+    public function makeAddEditTest(){
         request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
