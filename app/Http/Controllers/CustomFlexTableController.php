@@ -37,13 +37,15 @@ class CustomFlexTableController extends Page implements TableData
             $this->message['input_number.integer'] = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
             $this->message['input_number.between'] = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
             $key = $this->generateUniqueIdentifier();
+            $myInputKey = array();
+             for ($i=0; $i < request()->input('input_number'); $i++)
+                array_push($myInputKey, $this->generateUniqueIdentifier());
             foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
                 $lang = $this->getDb()[$code];
                 $lang['Menu']['FlexTable'][$key] = request()->input('name');
                 $lang[$key] = $lang['TablePage']['Info'];
                 $lang['CutomLang'][$key] = request()->input('name');
-                for ($i=0; $i < request()->input('input_number'); $i++) {
-                    $key2 = $this->generateUniqueIdentifier();
+                foreach ($myInputKey as $key2){
                     $lang[$key]['TableHead'][$key2] = $lang['TablePage']['Input']['InputNameTable'];
                     $lang[$key]['Label'][$key2] = $lang['TablePage']['Input']['InputLabel'];
                     $lang[$key]['Hint'][$key2] = $lang['TablePage']['Input']['InputHint'];
