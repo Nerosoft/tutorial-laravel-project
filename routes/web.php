@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ActionControllers\BranchDeleteController;
 use App\Http\Controllers\ActionControllers\MainBranchController;
 use App\Http\Controllers\ActionControllers\DeleteLangController;
 use App\Http\Controllers\ActionControllers\AdminChangeLangController;
@@ -38,9 +37,6 @@ Route::controller(LoginController::class)->group(function (){
 Route::controller(RegisterController::class)->group(function (){
     Route::get('/register/{id?}','index')->middleware(Auth::class.':admin');
     Route::post('/makeRegister','makeRegister')->name('makeRegister')->middleware(Auth::class.':admin');
-});
-Route::controller(BranchDeleteController::class)->group(function (){
-    Route::post('/deleteBranch/{id?}', 'makeDeleteMyBranch')->name('branch.delete')->middleware(IsLogin::class.':admin');
 });
 Route::controller(MainBranchController::class)->group(function (){
     Route::post('/branchMain', 'makeChangeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
@@ -91,6 +87,7 @@ Route::controller(CustomFlexTableController::class)->group(function () {
 });
 Route::controller(DeleteController::class)->group(function () {
     Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':test');
+    Route::post('/deleteItembranch/{id?}', 'action2')->name('branch.delete')->middleware(IsLogin::class.':test');
 });
 Route::controller(LogoutController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout')->middleware(IsLogin::class.':admin');

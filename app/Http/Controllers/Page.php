@@ -10,9 +10,21 @@ use App\Models\mydb;
 class Page extends TableInformation
 {
     function __construct(TableData | ViewLanguage2 $obj, $state){
-        if(Route::currentRouteName() === 'branchMain'|| Route::currentRouteName() === 'branch.delete'||
-        Route::currentRouteName() === 'editBranchRays'|| Route::currentRouteName() === 'editTest' || 
-        Route::currentRouteName() === 'deleteItem' || Route::currentRouteName() === 'editFlexTable'){
+        if(Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
+            $this->message = [
+                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
+                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
+                'not_in'=> $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['Used']
+            ];
+            $obj->ob = mydb::find(request()->session()->get('superId'));
+            $this->roll = [
+                'id'=>['required', Rule::in(array_keys((array)$obj->getDb()[$state])), Rule::notIn(request()->session()->get('userId'))]
+            ];
+            $obj->makeValidation();
+        }
+        else if(Route::currentRouteName() === 'branchMain'|| Route::currentRouteName() === 'editBranchRays'||
+        Route::currentRouteName() === 'editTest' || Route::currentRouteName() === 'deleteItem' ||
+        Route::currentRouteName() === 'editFlexTable' || Route::currentRouteName() === 'branch.delete'){
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys($obj->getDb()[$state]??(array)mydb::find(request()->session()->get('superId'))[$state]))]
             ];
@@ -33,12 +45,12 @@ class Page extends TableInformation
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editTable' || Route::currentRouteName() === 'deleteTable'){
             $this->roll = [
-                'id'=>['required', Rule::in(array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable'])), Rule::notIn(array_key_first($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable']))]
+                'id'=>['required', Rule::in(array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable'])), Rule::notIn(array_key_first($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable']))]
             ];
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
-                'id.not_in'=>$this->getDb()[$this->getDb()['Setting']['Language']][$state]['IdIsInv']
+                'id.not_in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
             ];
             $obj->makeValidation();
         }else if(

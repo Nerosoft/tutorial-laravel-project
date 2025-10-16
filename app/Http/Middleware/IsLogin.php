@@ -17,6 +17,7 @@ class IsLogin
     public function handle(Request $request, Closure $next, $state): Response
     {
         if($request->session()->exists('userId') && $state === 'admin' 
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branches' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages'
