@@ -12,6 +12,8 @@ class DeleteController extends Page implements ViewLanguage2
     }
     public function makeValidation(){
         $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['Delete'];
+       if(request()->session()->get('superId') !== request()->session()->get('userId') && request()->route('id') === 'Branches')
+            $this->ob = mydb::find(request()->session()->get('superId'));
         $arr = $this->getDb()[request()->route('id')];
         unset($arr[request()->input('id')]);
         if(empty($arr))

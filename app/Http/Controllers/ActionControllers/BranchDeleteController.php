@@ -13,15 +13,10 @@ class BranchDeleteController extends DeleteController
         parent::__construct();
         array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
         $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
-        if(request()->session()->get('superId') !== request()->session()->get('userId'))
-            $this->ob = mydb::find(request()->session()->get('superId'));
-        $arr = (array)$this->getDb()['Branches'];
-        unset($arr[request()->input('id')]);
-        $this->getDb()['Branches'] = $arr;
-        request()->validate($this->roll, $this->message);
+        $this->location = $this->action();
         mydb::find(request()->input('id'))->delete();
     }
     public function makeDeleteMyBranch(){
-        return $this->action();
+        return $this->location;
     }
 }
