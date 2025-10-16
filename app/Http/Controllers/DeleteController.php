@@ -22,15 +22,14 @@ class DeleteController extends Page implements ViewLanguage2
         $this->ob = mydb::find(request()->session()->get('userId'));
         $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['Delete'];
         parent::__construct($this, request()->route('id'));
+        request()->validate($this->roll, $this->message);
     }
     public function action(){
-        request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfully1);
     }
     public function action2(){
-        $location = $this->action();
         mydb::find(request()->input('id'))->delete();
-        return $location;
+        return $this->action();
     }
 }
