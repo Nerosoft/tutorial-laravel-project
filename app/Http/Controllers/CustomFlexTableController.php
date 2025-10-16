@@ -25,7 +25,6 @@ class CustomFlexTableController extends Page implements TableData
 
         $this->LabelInputNumber = $this->getDb()[$this->language]['CustomTable']['LabelInputNumber'];
         $this->HintInputNumber = $this->getDb()[$this->language]['CustomTable']['HintInputNumber'];
-        $this->error3 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsReq'];
     }
     public function makeValidation(){
         $this->roll['name'] = ['required', 'min:3'];
@@ -33,9 +32,9 @@ class CustomFlexTableController extends Page implements TableData
         $this->message['name.min'] = $this->error2;
         if(Route::currentRouteName() === 'addTable'){
             $this->roll['input_number'] = ['required', 'integer', 'between:1,8'];
-            $this->message['input_number.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsReq'];
-            $this->message['input_number.integer'] = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
-            $this->message['input_number.between'] = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
+            $this->message['input_number.required'] =  $this->error3;
+            $this->message['input_number.integer'] =  $this->error4;
+            $this->message['input_number.between'] =  $this->error4;
             $key = $this->generateUniqueIdentifier();
             $myInputKey = array();
              for ($i=0; $i < request()->input('input_number'); $i++)
@@ -70,6 +69,8 @@ class CustomFlexTableController extends Page implements TableData
         $this->ob = mydb::find(request()->session()->get('userId'));
         $this->error1 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['NameTableIsReq'];
         $this->error2 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['NameTableIsInv'];
+        $this->error3 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsReq'];
+        $this->error4 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
         parent::__construct($this, 'CustomTable');        
     }
     function index(){

@@ -15,10 +15,11 @@
 <div class="form-group">
     <label for="lang_name" class="form-label">{{$lang->LabelInputNumber}}</label>
     <input 
-    minlength="3" 
+    min="1" 
+    max="8" 
     required
-    oninvalid="handleInputSelect(this ,'{{$lang->error3}}')"
-    oninput="handleInputSelect(this ,'{{$lang->error3}}')"
+    oninvalid="handleInputCustomTable(this ,'{{$lang->error3}}', '{{$lang->error4}}')"
+    oninput="handleInputCustomTable(this ,'{{$lang->error3}}', '{{$lang->error4}}')"
     type="number" name="input_number" id="input_number" value="{{$inputNumber}}" placeholder='{{$lang->HintInputNumber}}' class="form-control">
 </div>
 @endif
