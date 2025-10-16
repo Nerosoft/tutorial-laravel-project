@@ -60,7 +60,6 @@ class TestCulturesController extends Page implements TableData
     public function index($id){
         return view('all_test_cultures',[
                 'lang'=> $this,
-                'active'=>'TestCultures',
         ]);
     }
     public function makeAddEditTest(){

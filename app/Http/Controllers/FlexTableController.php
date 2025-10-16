@@ -40,7 +40,6 @@ class FlexTableController extends Page implements TableData
     function index($id){
         return view('flex_table',[
             'lang'=> $this,
-            'active'=>'FlexTable',
         ]);
     }
     function makeAddEditFlexTable(){

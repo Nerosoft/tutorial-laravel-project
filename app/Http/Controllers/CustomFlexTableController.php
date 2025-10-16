@@ -76,7 +76,6 @@ class CustomFlexTableController extends Page implements TableData
     function index(){
         return view('custom_table',[
             'lang'=> $this,
-            'active'=>'CustomTable',
         ]);
     }
     function makeAddEditTable(){

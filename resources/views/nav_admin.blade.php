@@ -2,7 +2,7 @@
             @foreach ($lang->myMenuApp->getMenu() as $key=>$item)
               @if(isset($item->Item))
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle {{isset($active) && $active === $key ? 'my_active' : ''}}"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle {{Route::currentRouteName() === $key ? 'my_active' : ''}}"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <img class="style_icon_menu" src="{{asset('/lib/icons/'.$lang->myMenuApp->getIconByKey($key))}}"/>
                   {{$item->Name}}
                   </a>
