@@ -22,12 +22,12 @@ class MainBranchController extends Page implements ViewLanguage2
     }
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
-        if(request()->session()->get('superId') === request()->input('id') && request()->input('id') != request()->session()->get('userId')){
+        if(request()->session()->get('superId') === request()->input('id') && request()->input('id') === request()->session()->get('userId'))
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranchesChange'].' '.$this->getDb()[$this->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
+        else if(request()->session()->get('superId') === request()->input('id')){
             $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
             request()->session()->put('userId', request()->input('id'));
         }
-        else if(request()->session()->get('superId') === request()->input('id') && request()->input('id') === request()->session()->get('userId'))
-            $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
         else
             parent::__construct($this, 'Branches');
     }
