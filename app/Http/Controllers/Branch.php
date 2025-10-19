@@ -14,7 +14,7 @@ class Branch
     private $Address;
     private $Country;
     private $Follow;
-    public function __construct($Name, $Phone = null, $Governments = null,
+    function __construct($Name, $Phone = null, $Governments = null,
     $City = null, $Street = null, $Building = null, $Address = null, $Country = null, $Follow = null)
     {
         $this->Name = $Name;
@@ -27,34 +27,34 @@ class Branch
         $this->Country = $Country;
         $this->Follow = $Follow;
     }
-    public function getName(){
+    function getName(){
         return $this->Name;
     }
-    public function getPhone(){
+    function getPhone(){
         return $this->Phone;
     }
-    public function getGovernments(){
+    function getGovernments(){
         return $this->Governments;
     }
-    public function getCity(){
+    function getCity(){
         return $this->City;
     }
-    public function getStreet(){
+    function getStreet(){
         return $this->Street;
     }
-    public function getBuilding(){
+    function getBuilding(){
         return $this->Building;
     }
-    public function getAddress(){
+    function getAddress(){
         return $this->Address;
     }
-    public function getCountry(){
+    function getCountry(){
         return $this->Country;
     }
-    public function getFollowId(){
+    function getFollowId(){
         return $this->Follow;
     }
-    public static function fromArray($branch, $inout){
+    static function fromArray($branch, $inout){
         $allBranch = array();
         foreach ($branch as $key => $branch)
             $allBranch[$key] = new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
@@ -62,7 +62,7 @@ class Branch
                 $branch['Country'], $inout[$branch['Follow']]);        
         return $allBranch;
     }
-    public static function makeBranch($branch, $branchMain){
+    static function makeBranch($branch, $branchMain){
         $allBranch = array(request()->session()->get('superId')=>new Branch($branchMain));
         foreach ($branch as $key => $branch)
             $allBranch[$key] = new Branch($branch['Name']);        

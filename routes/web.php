@@ -77,8 +77,8 @@ Route::controller(FlexTableController::class)->group(function () {
 });
 Route::controller(BranchesController::class)->group(function () {
     Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
-    Route::post('/addBranchRays', 'makeAddBranch')->name('addBranchRays')->middleware(IsLogin::class.':admin');
-    Route::post('/editBranchRays', 'makeEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
+    Route::post('/addBranchRays', 'makeAddEditBranch')->name('addBranchRays')->middleware(IsLogin::class.':admin');
+    Route::post('/editBranchRays', 'makeAddEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
 });
 Route::controller(CustomFlexTableController::class)->group(function () {
     Route::get('/custom_table', 'index')->name('CustomTable')->middleware(IsLogin::class.':admin');

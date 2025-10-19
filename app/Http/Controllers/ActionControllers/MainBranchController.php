@@ -10,7 +10,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\ViewLanguage2;
 class MainBranchController extends Page implements ViewLanguage2
 {
-    public function getDb(){
+    function getDb(){
         return $this->ob;
     }
     function makeValidation(){
@@ -20,7 +20,7 @@ class MainBranchController extends Page implements ViewLanguage2
         $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->session()->get('superId'))['Branches'][request()->input('id')]['Name'];
         request()->session()->put('userId', request()->input('id'));
     }
-    public function __construct(){
+    function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
         if(request()->session()->get('superId') === request()->input('id') && request()->input('id') === request()->session()->get('userId'))
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranchesChange'].' '.$this->getDb()[$this->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
@@ -31,7 +31,7 @@ class MainBranchController extends Page implements ViewLanguage2
         else
             parent::__construct($this, 'Branches');
     }
-    public function makeChangeBranch(){
+    function makeChangeBranch(){
         return back()->with('success', $this->successfulyMessage);
     }
 }

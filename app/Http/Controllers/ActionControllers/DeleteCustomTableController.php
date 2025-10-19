@@ -8,7 +8,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\ViewLanguage2;
 class DeleteCustomTableController extends Page implements ViewLanguage2
 {
-    public function getDb(){
+    function getDb(){
         return $this->ob;
     }
     function makeValidation(){
@@ -23,13 +23,13 @@ class DeleteCustomTableController extends Page implements ViewLanguage2
             unset($this->getDb()[request()->input('id')]);
         $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['Delete'];
     }
-    public function __construct(){
+    function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
         parent::__construct($this, 'CustomTable');
         request()->validate($this->roll, $this->message);
 
     }
-    public function makeDeleteTable(){
+    function makeDeleteTable(){
         $this->getDb()->save();
         return back()->with('success', $this->successfully1);
     }

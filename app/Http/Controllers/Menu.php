@@ -37,7 +37,7 @@ class Menu
             $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
         }
     }
-    public function getMenu(){
+    function getMenu(){
         return array_filter(get_object_vars($this), function ($value) {
             return !is_null($value);
         });

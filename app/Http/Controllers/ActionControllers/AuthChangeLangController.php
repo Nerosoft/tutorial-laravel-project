@@ -10,7 +10,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\ViewLanguage2;
 class AuthChangeLangController extends Page implements ViewLanguage2
 {
-    public function getDb(){
+    function getDb(){
         return $this->ob;
     }
     function makeValidation(){
@@ -24,11 +24,11 @@ class AuthChangeLangController extends Page implements ViewLanguage2
         request()->validate($this->roll, $this->message);
         $this->messageServer = $this->getDb()[request()->input('id')]['ChangeLanguage']['ChangeLang'].$this->getDb()[request()->input('id')]['AllNamesLanguage'][request()->input('id')];
     }
-    public function __construct(){
+    function __construct(){
         $this->ob = mydb::find(request()->input('userAdmin'))??mydb::first();
         parent::__construct($this, 'ChangeLanguage');
     }
-    public function makeChangeLanguage(){
+    function makeChangeLanguage(){
         Cookie::queue(request()->input('userAdmin'), serialize(request()->input('id')),2628000);
         return back()->with('success', $this->messageServer);
     }

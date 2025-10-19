@@ -35,7 +35,7 @@ class BranchesController extends Page implements TableData
     function index(){
         return $this->view;
     }
-    public function getDataTable(){
+    function getDataTable(){
         return Branch::fromArray(array_reverse($this->getDb()['Branches']??(array)mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
     }
     function getDb(){
@@ -65,23 +65,11 @@ class BranchesController extends Page implements TableData
             'lang'=>$this,
         ]);
     }
-    function makeAddBranch(){
-        request()->validate($this->roll, $this->message);
-        $this->getDb()->save();
-        $myBranch = $this->getDb()->toArray();
-        unset($myBranch['User']);
-        unset($myBranch['Branches']);
-        $myBranch['_id'] = array_key_last($this->getDb()['Branches']);
-        mydb::insert($myBranch);
-        return back()->with('success', $this->successfulyMessage);
-    }
-    function makeEditBranch(){
-        request()->validate($this->roll, $this->message);
+    function makeAddEditBranch(){
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
-    public function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches'][Route::currentRouteName() === 'editBranchRays'?'MessageModelEdit':'MessageModelCreate'];
+    function makeValidation(){
         $this->roll['brance_rays_name'] = ['required', 'min:3'];
         $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['brance_rays_governments'] = ['required', 'min:3'];
@@ -109,9 +97,38 @@ class BranchesController extends Page implements TableData
         $this->message['brance_rays_country.required'] = $this->error8;
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranceRaysFollowValue'];
-        $this->ob = request()->session()->get('userId') === request()->session()->get('superId') ? $this->getDb() : mydb::find(request()->session()->get('superId'));
-        $arr = (array)$this->getDb()['Branches'];
-        $arr[isset($arr[request()->input('id')])?request()->input('id'):Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        request()->validate($this->roll, $this->message);
+        if(Route::currentRouteName() === 'addBranchRays' && request()->session()->get('userId') !== request()->session()->get('superId')){
+            $keyBranch = Str::uuid()->toString();
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
+            $this->ob = mydb::find(request()->session()->get('superId'));
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[$keyBranch] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+            $myBranch = $this->getDb()->toArray();
+            unset($myBranch['User']);
+            unset($myBranch['Branches']);
+            $myBranch['_id'] = $keyBranch;
+            mydb::insert($myBranch);
+        }else if(Route::currentRouteName() === 'editBranchRays' && request()->session()->get('userId') !== request()->session()->get('superId')){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+            $this->ob = mydb::find(request()->session()->get('superId'));
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        }else if(Route::currentRouteName() === 'addBranchRays'){
+            $keyBranch = Str::uuid()->toString();
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[$keyBranch] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
+            $myBranch = $this->getDb()->toArray();
+            unset($myBranch['User']);
+            unset($myBranch['Branches']);
+            $myBranch['_id'] = $keyBranch;
+            mydb::insert($myBranch);
+        }else{
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+        }
         $this->getDb()['Branches'] = $arr;
     }
 }
