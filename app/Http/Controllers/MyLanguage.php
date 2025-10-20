@@ -13,4 +13,10 @@ class MyLanguage
     function getName(){
         return $this->name;
     }
+    static function fromArray(array $data): array {
+        $lang = array();
+        foreach ($data as $key=>$value)
+            $lang[$key] =  new MyLanguage($value);
+        return $lang;
+    }
 }

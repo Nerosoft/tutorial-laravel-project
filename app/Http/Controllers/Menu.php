@@ -26,13 +26,9 @@ class Menu
             $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDb()[$language]['Menu']['Home'];
             $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
-            $name = $allTest[array_key_first($allTest)];
-            unset($allTest[array_key_first($allTest)]);
-            $this->TestCultures = new MenuItem($name, $allTest);
+            $this->TestCultures = new MenuItem(array_shift($allTest), $allTest);
             $flexTable = $ob->getDb()[$language]['Menu']['FlexTable'];
-            $name = $flexTable[array_key_first($flexTable)];
-            unset($flexTable[array_key_first($flexTable)]);
-            $this->FlexTable = new MenuItem($name, $flexTable);
+            $this->FlexTable = new MenuItem(array_shift($flexTable), $flexTable);
             $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
             $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
         }

@@ -30,6 +30,7 @@ class FlexTableController extends Page implements TableData
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['TableHead'] as $key => $value)
             $arr[array_key_last($arr)][$key] = request()->input($key)??null;
         $this->getDb()[request()->route('id')] = $arr;
+        request()->validate($this->roll, $this->message);
     }
     function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
@@ -43,7 +44,6 @@ class FlexTableController extends Page implements TableData
         ]);
     }
     function makeAddEditFlexTable(){
-        request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);    
     }

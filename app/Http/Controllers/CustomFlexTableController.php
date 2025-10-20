@@ -12,7 +12,7 @@ class CustomFlexTableController extends Page implements TableData
         return $this->ob;
     }
     public function getDataTable(){
-        return array_reverse(CustomTable::fromArray((array)$this->getDb()[$this->language]['Menu']['FlexTable']));
+        return array_reverse(CustomTable::fromArray(array_slice($this->getDb()[$this->language]['Menu']['FlexTable'], 1)));
     }
     public function setupViewLang(){
         $this->model2 = $this->getDb()[$this->language]['CustomTable']['ScreenModelCreate'];

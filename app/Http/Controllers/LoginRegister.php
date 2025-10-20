@@ -9,12 +9,12 @@ use Illuminate\Validation\Rule;
 class LoginRegister extends SettingPage
 {
     function __construct($state, ViewLanguage $obj){
-        $this->errorUserEmail = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserEmail'] ?? $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserEmail'];
-        $this->errorUserEmailRequired = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserEmailRequired']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserEmailRequired'];
-        $this->errorUserPassword = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserPassword']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserPassword'];
-        $this->errorUserPasswordRequired = $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['UserPasswordRequired']??$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['UserPasswordRequired'];
+        $this->errorUserEmail = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserEmail'];
+        $this->errorUserEmailRequired = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserEmailRequired'];
+        $this->errorUserPassword = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserPassword'];
+        $this->errorUserPasswordRequired = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserPasswordRequired'];
         if(Route::currentRouteName() === 'makeLogin' || Route::currentRouteName() === 'makeRegister'){
-            parent::__construct(isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']);
+            parent::__construct(isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']);
             $this->roll = [
                 'id' => ['required', Rule::in($obj->getDb()['_id'])],
                 'email' => ['required', 'email'],
@@ -32,7 +32,7 @@ class LoginRegister extends SettingPage
             $this->users = (array)$obj->getDb()['User'];
             $this->successfully = $obj->getDb()[$this->language][$state]['AdminLogin'];
             $obj->makeValidation();
-        }else if(isset($obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))])){
+        }else if(isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))])){
             parent::__construct(unserialize(request()->cookie($obj->getDb()['_id'])),
             $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['Title'],
             $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]['Html']['Direction']);
@@ -47,8 +47,7 @@ class LoginRegister extends SettingPage
             $this->label4 = $obj->getDb()[$this->language][$state]['LabelLoginUser'];
             $this->hint1 = $obj->getDb()[$this->language][$state]['HintUserEmail'];
             $this->hint2 = $obj->getDb()[$this->language][$state]['HintUserPassword'];
-            foreach ($obj->getDb()[$this->language]['AllNamesLanguage'] as $key => $value)
-                    $this->myRadios[$key] = new MyLanguage($value);
+            $this->myRadios = MyLanguage::fromArray($obj->getDb()[$this->language]['AllNamesLanguage']);
         }else{
             Cookie::queue($obj->getDb()['_id'], serialize($obj->getDb()['Setting']['Language']),2628000);
             parent::__construct($obj->getDb()['Setting']['Language'],
@@ -65,8 +64,7 @@ class LoginRegister extends SettingPage
             $this->label4 = $obj->getDb()[$this->language][$state]['LabelLoginUser'];
             $this->hint1 = $obj->getDb()[$this->language][$state]['HintUserEmail'];
             $this->hint2 = $obj->getDb()[$this->language][$state]['HintUserPassword'];
-            foreach ($obj->getDb()[$this->language]['AllNamesLanguage'] as $key => $value)
-                    $this->myRadios[$key] = new MyLanguage($value);
+            $this->myRadios = MyLanguage::fromArray($obj->getDb()[$this->language]['AllNamesLanguage']);
         }
     }
 }

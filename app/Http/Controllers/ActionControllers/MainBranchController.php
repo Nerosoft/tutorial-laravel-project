@@ -14,10 +14,8 @@ class MainBranchController extends Page implements ViewLanguage2
         return $this->ob;
     }
     function makeValidation(){
-        array_push($this->roll['id'], Rule::notIn(request()->session()->get('userId')));
-        $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['Used'];
         request()->validate($this->roll, $this->message);
-        $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->session()->get('superId'))['Branches'][request()->input('id')]['Name'];
+        $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.$this->getDb()['Branches'][request()->input('id')]['Name'];
         request()->session()->put('userId', request()->input('id'));
     }
     function __construct(){

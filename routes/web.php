@@ -71,14 +71,14 @@ Route::controller(TestCulturesController::class)->group(function () {
     Route::post('/editTest/{id?}', 'makeAddEditTest')->name('editTest')->middleware(IsLogin::class.':test');
 });
 Route::controller(FlexTableController::class)->group(function () {
-    Route::get('/flextable/{id?}', 'index')->name('FlexTable')->middleware(IsLogin::class.':test');
-    Route::post('/createFlexTable/{id?}', 'makeAddEditFlexTable')->name('createFlexTable')->middleware(IsLogin::class.':test');
-    Route::post('/editFlexTable/{id?}', 'makeAddEditFlexTable')->name('editFlexTable')->middleware(IsLogin::class.':test');
+    Route::get('/flextable/{id?}', 'index')->name('FlexTable')->middleware(IsLogin::class.':flex');
+    Route::post('/createFlexTable/{id?}', 'makeAddEditFlexTable')->name('createFlexTable')->middleware(IsLogin::class.':flex');
+    Route::post('/editFlexTable/{id?}', 'makeAddEditFlexTable')->name('editFlexTable')->middleware(IsLogin::class.':flex');
 });
 Route::controller(BranchesController::class)->group(function () {
     Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
-    Route::post('/addBranchRays', 'makeAddEditBranch')->name('addBranchRays')->middleware(IsLogin::class.':admin');
-    Route::post('/editBranchRays', 'makeAddEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
+    Route::post('/addBranchRays', 'makeAddBranch')->name('addBranchRays')->middleware(IsLogin::class.':admin');
+    Route::post('/editBranchRays', 'makeEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
 });
 Route::controller(CustomFlexTableController::class)->group(function () {
     Route::get('/custom_table', 'index')->name('CustomTable')->middleware(IsLogin::class.':admin');
@@ -86,8 +86,8 @@ Route::controller(CustomFlexTableController::class)->group(function () {
     Route::post('/editTable', 'makeAddEditTable')->name('editTable')->middleware(IsLogin::class.':admin');
 });
 Route::controller(DeleteController::class)->group(function () {
-    Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':test');
-    Route::post('/deleteItembranch/{id?}', 'action2')->name('branch.delete')->middleware(IsLogin::class.':test');
+    Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':delete');
+    Route::post('/deleteItembranch/{id?}', 'action2')->name('branch.delete')->middleware(IsLogin::class.':delete');
 });
 Route::controller(LogoutController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout')->middleware(IsLogin::class.':admin');

@@ -45,6 +45,7 @@ class TestCulturesController extends Page implements TableData
         $arr = (array)$this->getDb()[request()->route('id')];
         $arr[Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
         $this->getDb()[request()->route('id')] = $arr;
+        request()->validate($this->roll, $this->message);
     }
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
@@ -63,7 +64,6 @@ class TestCulturesController extends Page implements TableData
         ]);
     }
     public function makeAddEditTest(){
-        request()->validate($this->roll, $this->message);
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }

@@ -5,9 +5,7 @@ class CustomTable
     /**
      * Create a new class instance.
      */
-    //order var important
     private $Name;
-    //----------------------
     public function __construct($Name)
     {
         $this->Name = $Name;
@@ -19,8 +17,7 @@ class CustomTable
     public static function fromArray(array $data): array {
         $CustomTable = array();
         foreach ($data as $key=>$value)
-            if(array_key_first($data) !== $key)
-                $CustomTable[$key] =  new CustomTable($value);
+            $CustomTable[$key] =  new CustomTable($value);
         return $CustomTable;
     }
 }

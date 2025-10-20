@@ -17,21 +17,27 @@ class IsLogin
     public function handle(Request $request, Closure $next, $state): Response
     {
         if($request->session()->exists('userId') && $state === 'admin' 
-        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branches' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages'
-        || $request->session()->exists('userId') && $state === 'test' && $this->getKeyTables()
+
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Branches' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Test' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Cultures' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Packages'
+        || $request->session()->exists('userId') && $state === 'delete' && $this->getKeyTables()
+    
+        || $request->session()->exists('userId') && $state === 'flex' && $this->getKeyTables()
         )
             return $next($request);
-        else if($request->session()->exists('userId') && $state === 'test')
+        else if($request->session()->exists('userId') && $state === 'test' 
+        || $request->session()->exists('userId') && $state === 'delete'
+        || $request->session()->exists('userId') && $state === 'flex')
             return redirect()->route('Home');
         else
             return redirect('/login');
     }
     function getKeyTables(){
-        $keys = array_keys(mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['Menu']['FlexTable']);
-        unset($keys[array_key_first($keys)]);
-        return in_array(request()->route('id'), $keys);
+        return in_array(request()->route('id'), array_keys(array_slice(mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['Menu']['FlexTable'], 1)));
     }
 }

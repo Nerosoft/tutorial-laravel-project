@@ -23,10 +23,10 @@ class LoginController extends LoginRegister implements ViewLanguage
     }
     function makeValidation(){
         $this->errorMessage = $this->ob[$this->language]['Login']['UserPasswordDntMatch'];
+        request()->validate($this->roll, $this->message);
     }
 
     function makeLogin(){
-        request()->validate($this->roll, $this->message);
         foreach ($this->users as $key => $user)
             if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
                 request()->session()->put('userId', request()->input('id'));

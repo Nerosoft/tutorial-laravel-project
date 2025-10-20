@@ -20,10 +20,7 @@ class LangController extends Page implements TableData
         return $this->view;
     }
     function getDataTable(){
-        $tableData = array();
-        foreach (array_reverse($this->allNames) as $key => $value)
-            $tableData[$key] = new MyLanguage($value);
-        return $tableData;
+        return MyLanguage::fromArray(array_reverse($this->allNames));
     }
     function getDb(){
         return $this->ob;
@@ -56,19 +53,15 @@ class LangController extends Page implements TableData
             $myLanguage = $this->getDb()['MyLanguage'];
             $myLanguage['AllNamesLanguage'] = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
             if(count($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable']) > 1)
-                foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'] as $key => $value) 
-                    if($key !== array_key_first($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'])){
-                        $myLanguage['Menu']['FlexTable'][$key] = $value;
-                        $myLanguage['CutomLang'][$key] = $value;
-                        $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];
-                    }
+                foreach (array_slice($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'], 1) as $key => $value) 
+                    $myLanguage['Menu']['FlexTable'][$key] = $value;
+                    $myLanguage['CutomLang'][$key] = $value;
+                    $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];     
             $this->getDb()[$newKey] = $myLanguage;
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelCreate'];
         }else
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
         request()->validate($this->roll, $this->message);
-
-
     }
     function makeAddEditLanguage(){
         $this->getDb()->save();

@@ -10,7 +10,7 @@ use App\Models\mydb;
 class Page extends TableInformation
 {
     function __construct(TableData | ViewLanguage2 $obj, $state){
-        if(Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
+        if(Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
@@ -21,20 +21,25 @@ class Page extends TableInformation
                 'id'=>['required', Rule::in(array_keys((array)$obj->getDb()[$state])), Rule::notIn(request()->session()->get('userId'))]
             ];
             $obj->makeValidation();
-        }
-        else if(Route::currentRouteName() === 'branchMain'|| Route::currentRouteName() === 'editBranchRays'||
-        Route::currentRouteName() === 'editTest' || Route::currentRouteName() === 'deleteItem' ||
-        Route::currentRouteName() === 'editFlexTable' || Route::currentRouteName() === 'branch.delete'){
+        }else if(Route::currentRouteName() === 'editBranchRays'){
             $this->roll = [
-                'id'=>['required', Rule::in(array_keys($obj->getDb()[$state]??(array)mydb::find(request()->session()->get('superId'))[$state]))]
+                'id'=>['required', Rule::in(array_keys((array)mydb::find(request()->session()->get('superId'))[$state]))]
             ];
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
             ];
             $obj->makeValidation();
-        }else if(Route::currentRouteName() === 'makeChangeLanguage' || Route::currentRouteName() === 'language.change' ||
-        Route::currentRouteName() === 'language.delete' || Route::currentRouteName() === 'language.copy'){
+        }else if(Route::currentRouteName() === 'editTest' || Route::currentRouteName() === 'deleteItem' || Route::currentRouteName() === 'editFlexTable' || Route::currentRouteName() === 'branch.delete'){
+            $this->roll = [
+                'id'=>['required', Rule::in(array_keys((array)$obj->getDb()[$state]))]
+            ];
+            $this->message = [
+                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
+                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
+            ];
+            $obj->makeValidation();
+        }else if(Route::currentRouteName() === 'makeChangeLanguage' || Route::currentRouteName() === 'language.change' || Route::currentRouteName() === 'language.delete' || Route::currentRouteName() === 'language.copy'){
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['AllNamesLanguage']))]
             ];
@@ -45,20 +50,19 @@ class Page extends TableInformation
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editTable' || Route::currentRouteName() === 'deleteTable'){
             $this->roll = [
-                'id'=>['required', Rule::in(array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable'])), Rule::notIn(array_key_first($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable']))]
+                'id'=>['required', Rule::in(array_keys(array_slice($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable'],1)))]
             ];
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
                 'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
-                'id.not_in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
             ];
             $obj->makeValidation();
         }else if(
         Route::currentRouteName() === 'lang.createLanguage'||
+        Route::currentRouteName() === 'addBranchRays'||
         Route::currentRouteName() === 'createTest'||
         Route::currentRouteName() === 'createFlexTable'||
-        Route::currentRouteName() === 'addTable'||
-        Route::currentRouteName() === 'addBranchRays')
+        Route::currentRouteName() === 'addTable')
             $obj->makeValidation();
         else{
             parent::__construct($obj, $state);
