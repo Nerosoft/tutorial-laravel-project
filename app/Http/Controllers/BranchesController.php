@@ -77,7 +77,6 @@ class BranchesController extends Page implements TableData
         return back()->with('success', $this->successfulyMessage);
     }
     function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches'][Route::currentRouteName() === 'addBranchRays' ? 'MessageModelCreate':'MessageModelEdit'];
         $this->roll['brance_rays_name'] = ['required', 'min:3'];
         $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['brance_rays_governments'] = ['required', 'min:3'];
@@ -105,9 +104,25 @@ class BranchesController extends Page implements TableData
         $this->message['brance_rays_country.required'] = $this->error8;
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranceRaysFollowValue'];
-        $this->ob = request()->session()->get('superId') !== request()->session()->get('userId') ? mydb::find(request()->session()->get('superId')) : $this->ob;
-        $arr = (array)$this->getDb()['Branches'];
-        $arr[Route::currentRouteName() === 'addBranchRays' ? Str::uuid()->toString(): request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        if(Route::currentRouteName() === 'addBranchRays' && request()->session()->get('superId') === request()->session()->get('userId')){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        }else if(Route::currentRouteName() === 'editBranchRays' && request()->session()->get('superId') === request()->session()->get('userId')){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        }else if(Route::currentRouteName() === 'addBranchRays'){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
+            $this->ob = mydb::find(request()->session()->get('superId'));
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        }else{
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+            $this->ob = mydb::find(request()->session()->get('superId'));
+            $arr = (array)$this->getDb()['Branches'];
+            $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        }
         $this->getDb()['Branches'] = $arr;
         request()->validate($this->roll, $this->message);
     }

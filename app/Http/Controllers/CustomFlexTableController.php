@@ -35,34 +35,9 @@ class CustomFlexTableController extends Page implements TableData
             $this->message['input_number.required'] =  $this->error3;
             $this->message['input_number.integer'] =  $this->error4;
             $this->message['input_number.between'] =  $this->error4;
-            $key = $this->generateUniqueIdentifier();
-            $myInputKey = array();
-             for ($i=0; $i < request()->input('input_number'); $i++)
-                array_push($myInputKey, $this->generateUniqueIdentifier());
-            foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
-                $lang = $this->getDb()[$code];
-                $lang['Menu']['FlexTable'][$key] = request()->input('name');
-                $lang[$key] = $lang['TablePage']['Info'];
-                $lang['CutomLang'][$key] = request()->input('name');
-                foreach ($myInputKey as $key2){
-                    $lang[$key]['TableHead'][$key2] = $lang['TablePage']['Input']['InputNameTable'];
-                    $lang[$key]['Label'][$key2] = $lang['TablePage']['Input']['InputLabel'];
-                    $lang[$key]['Hint'][$key2] = $lang['TablePage']['Input']['InputHint'];
-                    $lang[$key]['ErrorsMessageReq'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageReq'];
-                    $lang[$key]['ErrorsMessageInv'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageInv'];
-                }
-                $this->getDb()[$code] = $lang;
-            }
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['MessageModelCreate'];
-        }else{
-            foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
-                $lang = $this->getDb()[$key];
-                $lang['Menu']['FlexTable'][request()->input('id')] = request()->input('name');
-                $lang['CutomLang'][request()->input('id')] = request()->input('name');
-                $this->getDb()[$key] = $lang;
-            }
+        }else
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['MessageModelEdit'];
-        }
         request()->validate($this->roll, $this->message);
     }
     function __construct(){
@@ -78,7 +53,35 @@ class CustomFlexTableController extends Page implements TableData
             'lang'=> $this,
         ]);
     }
-    function makeAddEditTable(){
+    function makeAddTable(){
+        $key = $this->generateUniqueIdentifier();
+        $myInputKey = array();
+            for ($i=0; $i < request()->input('input_number'); $i++)
+            array_push($myInputKey, $this->generateUniqueIdentifier());
+        foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
+            $lang = $this->getDb()[$code];
+            $lang['Menu']['FlexTable'][$key] = request()->input('name');
+            $lang[$key] = $lang['TablePage']['Info'];
+            $lang['CutomLang'][$key] = request()->input('name');
+            foreach ($myInputKey as $key2){
+                $lang[$key]['TableHead'][$key2] = $lang['TablePage']['Input']['InputNameTable'];
+                $lang[$key]['Label'][$key2] = $lang['TablePage']['Input']['InputLabel'];
+                $lang[$key]['Hint'][$key2] = $lang['TablePage']['Input']['InputHint'];
+                $lang[$key]['ErrorsMessageReq'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageReq'];
+                $lang[$key]['ErrorsMessageInv'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageInv'];
+            }
+            $this->getDb()[$code] = $lang;
+        }
+        $this->getDb()->save();
+        return back()->with('success', $this->successfulyMessage);
+    }
+    function makeEditTable(){
+        foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
+            $lang = $this->getDb()[$key];
+            $lang['Menu']['FlexTable'][request()->input('id')] = request()->input('name');
+            $lang['CutomLang'][request()->input('id')] = request()->input('name');
+            $this->getDb()[$key] = $lang;
+        }
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }

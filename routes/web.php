@@ -62,8 +62,8 @@ Route::controller(SystemLangController::class)->group(function () {
 });
 Route::controller(LangController::class)->group(function () {
     Route::get('/ChangeLanguage', 'index')->name('ChangeLanguage')->middleware(IsLogin::class.':admin');
-    Route::post('/newLanguage', 'makeAddEditLanguage')->name('lang.createLanguage')->middleware(IsLogin::class.':admin');
-    Route::post('/copyLanguage', 'makeAddEditLanguage')->name('language.copy')->middleware(IsLogin::class.':admin');
+    Route::post('/newLanguage', 'makeAddLanguage')->name('lang.createLanguage')->middleware(IsLogin::class.':admin');
+    Route::post('/copyLanguage', 'makeEditLanguage')->name('language.copy')->middleware(IsLogin::class.':admin');
 });
 Route::controller(TestCulturesController::class)->group(function () {
     Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':test');
@@ -82,8 +82,8 @@ Route::controller(BranchesController::class)->group(function () {
 });
 Route::controller(CustomFlexTableController::class)->group(function () {
     Route::get('/custom_table', 'index')->name('CustomTable')->middleware(IsLogin::class.':admin');
-    Route::post('/addTable', 'makeAddEditTable')->name('addTable')->middleware(IsLogin::class.':admin');
-    Route::post('/editTable', 'makeAddEditTable')->name('editTable')->middleware(IsLogin::class.':admin');
+    Route::post('/addTable', 'makeAddTable')->name('addTable')->middleware(IsLogin::class.':admin');
+    Route::post('/editTable', 'makeEditTable')->name('editTable')->middleware(IsLogin::class.':admin');
 });
 Route::controller(DeleteController::class)->group(function () {
     Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':delete');

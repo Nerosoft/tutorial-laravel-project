@@ -43,27 +43,37 @@ class LangController extends Page implements TableData
         $this->roll['lang_name'] = ['required', 'min:3'];
         $this->message['lang_name.required'] = $this->error1;
         $this->message['lang_name.min'] = $this->error2;
-        $newKey = Route::currentRouteName() === 'lang.createLanguage'?$this->generateUniqueIdentifier():request()->input('id');
-        foreach ($this->allNames as $key=>$value) {
-            $myLang = $this->getDb()[$key];
-            $myLang['AllNamesLanguage'][$newKey] = request()->input('lang_name');
-            $this->getDb()[$key] = $myLang;
-        }
         if(Route::currentRouteName() === 'lang.createLanguage'){
-            $myLanguage = $this->getDb()['MyLanguage'];
-            $myLanguage['AllNamesLanguage'] = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
-            if(count($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable']) > 1)
-                foreach (array_slice($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'], 1) as $key => $value) 
-                    $myLanguage['Menu']['FlexTable'][$key] = $value;
-                    $myLanguage['CutomLang'][$key] = $value;
-                    $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];     
-            $this->getDb()[$newKey] = $myLanguage;
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelCreate'];
-        }else
+            $this->newKey = $this->generateUniqueIdentifier();
+            foreach ($this->allNames as $key=>$value) {
+                $myLang = $this->getDb()[$key];
+                $myLang['AllNamesLanguage'][$this->newKey] = request()->input('lang_name');
+                $this->getDb()[$key] = $myLang;
+            }
+        }else{
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
+            foreach ($this->allNames as $key=>$value) {
+                $myLang = $this->getDb()[$key];
+                $myLang['AllNamesLanguage'][request()->input('id')] = request()->input('lang_name');
+                $this->getDb()[$key] = $myLang;
+            }
+        }
         request()->validate($this->roll, $this->message);
     }
-    function makeAddEditLanguage(){
+    function makeAddLanguage(){
+        $myLanguage = $this->getDb()['MyLanguage'];
+        $myLanguage['AllNamesLanguage'] = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
+        if(count($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable']) > 1)
+            foreach (array_slice($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'], 1) as $key => $value){ 
+                $myLanguage['Menu']['FlexTable'][$key] = $value;
+                $myLanguage['CutomLang'][$key] = $this->getDb()[$this->getDb()['Setting']['Language']]['CutomLang'][$key];
+                $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];   
+            } 
+        $this->getDb()[$this->newKey] = $myLanguage;
+        return $this->makeEditLanguage();
+    }
+    function makeEditLanguage(){
         $this->getDb()->save();
         return back()->with('success', $this->successfulyMessage);
     }
