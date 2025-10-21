@@ -32,10 +32,10 @@ class FlexTableController extends Page implements TableData
             $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
             $arr[request()->input('id')] = array();
         }
-        foreach ($this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['TableHead'] as $key => $value)
-            $arr[array_key_last($arr)][$key] = request()->input($key)??null;
-        $this->getDb()[request()->route('id')] = $arr;
         request()->validate($this->roll, $this->message);
+        foreach ($this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['TableHead'] as $key => $value)
+            $arr[array_key_last($arr)][$key] = request()->input($key);
+        $this->getDb()[request()->route('id')] = $arr;
     }
     function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
