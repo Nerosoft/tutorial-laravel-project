@@ -1,5 +1,5 @@
 @csrf
-@include('my_id', ['myAppId'=>$lang->myAppId])
+@include('my_id')
 <h4>{{$lang->label4}}</h4>
 <div class="form-group">
     <label for="email">{{$lang->label2}}</label>
