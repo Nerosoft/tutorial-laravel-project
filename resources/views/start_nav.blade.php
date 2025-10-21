@@ -14,7 +14,7 @@
       @foreach($lang->MyBranch as $keyBranch=>$branch)
       <form class="form_branch" method="POST" action="{{ route('branchMain') }}">
         @csrf
-        <input type="hidden" value="{{$keyBranch}}" name="id">
+         @include('my_id', ['myAppId'=>$keyBranch])
         <li class="dropdown-item">
             <button type="submit" class="{{request()->session()->get('userId') === $keyBranch? 'btn btn-danger' : 'btn btn-primary'}}">{{$branch->getName()}}</button>
         </li>
