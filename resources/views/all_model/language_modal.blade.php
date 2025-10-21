@@ -13,7 +13,7 @@
       <div class="modal-body">
         <form id="myForm" action="{{route('makeChangeLanguage')}}" method="POST">
         @csrf
-          <input type="hidden" value="{{$lang->myAppId}}" name="userAdmin">
+          @include('my_id2', ['name'=>'userAdmin'])
           @foreach ($lang->myRadios as $key =>$radios)
             <div class="form-check">
             <input name="id" class="flexCheck form-check-input" value="{{$key}}" onClick="setLanguage(this.value)" {{$key === $lang->language ? 'checked' : ''}} type="checkbox">
