@@ -1,1 +1,1 @@
-<input type="hidden" value="{{isset($lang->myAppId)?$lang->myAppId:$index}}" name="id">
+<input type="hidden" value="{{$lang->myAppId??$index}}" name="id">
