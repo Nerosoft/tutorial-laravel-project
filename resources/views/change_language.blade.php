@@ -41,7 +41,7 @@
                                     <form action="{{route('language.change')}}" method="POST">
                                         <div class="modal-body">
                                             @csrf
-                                            @include('my_id', ['myAppId'=>$index])
+                                            @include('my_id')
                                             {{$lang->label5}}<spam>-{{$myLang->getName()}}</spam>
                                         </div>
                                         <div class="modal-footer">

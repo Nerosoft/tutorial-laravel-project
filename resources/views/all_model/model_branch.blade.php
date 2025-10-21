@@ -2,7 +2,7 @@
 @include('all_model.start_model')
 <div class="container">
     @isset($index)
-        @include('my_id', ['myAppId'=>$index])
+        @include('my_id')
     @endisset
     <div class="row">
         <div class="col-lg-auto pt-2">

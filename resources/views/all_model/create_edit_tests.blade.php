@@ -1,7 +1,7 @@
 <!-- Modal -->
 @include('all_model.start_model') 
 @isset($index)
-    @include('my_id', ['myAppId'=>$index])
+    @include('my_id')
 @endisset
 <div class="mb-3">
     <label for="name" class="form-label">{{$lang->label3}}</label>

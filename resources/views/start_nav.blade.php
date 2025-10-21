@@ -11,12 +11,12 @@
           {{$lang->selectBox3}}
       </a>
       <ul class="dropdown-menu">        
-      @foreach($lang->MyBranch as $keyBranch=>$branch)
+      @foreach($lang->MyBranch as $index=>$branch)
       <form class="form_branch" method="POST" action="{{ route('branchMain') }}">
         @csrf
-         @include('my_id', ['myAppId'=>$keyBranch])
+         @include('my_id')
         <li class="dropdown-item">
-            <button type="submit" class="{{request()->session()->get('userId') === $keyBranch? 'btn btn-danger' : 'btn btn-primary'}}">{{$branch->getName()}}</button>
+            <button type="submit" class="{{request()->session()->get('userId') === $index? 'btn btn-danger' : 'btn btn-primary'}}">{{$branch->getName()}}</button>
         </li>
       </form>
       @endforeach

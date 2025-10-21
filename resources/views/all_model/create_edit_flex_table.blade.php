@@ -1,7 +1,7 @@
 <!-- Modal -->
 @include('all_model.start_model')
  @isset($index)
-  @include('my_id', ['myAppId'=>$index])
+  @include('my_id')
 @endisset
 @foreach($arr as $key=>$value)
   <div class="mb-3">

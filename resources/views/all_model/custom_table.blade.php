@@ -1,6 +1,6 @@
 @include('all_model.start_model')
 @isset($index)
-    @include('my_id', ['myAppId'=>$index])
+    @include('my_id')
 @endisset
 <div class="form-group">
     <label for="lang_name" class="form-label">{{$lang->LabelName}}</label>
