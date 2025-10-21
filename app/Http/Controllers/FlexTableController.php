@@ -19,14 +19,19 @@ class FlexTableController extends Page implements TableData
         $this->Hint = $this->getDb()[$this->language][request()->route('id')]['Hint'];
     }
     public function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')][Route::currentRouteName() === 'editFlexTable'?'MessageModelEdit':'MessageModelCreate'];
         foreach ($this->ErrorsMessageReq as $key => $value) {
             $this->roll[$key] = ['required', 'min:3'];
             $this->message[$key.'.required'] = $value;
             $this->message[$key.'.min'] = $this->ErrorsMessageInv[$key];
         }
         $arr = (array)$this->getDb()[request()->route('id')];
-        $arr[Route::currentRouteName() === 'editFlexTable' ?request()->input('id'):$this->generateUniqueIdentifier()] = array();
+        if(Route::currentRouteName() === 'createFlexTable'){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelCreate'];
+            $arr[$this->generateUniqueIdentifier()] = array();
+        }else{
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
+            $arr[request()->input('id')] = array();
+        }
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['TableHead'] as $key => $value)
             $arr[array_key_last($arr)][$key] = request()->input($key)??null;
         $this->getDb()[request()->route('id')] = $arr;

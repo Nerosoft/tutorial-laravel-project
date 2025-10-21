@@ -29,7 +29,6 @@ class TestCulturesController extends Page implements TableData
         $this->hint3 = $this->getDb()[$this->language][request()->route('id')]['HintShortcut'];
     }
     public function makeValidation(){
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')][Route::currentRouteName() === 'editTest'?'MessageModelEdit':'MessageModelCreate'];
         $this->roll['name'] = ['required', 'min:3'];
         $this->roll['shortcut'] = ['required', 'min:3'];
         $this->roll['price'] = ['required', 'integer'];
@@ -43,7 +42,13 @@ class TestCulturesController extends Page implements TableData
         $this->message['input-output-lab.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
         $arr = (array)$this->getDb()[request()->route('id')];
-        $arr[Route::currentRouteName() === 'editTest' ?request()->input('id'):$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
+        if(Route::currentRouteName() === 'createTest'){
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelCreate'];
+            $arr[$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
+        }else{
+            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
+            $arr[request()->input('id')] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
+        }
         $this->getDb()[request()->route('id')] = $arr;
         request()->validate($this->roll, $this->message);
     }
