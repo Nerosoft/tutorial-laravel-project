@@ -13,9 +13,9 @@ class Auth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $state): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if($request->session()->exists('userId') && $state === 'admin')
+        if($request->session()->exists('userId'))
             return redirect()->route('Home');
         else
             return $next($request);

@@ -31,12 +31,12 @@ use App\Http\Middleware\Auth;
 |
 */
 Route::controller(LoginController::class)->group(function (){
-    Route::get('/login/{id?}','index')->middleware(Auth::class.':admin');
-    Route::post('/makeLogin','makeLogin')->name('makeLogin')->middleware(Auth::class.':admin');
+    Route::get('/login/{id?}','index')->middleware(Auth::class);
+    Route::post('/makeLogin','makeLogin')->name('makeLogin')->middleware(Auth::class);
 });
 Route::controller(RegisterController::class)->group(function (){
-    Route::get('/register/{id?}','index')->middleware(Auth::class.':admin');
-    Route::post('/makeRegister','makeRegister')->name('makeRegister')->middleware(Auth::class.':admin');
+    Route::get('/register/{id?}','index')->middleware(Auth::class);
+    Route::post('/makeRegister','makeRegister')->name('makeRegister')->middleware(Auth::class);
 });
 Route::controller(MainBranchController::class)->group(function (){
     Route::post('/branchMain', 'makeChangeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
@@ -48,7 +48,7 @@ Route::controller(AdminChangeLangController::class)->group(function (){
     Route::post('/changeLanguage', 'makeChangeMyLanguage')->name('language.change')->middleware(IsLogin::class.':admin');
 });
 Route::controller(AuthChangeLangController::class)->group(function (){
-    Route::post('/makeChangeLanguage','makeChangeLanguage')->name('makeChangeLanguage')->middleware(Auth::class.':admin');
+    Route::post('/makeChangeLanguage','makeChangeLanguage')->name('makeChangeLanguage')->middleware(Auth::class);
 });
 Route::controller(DeleteCustomTableController::class)->group(function (){
     Route::post('/deleteTable', 'makeDeleteTable')->name('deleteTable')->middleware(IsLogin::class.':admin');
