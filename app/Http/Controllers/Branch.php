@@ -63,10 +63,13 @@ class Branch
         return $allBranch;
     }
     static function makeBranch($branch, $branchMain){
-        $allBranch = array(request()->session()->get('superId')=>new Branch($branchMain));
+        $allBranch = Branch::makeBranch2($branchMain);
         foreach ($branch as $key => $branch)
             $allBranch[$key] = new Branch($branch['Name']);        
         return $allBranch;
+    }
+    static function makeBranch2($branchMain){
+        return array(request()->session()->get('superId')=>new Branch($branchMain));
     }
 
 }

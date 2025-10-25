@@ -14,6 +14,11 @@ class AdminMenu extends SettingPage
         $this->label1 = $obj->getDb()[$this->language]['AppSettingAdmin']['Logout'];
         $this->label2 = $obj->getDb()[$this->language]['AppSettingAdmin']['AdminDashboard'];
         $this->myMenuApp =  new Menu($obj, $state, $this->language);
-        $this->MyBranch = Branch::makeBranch((array)mydb::find(request()->session()->get('superId'))['Branches'],$obj->getDb()[$obj->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
+        if(is_null($obj->getDb()['Branches']) && is_null(mydb::find(request()->session()->get('superId'))['Branches']))
+            $this->MyBranch = Branch::makeBranch2($obj->getDb()[$obj->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
+        else if(isset($obj->getDb()['Branches']))
+            $this->MyBranch = Branch::makeBranch($obj->getDb()['Branches'],$obj->getDb()[$obj->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
+        else
+            $this->MyBranch = Branch::makeBranch(mydb::find(request()->session()->get('superId'))['Branches'],$obj->getDb()[$obj->getDb()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
     }
 }
