@@ -11,7 +11,7 @@ class FlexTableController extends Page implements TableData
         return $this->ob;
     }
     public function getDataTable(){
-        return array_reverse((array)$this->getDb()[request()->route('id')]);
+        return is_null($this->getDb()[request()->route('id')])?array():array_reverse($this->getDb()[request()->route('id')]);
     }
     public function setupViewLang(){
         $this->TableHead = $this->getDb()[$this->language][request()->route('id')]['TableHead'];

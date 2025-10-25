@@ -36,7 +36,12 @@ class BranchesController extends Page implements TableData
         return $this->view;
     }
     function getDataTable(){
-        return Branch::fromArray(array_reverse($this->getDb()['Branches']??(array)mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
+        if(is_null($this->getDb()['Branches']) && is_null(mydb::find(request()->session()->get('superId'))['Branches']))
+            return array();
+        else if(isset($this->getDb()['Branches']))
+            return Branch::fromArray(array_reverse($this->getDb()['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
+        else
+            return Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
     }
     function getDb(){
         return $this->ob;

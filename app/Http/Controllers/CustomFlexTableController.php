@@ -12,7 +12,7 @@ class CustomFlexTableController extends Page implements TableData
         return $this->ob;
     }
     public function getDataTable(){
-        return array_reverse(CustomTable::fromArray(array_slice($this->getDb()[$this->language]['Menu']['FlexTable'], 1)));
+        return count($this->getDb()[$this->language]['Menu']['FlexTable']) === 1?array():array_reverse(CustomTable::fromArray(array_slice($this->getDb()[$this->language]['Menu']['FlexTable'], 1)));
     }
     public function setupViewLang(){
         $this->model2 = $this->getDb()[$this->language]['CustomTable']['ScreenModelCreate'];
@@ -46,7 +46,7 @@ class CustomFlexTableController extends Page implements TableData
         $this->error2 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['NameTableIsInv'];
         $this->error3 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsReq'];
         $this->error4 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
-        parent::__construct($this, 'CustomTable');        
+        parent::__construct($this, 'CustomTable');      
     }
     function index(){
         return view('custom_table',[

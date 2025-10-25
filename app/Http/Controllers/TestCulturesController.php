@@ -12,7 +12,7 @@ class TestCulturesController extends Page implements TableData
         return $this->ob;
     }
     public function getDataTable(){
-        return $this->getDb()[request()->route('id')]?Test::fromArray(array_reverse($this->getDb()[request()->route('id')]), $this->inputOutPut):array();
+        return is_null($this->getDb()[request()->route('id')])? array():Test::fromArray(array_reverse($this->getDb()[request()->route('id')]), $this->inputOutPut);
     }
     public function setupViewLang(){
         $this->table8 = $this->getDb()[$this->language][request()->route('id')]['TableName'];
