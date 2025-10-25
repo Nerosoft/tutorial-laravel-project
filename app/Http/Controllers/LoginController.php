@@ -11,8 +11,7 @@ class LoginController extends LoginRegister implements ViewLanguage
         ]);
     }
     function __construct(){
-        $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):
-        (mydb::find(request()->input('id'))?mydb::find(request()->input('id')):mydb::first());
+        $this->ob = !is_null(request()->route('id')) ? mydb::find(request()->route('id')) :(is_null(request()->input('id')) ? mydb::first() : mydb::find(request()->input('id')));
         parent::__construct('Login', $this);
     }
     function getDb(){
