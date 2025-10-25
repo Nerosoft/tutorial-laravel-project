@@ -38,9 +38,6 @@ class RegisterController extends LoginRegister implements ViewLanguage
         return $this->ob;
     }
     function makeValidation(){
-        $arr = (array)$this->getDb()['User'];
-        $arr[$this->generateUniqueIdentifier()] = array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
-        $this->getDb()['User'] = $arr;
         array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
         array_push($this->roll['password'], 'confirmed');
         $this->roll['password_confirmation'] = ['required', 'min:8'];
@@ -52,6 +49,7 @@ class RegisterController extends LoginRegister implements ViewLanguage
         $this->message['codePassword.required'] = $this->error8;
         $this->message['password.confirmed']= $this->error7;
         request()->validate($this->roll, $this->message);
-
+        $this->users[$this->generateUniqueIdentifier()] = array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
+        $this->getDb()['User'] = $this->users;
     }
 }

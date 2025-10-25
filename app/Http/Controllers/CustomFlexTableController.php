@@ -46,7 +46,7 @@ class CustomFlexTableController extends Page implements TableData
         $this->error2 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['NameTableIsInv'];
         $this->error3 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsReq'];
         $this->error4 = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['InputNumberTableIsInv'];
-        parent::__construct($this, 'CustomTable');      
+        parent::__construct($this, 'CustomTable');  
     }
     function index(){
         return view('custom_table',[

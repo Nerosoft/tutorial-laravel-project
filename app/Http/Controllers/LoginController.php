@@ -26,12 +26,13 @@ class LoginController extends LoginRegister implements ViewLanguage
     }
 
     function makeLogin(){
-        foreach ($this->users as $key => $user)
-            if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
-                request()->session()->put('userId', request()->input('id'));
-                request()->session()->put('superId', request()->input('id'));
-                return redirect()->route('Home')->with('success', $this->successfully);
-            }         
+        if(!empty($this->users))
+            foreach ($this->users as $key => $user)
+                if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
+                    request()->session()->put('userId', request()->input('id'));
+                    request()->session()->put('superId', request()->input('id'));
+                    return redirect()->route('Home')->with('success', $this->successfully);
+                }         
         // return error email exsist
         return back()->withInput()->withErrors($this->errorMessage);
     }
