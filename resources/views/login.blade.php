@@ -1,7 +1,4 @@
-@extends('layout')
-@section('head')
-<link rel='stylesheet' href="{{asset('css/login.css')}}">
-@endsection
+@extends('layout2')
 @section('containt')
 <div class="container">
     <div class="login">
@@ -11,6 +8,5 @@
         @include('all_model.language_modal')
     </div>
 </div>
-
 <script src="{{asset('js/login.js')}}" type="text/javascript"></script>
 @endsection

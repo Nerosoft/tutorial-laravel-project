@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="{{$lang->direction}}">
-<head>
-  <meta charset="UTF-8">
-  <title>{{$lang->title}}</title>
-  @yield('head')
-  <link href="{{asset('css/style.css')}}" rel="stylesheet">
-  <link href="{{asset('lib/bootstrap.min.css')}}" rel="stylesheet">
-
-  <link href="{{asset('lib/dataTables.bootstrap5.css')}}" rel="stylesheet">
-  
-  <script src="{{asset('lib/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{asset('lib/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
-
-  <script src="{{asset('lib/dataTables.js')}}" type="text/javascript"></script>
-  <script src="{{asset('lib/dataTables.bootstrap5.js')}}" type="text/javascript"></script>
-
-  <script src="{{asset('js/js.js')}}" type="text/javascript"></script>
+@include('start_layout')
+<link href="{{asset('lib/dataTables.bootstrap5.css')}}" rel="stylesheet">
+<script src="{{asset('lib/dataTables.js')}}" type="text/javascript"></script>
+<script src="{{asset('lib/dataTables.bootstrap5.js')}}" type="text/javascript"></script>
 </head>
 <body>
   <div id="toastContainer" style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;"></div>
