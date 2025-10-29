@@ -37,7 +37,7 @@ function createToast(message, type){
 
     // Remove the toast from DOM when hidden
     $toast.on("hidden.bs.toast", function () {
-    $(this).remove();
+        $(this).remove();
     });
 };
 

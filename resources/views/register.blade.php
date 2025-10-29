@@ -6,14 +6,12 @@
         placeholder="{{$lang->hintUserRepeatPassword}}"
         title="{{$lang->hintUserRepeatPassword}}"
         minlength="8" 
-        required 
-        oninvalid="handleInput2(this ,'{{$lang->UserRepeatPasswordRequired}}', '{{$lang->UserRepeatPassword}}', '{{$lang->error7}}')"
-        oninput="handleInput2(this ,'{{$lang->UserRepeatPasswordRequired}}', '{{$lang->UserRepeatPassword}}', '{{$lang->error7}}')">
+        required>
     </div>
     <div class="form-group">
         <label for="codePassword">{{$lang->labelUserCodePassword}}</label>
         <input type="password" class="form-control" id="codePassword" name="codePassword"
-        value="{{old('codePassword')}}" placeholder="{{$lang->hintUserCodePassword}}"
+        placeholder="{{$lang->hintUserCodePassword}}"
         title="{{$lang->hintUserCodePassword}}"
         minlength="8" 
         required 
@@ -21,21 +19,20 @@
         oninput="handleInput(this ,'{{$lang->error8}}', '{{$lang->error9}}')">
     </div>
     <script type="text/javascript">
-        $('#password').on('input invalid', function(e) {
-            if($(this).val() != $('#password_confirmation').val())
+        $('#password').on('input invalid', function() {
+            if(this.value != $('#password_confirmation').val() && $('#password_confirmation').val() != '')
+                this.setCustomValidity(@json($lang->error7));
+        });
+        $('#password_confirmation').on('input invalid', function() {
+            if (this.validity.valueMissing)
+                this.setCustomValidity(@json($lang->UserRepeatPasswordRequired));
+            else if (this.validity.tooShort)
+                this.setCustomValidity(@json($lang->UserRepeatPassword));
+            else if(this.value != $('#password').val())
                 this.setCustomValidity(@json($lang->error7));
             else
-            this.setCustomValidity(''); 
+                this.setCustomValidity('');
         });
-        function handleInput2(event, error1, error2, error3) {
-            if (event.validity.valueMissing)
-                event.setCustomValidity(error1);
-            else if (event.validity.tooShort)
-                event.setCustomValidity(error2);
-            else if(event.value != $('#password').val())
-                event.setCustomValidity(error3);
-            else
-                event.setCustomValidity('');
-        }
+        
     </script>
 @endsection

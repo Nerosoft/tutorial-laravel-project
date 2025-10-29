@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="password">{{$lang->label3}}</label>
-                <input type="password" class="form-control" value="{{old('password')}}" id="password" name="password"
+                <input type="password" class="form-control" id="password" name="password"
                     placeholder="{{$lang->hint2}}"
                     title="{{$lang->hint2}}"
                     minlength="8" 
