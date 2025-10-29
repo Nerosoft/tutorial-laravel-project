@@ -2,7 +2,7 @@
   <link rel='stylesheet' href="{{asset('css/login.css')}}">
 </head>
 <body>
-     <div id="toastContainer" style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;"></div>
+    @include('toast_container')
     @if ($errors->any())
         <script>
             $(document).ready(function () {
