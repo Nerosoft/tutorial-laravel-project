@@ -6,8 +6,9 @@ use App\Models\mydb;
 class LoginController extends LoginRegister implements ViewLanguage
 {
     function setupViewLang(){
-        $this->myView = view('Login',[
-            'lang'=>$this
+        $this->myView = view('login',[
+            'lang'=>$this,
+            'action'=>route('makeLogin')
         ]);
     }
     function __construct(){

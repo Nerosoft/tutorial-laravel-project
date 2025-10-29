@@ -13,7 +13,8 @@ class RegisterController extends LoginRegister implements ViewLanguage
         $this->hintUserRepeatPassword = $this->getDb()[$this->language]['Register']['HintUserRepeatPassword'];
         $this->hintUserCodePassword = $this->getDb()[$this->language]['Register']['HintUserCodePassword'];
         $this->myView = view('register',[
-            'lang'=>$this
+            'lang'=>$this,
+            'action'=>route('makeRegister')
         ]);
     }
     function __construct(){
