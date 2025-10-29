@@ -1,7 +1,4 @@
-@extends('layout')
-@section('head')
-<link rel='stylesheet' href="{{asset('css/login.css')}}">
-@endsection
+@extends('layout2')
 @section('containt')
 <div class="container">
     <div class="login">
