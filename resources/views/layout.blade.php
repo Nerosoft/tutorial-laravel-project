@@ -4,7 +4,6 @@
 <script src="{{asset('lib/dataTables.bootstrap5.js')}}" type="text/javascript"></script>
 </head>
 <body>
-  @include('toast_container')
   @if ($errors->any())
       <script>
           $(document).ready(function () {

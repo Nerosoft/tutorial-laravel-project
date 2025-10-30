@@ -2,7 +2,6 @@
   <link rel='stylesheet' href="{{asset('css/login.css')}}">
 </head>
 <body>
-    @include('toast_container')
     @if ($errors->any())
         <script>
             $(document).ready(function () {

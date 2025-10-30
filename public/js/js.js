@@ -63,3 +63,19 @@ function handleInputSelect(event, error1) {
     else
         event.setCustomValidity('');
 }
+
+$(document).ready(function(){
+    $('body').append(
+        $('<div>', {
+            id:'toastContainer',
+            css:{
+                position: 'fixed',
+                top: '0px',
+                right: '10px',
+                zIndex: 9999,
+                maxHeight: '90vh',
+                overflowY: 'auto'
+            }        
+        })
+    );
+});
