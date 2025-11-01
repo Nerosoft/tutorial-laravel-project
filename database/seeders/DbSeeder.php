@@ -32,9 +32,7 @@ class DbSeeder extends Seeder
                             'Cultures'=>'Cultures',
                             'Packages'=>'Packages',
                         ],
-                        'FlexTable'=>[
-                            'Name'=>'table',
-                        ],
+                        'MyFlexTables'=>'flex table',
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'English language'
@@ -371,6 +369,7 @@ class DbSeeder extends Seeder
                         'Html'=>'Change direction',
                         'CustomTable'=>'Custom Table',
                         'TablePage'=>'Table Page',
+                        'MyFlexTables'=>'Flex Tables'
                     ],
                     'Html'=>[
                         'Direction'=>'ltr',
@@ -445,9 +444,7 @@ class DbSeeder extends Seeder
                             'Cultures'=>'Cultures',
                             'Packages'=>'Packages',
                         ],
-                        'FlexTable'=>[
-                            'Name'=>'table',
-                        ],
+                        'MyFlexTables'=>'flex table',
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'English language'
@@ -784,6 +781,7 @@ class DbSeeder extends Seeder
                         'Html'=>'Change direction',
                         'CustomTable'=>'Custom Table',
                         'TablePage'=>'Table Page',
+                        'MyFlexTables'=>'Flex Tables'
                     ],
                     'Html'=>[
                         'Direction'=>'ltr',

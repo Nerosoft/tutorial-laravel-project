@@ -21,14 +21,21 @@ class Menu
             foreach ($ob->getDb()[$language]['AllNamesLanguage'] as $key => $value)
                 $this->CustomMenu[$key] = new MenuItem($value, $ob->getDb()[$language]['CutomLang']);
         }
-        else{
+        else if(isset($ob->getDb()[$language]['MyFlexTables']) && !empty($ob->getDb()[$language]['MyFlexTables'])){
             $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
             $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDb()[$language]['Menu']['Home'];
             $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
             $this->TestCultures = new MenuItem(array_shift($allTest), $allTest);
-            $flexTable = $ob->getDb()[$language]['Menu']['FlexTable'];
-            $this->FlexTable = new MenuItem(array_shift($flexTable), $flexTable);
+            $this->FlexTable = new MenuItem($ob->getDb()[$language]['Menu']['MyFlexTables'], $ob->getDb()[$language]['MyFlexTables']);
+            $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
+            $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
+        }else{
+            $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
+            $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
+            $this->Home = $ob->getDb()[$language]['Menu']['Home'];
+            $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
+            $this->TestCultures = new MenuItem(array_shift($allTest), $allTest);
             $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
             $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
         }

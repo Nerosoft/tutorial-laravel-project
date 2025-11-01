@@ -13,10 +13,12 @@ class DeleteCustomTableController extends Page implements ViewLanguage2
     }
     function makeValidation(){
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
+            request()->validate($this->roll, $this->message);
             $lang = $this->getDb()[$key];
-            unset($lang[request()->input('id')],
-            $lang['Menu']['FlexTable'][request()->input('id')],
-            $lang['CutomLang'][request()->input('id')]);
+            if(count($lang['MyFlexTables']) === 1)
+                unset($lang[request()->input('id')], $lang['MyFlexTables'], $lang['CutomLang'][request()->input('id')]);
+            else
+                unset($lang[request()->input('id')], $lang['MyFlexTables'][request()->input('id')], $lang['CutomLang'][request()->input('id')]);
             $this->getDb()[$key] = $lang;
         }
         if(isset($this->getDb()[request()->input('id')]))
@@ -26,7 +28,6 @@ class DeleteCustomTableController extends Page implements ViewLanguage2
     function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
         parent::__construct($this, 'CustomTable');
-        request()->validate($this->roll, $this->message);
 
     }
     function makeDeleteTable(){

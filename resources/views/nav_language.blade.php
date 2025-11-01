@@ -10,7 +10,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                     @foreach($myValue->Item as $keyItem=>$customItem)
                     <li>
-                      <a class="dropdown-item {{$keyItem === request()->route('id') ? 'my_active':''}}" href="{{route('SystemLang', ['id'=>$keyItem, 'lang'=>$key2])}}">
+                      <a class="dropdown-item {{$keyItem === request()->route('id') && $key2 === request()->route('lang') ? 'my_active':''}}" href="{{route('SystemLang', ['id'=>$keyItem, 'lang'=>$key2])}}">
                         <img class="style_icon_menu" src="{{asset('/lib/icons/'.$lang->myMenuApp->getIconByKey($keyItem))}}"/>
                         {{$customItem}}
                       </a>

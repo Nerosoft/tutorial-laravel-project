@@ -27,7 +27,7 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Packages'
         || $request->session()->exists('userId') && $state === 'delete' && $this->getKeyTables()
     
-        || $request->session()->exists('userId') && $state === 'flex' && $this->getKeyTables()
+        || $request->session()->exists('userId') && $state === 'flex' && isset(mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['MyFlexTables']) && $this->getKeyTables()
         )
             return $next($request);
         else if($request->session()->exists('userId') && $state === 'test' 
@@ -38,6 +38,6 @@ class IsLogin
             return redirect('/login');
     }
     function getKeyTables(){
-        return in_array(request()->route('id'), array_keys(array_slice(mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['Menu']['FlexTable'], 1)));
+        return in_array(request()->route('id'), array_keys((array)mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['MyFlexTables']));
     }
 }

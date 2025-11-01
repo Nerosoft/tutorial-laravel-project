@@ -64,9 +64,9 @@ class LangController extends Page implements TableData
     function makeAddLanguage(){
         $myLanguage = $this->getDb()['MyLanguage'];
         $myLanguage['AllNamesLanguage'] = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
-        if(count($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable']) > 1)
-            foreach (array_slice($this->getDb()[$this->getDb()['Setting']['Language']]['Menu']['FlexTable'], 1) as $key => $value){ 
-                $myLanguage['Menu']['FlexTable'][$key] = $value;
+        if(isset($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']) && !empty($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']))
+            foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables'] as $key => $value){ 
+                $myLanguage['MyFlexTables'][$key] = $value;
                 $myLanguage['CutomLang'][$key] = $this->getDb()[$this->getDb()['Setting']['Language']]['CutomLang'][$key];
                 $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];   
             } 

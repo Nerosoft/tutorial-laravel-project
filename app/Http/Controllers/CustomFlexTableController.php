@@ -12,7 +12,7 @@ class CustomFlexTableController extends Page implements TableData
         return $this->ob;
     }
     public function getDataTable(){
-        return count($this->getDb()[$this->language]['Menu']['FlexTable']) === 1?array():array_reverse(CustomTable::fromArray(array_slice($this->getDb()[$this->language]['Menu']['FlexTable'], 1)));
+        return isset($this->getDb()[$this->language]['MyFlexTables'])?array_reverse(CustomTable::fromArray($this->getDb()[$this->language]['MyFlexTables'])):array();
     }
     public function setupViewLang(){
         $this->model2 = $this->getDb()[$this->language]['CustomTable']['ScreenModelCreate'];
@@ -60,7 +60,7 @@ class CustomFlexTableController extends Page implements TableData
             array_push($myInputKey, $this->generateUniqueIdentifier());
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
             $lang = $this->getDb()[$code];
-            $lang['Menu']['FlexTable'][$key] = request()->input('name');
+            $lang['MyFlexTables'][$key] = request()->input('name');
             $lang[$key] = $lang['TablePage']['Info'];
             $lang['CutomLang'][$key] = request()->input('name');
             foreach ($myInputKey as $key2){
@@ -78,7 +78,7 @@ class CustomFlexTableController extends Page implements TableData
     function makeEditTable(){
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
             $lang = $this->getDb()[$key];
-            $lang['Menu']['FlexTable'][request()->input('id')] = request()->input('name');
+            $lang['MyFlexTables'][request()->input('id')] = request()->input('name');
             $lang['CutomLang'][request()->input('id')] = request()->input('name');
             $this->getDb()[$key] = $lang;
         }

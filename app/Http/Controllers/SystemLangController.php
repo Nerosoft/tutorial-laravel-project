@@ -31,12 +31,14 @@ class SystemLangController extends TableInformation implements ViewLanguage
     public function getDataTable(){
         if(isset($this->getDb()[request()->route('lang')][request()->route('id')]))
             return $this->getDb()[request()->route('lang')][request()->route('id')];
-        else{
+        else if(is_null(request()->route('lang')) && is_null(request()->route('id'))){
             $tableData = array();
             foreach ($this->getDb()[$this->language]['AllNamesLanguage'] as $key=>$value)
                 $tableData[$key] = $this->getDb()[$key];
             return $tableData;
         }
+        else
+            return array();
     }
     function setupViewLang(){
         $this->Left = $this->getDb()[$this->language]['SystemLang']['ltr'];

@@ -50,7 +50,7 @@ class Page extends TableInformation
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editTable' || Route::currentRouteName() === 'deleteTable'){
             $this->roll = [
-                'id'=>['required', Rule::in(array_keys(array_slice($obj->getDb()[$obj->getDb()['Setting']['Language']]['Menu']['FlexTable'],1)))]
+                'id'=>['required', Rule::in(isset($obj->getDb()[$obj->getDb()['Setting']['Language']]['MyFlexTables'])?array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['MyFlexTables']):null)]
             ];
             $this->message = [
                 'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
