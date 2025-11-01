@@ -16,9 +16,9 @@ class DeleteCustomTableController extends Page implements ViewLanguage2
             request()->validate($this->roll, $this->message);
             $lang = $this->getDb()[$key];
             if(count($lang['MyFlexTables']) === 1)
-                unset($lang[request()->input('id')], $lang['MyFlexTables'], $lang['CutomLang'][request()->input('id')]);
+                unset($lang[request()->input('id')], $lang['MyFlexTables']);
             else
-                unset($lang[request()->input('id')], $lang['MyFlexTables'][request()->input('id')], $lang['CutomLang'][request()->input('id')]);
+                unset($lang[request()->input('id')], $lang['MyFlexTables'][request()->input('id')]);
             $this->getDb()[$key] = $lang;
         }
         if(isset($this->getDb()[request()->input('id')]))

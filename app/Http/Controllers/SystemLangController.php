@@ -57,7 +57,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
     }
     function makeValidation(){
         $this->roll = [
-            'id'=>['required', Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['CutomLang']))],
+            'id'=>['required', Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]))],
         ];
         $this->message = [
             'id.required'=>$this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditTableRequired'],

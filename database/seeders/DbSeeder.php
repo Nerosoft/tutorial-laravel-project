@@ -21,6 +21,7 @@ class DbSeeder extends Seeder
                 ],
                 'MyLanguage'=>[
                     'Menu'=>[
+                        'MYTITLE'=>'Menu',
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'Branches'=>'Branches',
@@ -32,12 +33,13 @@ class DbSeeder extends Seeder
                             'Cultures'=>'Cultures',
                             'Packages'=>'Packages',
                         ],
-                        'MyFlexTables'=>'flex table',
+                        'MyFlexTables'=>'flex table'
                     ],
                     'AllNamesLanguage'=>[
-                        'english'=>'English language'
+                        'english'=>'English language',
                     ],
                     'Login'=>[
+                        'MYTITLE'=>'Login',
                         'IdReq'=>'id required',
                         'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
@@ -58,6 +60,7 @@ class DbSeeder extends Seeder
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
                     ],
                     'Register'=>[
+                        'MYTITLE'=>'Register',
                         'IdReq'=>'id required',
                         'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
@@ -87,24 +90,35 @@ class DbSeeder extends Seeder
                         'AdminLogin'=>'seccessfully register admin'
                     ],
                     'Admin'=>[
-                        'Title'=>'Admin user',
+                        'MYTITLE'=>'Admin',
+                        'Title'=>'Admin user'
                     ],
                     'AppSettingAdmin'=>[
+                        'MYTITLE'=>'App setting',
                         'Offcanvas'=>'Dark offcanvas',
                         'Logout'=>'Logout',
                         'AdminDashboard'=>'Salamatak for medical analysis and radiology',
                         'BranchesCompany'=>'Select branches',
                         'BranchMain'=>'Branch main',
+                        'AllNamesLanguage'=>'App lang',
+                        'MyFlexTables'=>'My Flex Tables',
+                        'InputNameTable'=>'Name',
+                        'InputLabel'=>'Name',
+                        'InputHint'=>'Enter name value',
+                        'InputErrorsMessageReq'=>'error name reqired',
+                        'InputErrorsMessageInv'=>'error name invalid',
                     ],
                     'TableInfo'=>[
+                        'MYTITLE'=>'table info',
                         'Ssearch'=>'Quick Search:',
                         'InfoEmpty'=>'No records available',
                         'ZeroRecords'=>'No Data Found',
                         'Info'=>'Total',
                         'LengthMenu'=>'records per page',
-                        'InfoFiltered'=>'Showing',
+                        'InfoFiltered'=>'Showing'
                     ],
                     'Branches'=>[
+                        'MYTITLE'=>'branch',
                         'Used'=>'branch is used',
                         'LoadMessage'=>'welcome in branch main',
                         'Active'=>'this branch is used',
@@ -165,10 +179,12 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete branch',
                     ],
                     'SelectBranchBox'=>[
+                        'MYTITLE'=>'branch box',
                         'WithoutRays'=>'Without rays',
-                        'WithRays'=>'With rays',
+                        'WithRays'=>'With rays'
                     ],
                     'ChangeLanguage'=>[
+                        'MYTITLE'=>'change language',
                         'Used'=>'language is used',
                         'LoadMessage'=>'welcome in Change Language',
                         'ButtonModelAdd'=>'Create language',
@@ -203,6 +219,7 @@ class DbSeeder extends Seeder
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'SystemLang'=>[
+                        'MYTITLE'=>'system language',
                         'TextRequired'=>'Text Required',
                         'TextLenght'=>'Invalid text',
                         'SystemLang'=>'System language',
@@ -229,6 +246,7 @@ class DbSeeder extends Seeder
                         'rtl'=>'set right to left direction',
                     ],
                     'Test'=>[
+                        'MYTITLE'=>'Test',
                         'LoadMessage'=>'welcome in page test',
                         'ScreenModelDelete'=>'Screen delete Test',
                         'MessageModelDelete'=>'Do you want to delete Test',
@@ -268,6 +286,7 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Test',
                     ],
                     'Cultures'=>[
+                        'MYTITLE'=>'Cultures',
                         'LoadMessage'=>'welcome in page Cultures',
                         'ScreenModelDelete'=>'Screen delete cultures',
                         'MessageModelDelete'=>'Do you want to delete cultures',
@@ -307,6 +326,7 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete cultures',
                     ],
                     'Packages'=>[
+                        'MYTITLE'=>'Packages',
                         'LoadMessage'=>'welcome in page Packages',
                         'ScreenModelDelete'=>'Screen delete packages',
                         'MessageModelDelete'=>'Do you want to delete packages',
@@ -346,35 +366,16 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'SelectTestBox'=>[
+                        'MYTITLE'=>'Text box',
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
                     ],
-                    'CutomLang'=>[
-                        'Admin'=>'Admin',
-                        'Branches'=>'Branch',
-                        'ChangeLanguage'=>'Change Language',
-                        'SystemLang'=>'System Lang',
-                        'Test'=>'Test',
-                        'Cultures'=>'Cultures',
-                        'Packages'=>'Packages',
-                        'Login'=>'LoginAdmin',
-                        'Register'=>'Register',
-                        'Menu'=>'Menu',
-                        'TableInfo'=>'TableInfo',
-                        'AppSettingAdmin'=>'App Setting Admin',
-                        'SelectTestBox'=>'Select Test Box',
-                        'SelectBranchBox'=>'Select Branch Box',
-                        'CutomLang'=>'Cutom Lang',
-                        'AllNamesLanguage'=>'All Names Language',
-                        'Html'=>'Change direction',
-                        'CustomTable'=>'Custom Table',
-                        'TablePage'=>'Table Page',
-                        'MyFlexTables'=>'Flex Tables'
-                    ],
                     'Html'=>[
+                        'MYTITLE'=>'Html',
                         'Direction'=>'ltr',
                     ],
                     'CustomTable'=>[
+                        'MYTITLE'=>'custom table',
                         'LoadMessage'=>'welcome in page Custom Table',
                         'ScreenModelDelete'=>'Screen delete table',
                         'MessageModelDelete'=>'Do you want to delete table',
@@ -403,7 +404,7 @@ class DbSeeder extends Seeder
                         'HintInputNumber'=>'enter Input Numper table',
                     ],
                     'TablePage'=>[
-                        'Info'=>[
+                        'MYTITLE'=>'Table page',
                         'LoadMessage'=>'welcome in page table',
                         'ScreenModelDelete'=>'Screen delete table',
                         'MessageModelDelete'=>'Do you want to delete table',
@@ -421,18 +422,11 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete table',
                         'IdIsReq'=>'Id Required',
                         'IdIsInv'=>'Id Invalid',
-                        ],
-                        'Input'=>[
-                            'InputNameTable'=>'Name',
-                            'InputLabel'=>'Name',
-                            'InputHint'=>'Enter name value',
-                            'InputErrorsMessageReq'=>'error name reqired',
-                            'InputErrorsMessageInv'=>'error name invalid',
-                        ]
                     ],
                 ],
                 'english'=>[
                     'Menu'=>[
+                        'MYTITLE'=>'Menu',
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'Branches'=>'Branches',
@@ -444,12 +438,13 @@ class DbSeeder extends Seeder
                             'Cultures'=>'Cultures',
                             'Packages'=>'Packages',
                         ],
-                        'MyFlexTables'=>'flex table',
+                        'MyFlexTables'=>'flex table'
                     ],
                     'AllNamesLanguage'=>[
-                        'english'=>'English language'
+                        'english'=>'English language',
                     ],
                     'Login'=>[
+                        'MYTITLE'=>'Login',
                         'IdReq'=>'id required',
                         'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
@@ -470,6 +465,7 @@ class DbSeeder extends Seeder
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
                     ],
                     'Register'=>[
+                        'MYTITLE'=>'Register',
                         'IdReq'=>'id required',
                         'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
@@ -499,24 +495,35 @@ class DbSeeder extends Seeder
                         'AdminLogin'=>'seccessfully register admin'
                     ],
                     'Admin'=>[
-                        'Title'=>'Admin user',
+                        'MYTITLE'=>'Admin',
+                        'Title'=>'Admin user'
                     ],
                     'AppSettingAdmin'=>[
+                        'MYTITLE'=>'App setting',
                         'Offcanvas'=>'Dark offcanvas',
                         'Logout'=>'Logout',
                         'AdminDashboard'=>'Salamatak for medical analysis and radiology',
                         'BranchesCompany'=>'Select branches',
                         'BranchMain'=>'Branch main',
+                        'AllNamesLanguage'=>'App lang',
+                        'MyFlexTables'=>'My Flex Tables',
+                        'InputNameTable'=>'Name',
+                        'InputLabel'=>'Name',
+                        'InputHint'=>'Enter name value',
+                        'InputErrorsMessageReq'=>'error name reqired',
+                        'InputErrorsMessageInv'=>'error name invalid',
                     ],
                     'TableInfo'=>[
+                        'MYTITLE'=>'table info',
                         'Ssearch'=>'Quick Search:',
                         'InfoEmpty'=>'No records available',
                         'ZeroRecords'=>'No Data Found',
                         'Info'=>'Total',
                         'LengthMenu'=>'records per page',
-                        'InfoFiltered'=>'Showing',
+                        'InfoFiltered'=>'Showing'
                     ],
                     'Branches'=>[
+                        'MYTITLE'=>'branch',
                         'Used'=>'branch is used',
                         'LoadMessage'=>'welcome in branch main',
                         'Active'=>'this branch is used',
@@ -577,10 +584,12 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete branch',
                     ],
                     'SelectBranchBox'=>[
+                        'MYTITLE'=>'branch box',
                         'WithoutRays'=>'Without rays',
-                        'WithRays'=>'With rays',
+                        'WithRays'=>'With rays'
                     ],
                     'ChangeLanguage'=>[
+                        'MYTITLE'=>'change language',
                         'Used'=>'language is used',
                         'LoadMessage'=>'welcome in Change Language',
                         'ButtonModelAdd'=>'Create language',
@@ -615,6 +624,7 @@ class DbSeeder extends Seeder
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'SystemLang'=>[
+                        'MYTITLE'=>'system language',
                         'TextRequired'=>'Text Required',
                         'TextLenght'=>'Invalid text',
                         'SystemLang'=>'System language',
@@ -641,6 +651,7 @@ class DbSeeder extends Seeder
                         'rtl'=>'set right to left direction',
                     ],
                     'Test'=>[
+                        'MYTITLE'=>'Test',
                         'LoadMessage'=>'welcome in page test',
                         'ScreenModelDelete'=>'Screen delete Test',
                         'MessageModelDelete'=>'Do you want to delete Test',
@@ -680,6 +691,7 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Test',
                     ],
                     'Cultures'=>[
+                        'MYTITLE'=>'Cultures',
                         'LoadMessage'=>'welcome in page Cultures',
                         'ScreenModelDelete'=>'Screen delete cultures',
                         'MessageModelDelete'=>'Do you want to delete cultures',
@@ -719,6 +731,7 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete cultures',
                     ],
                     'Packages'=>[
+                        'MYTITLE'=>'Packages',
                         'LoadMessage'=>'welcome in page Packages',
                         'ScreenModelDelete'=>'Screen delete packages',
                         'MessageModelDelete'=>'Do you want to delete packages',
@@ -758,35 +771,16 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'SelectTestBox'=>[
+                        'MYTITLE'=>'Text box',
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
                     ],
-                    'CutomLang'=>[
-                        'Admin'=>'Admin',
-                        'Branches'=>'Branch',
-                        'ChangeLanguage'=>'Change Language',
-                        'SystemLang'=>'System Lang',
-                        'Test'=>'Test',
-                        'Cultures'=>'Cultures',
-                        'Packages'=>'Packages',
-                        'Login'=>'LoginAdmin',
-                        'Register'=>'Register',
-                        'Menu'=>'Menu',
-                        'TableInfo'=>'TableInfo',
-                        'AppSettingAdmin'=>'App Setting Admin',
-                        'SelectTestBox'=>'Select Test Box',
-                        'SelectBranchBox'=>'Select Branch Box',
-                        'CutomLang'=>'Cutom Lang',
-                        'AllNamesLanguage'=>'All Names Language',
-                        'Html'=>'Change direction',
-                        'CustomTable'=>'Custom Table',
-                        'TablePage'=>'Table Page',
-                        'MyFlexTables'=>'Flex Tables'
-                    ],
                     'Html'=>[
+                        'MYTITLE'=>'Html',
                         'Direction'=>'ltr',
                     ],
                     'CustomTable'=>[
+                        'MYTITLE'=>'custom table',
                         'LoadMessage'=>'welcome in page Custom Table',
                         'ScreenModelDelete'=>'Screen delete table',
                         'MessageModelDelete'=>'Do you want to delete table',
@@ -815,7 +809,7 @@ class DbSeeder extends Seeder
                         'HintInputNumber'=>'enter Input Numper table',
                     ],
                     'TablePage'=>[
-                        'Info'=>[
+                        'MYTITLE'=>'Table page',
                         'LoadMessage'=>'welcome in page table',
                         'ScreenModelDelete'=>'Screen delete table',
                         'MessageModelDelete'=>'Do you want to delete table',
@@ -833,14 +827,6 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete table',
                         'IdIsReq'=>'Id Required',
                         'IdIsInv'=>'Id Invalid',
-                        ],
-                        'Input'=>[
-                            'InputNameTable'=>'Name',
-                            'InputLabel'=>'Name',
-                            'InputHint'=>'Enter name value',
-                            'InputErrorsMessageReq'=>'error name reqired',
-                            'InputErrorsMessageInv'=>'error name invalid',
-                        ]
                     ],
                 ]
             ]);

@@ -61,14 +61,13 @@ class CustomFlexTableController extends Page implements TableData
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
             $lang = $this->getDb()[$code];
             $lang['MyFlexTables'][$key] = request()->input('name');
-            $lang[$key] = $lang['TablePage']['Info'];
-            $lang['CutomLang'][$key] = request()->input('name');
+            $lang[$key] = $lang['TablePage'];
             foreach ($myInputKey as $key2){
-                $lang[$key]['TableHead'][$key2] = $lang['TablePage']['Input']['InputNameTable'];
-                $lang[$key]['Label'][$key2] = $lang['TablePage']['Input']['InputLabel'];
-                $lang[$key]['Hint'][$key2] = $lang['TablePage']['Input']['InputHint'];
-                $lang[$key]['ErrorsMessageReq'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageReq'];
-                $lang[$key]['ErrorsMessageInv'][$key2] = $lang['TablePage']['Input']['InputErrorsMessageInv'];
+                $lang[$key]['TableHead'][$key2] = $lang['AppSettingAdmin']['InputNameTable'];
+                $lang[$key]['Label'][$key2] = $lang['AppSettingAdmin']['InputLabel'];
+                $lang[$key]['Hint'][$key2] = $lang['AppSettingAdmin']['InputHint'];
+                $lang[$key]['ErrorsMessageReq'][$key2] = $lang['AppSettingAdmin']['InputErrorsMessageReq'];
+                $lang[$key]['ErrorsMessageInv'][$key2] = $lang['AppSettingAdmin']['InputErrorsMessageInv'];
             }
             $this->getDb()[$code] = $lang;
         }
@@ -79,7 +78,6 @@ class CustomFlexTableController extends Page implements TableData
         foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
             $lang = $this->getDb()[$key];
             $lang['MyFlexTables'][request()->input('id')] = request()->input('name');
-            $lang['CutomLang'][request()->input('id')] = request()->input('name');
             $this->getDb()[$key] = $lang;
         }
         $this->getDb()->save();

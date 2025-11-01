@@ -67,7 +67,6 @@ class LangController extends Page implements TableData
         if(isset($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']) && !empty($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']))
             foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables'] as $key => $value){ 
                 $myLanguage['MyFlexTables'][$key] = $value;
-                $myLanguage['CutomLang'][$key] = $this->getDb()[$this->getDb()['Setting']['Language']]['CutomLang'][$key];
                 $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];   
             } 
         $this->getDb()[$this->newKey] = $myLanguage;

@@ -18,8 +18,14 @@ class Menu
         if($state === 'SystemLang'){
             $this->Home = $ob->getDb()[$language]['Menu']['Home'];
             $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
+            $arr = array();
+            foreach (array_keys($ob->getDb()[$language]) as $key => $value) 
+                if($value === 'AllNamesLanguage' || $value === 'MyFlexTables')
+                    $arr[$value] = $ob->getDb()[$language]['AppSettingAdmin'][$value];
+                else
+                    $arr[$value] = $ob->getDb()[$language][$value][array_key_first($ob->getDb()[$language][$value])];
             foreach ($ob->getDb()[$language]['AllNamesLanguage'] as $key => $value)
-                $this->CustomMenu[$key] = new MenuItem($value, $ob->getDb()[$language]['CutomLang']);
+                $this->CustomMenu[$key] = new MenuItem($value, $arr);
         }
         else if(isset($ob->getDb()[$language]['MyFlexTables']) && !empty($ob->getDb()[$language]['MyFlexTables'])){
             $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
@@ -76,8 +82,6 @@ class Menu
             return 'hospital.svg';
         else if($key === 'SelectBranchBox')
             return 'gear.svg';
-        else if($key === 'CutomLang')
-            return 'badge-3d-fill.svg';
         else if($key === 'AllNamesLanguage')
             return 'bag-check-fill.svg';
         else if($key === 'CustomTable')
