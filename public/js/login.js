@@ -1,5 +1,4 @@
 function IsEmail(event, error1, error2) {
-    const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if(event.validity.valueMissing)
         event.setCustomValidity(error1);
     else if (event.validity.typeMismatch)
