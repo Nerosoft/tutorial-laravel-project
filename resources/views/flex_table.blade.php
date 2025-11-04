@@ -54,6 +54,5 @@
             $(id).find('#'+key).val(myObj[key]);
     }
 </script>
-<script src="{{asset('js/flex_table.js')}}" type="text/javascript"></script>
 @include('table_setting')
 @endsection
