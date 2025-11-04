@@ -27,8 +27,7 @@
                     value="{{old('email')}}" placeholder="{{$lang->hint1}}"
                     title="{{$lang->hint1}}"
                     required 
-                    oninvalid="IsEmail(this, '{{$lang->errorUserEmailRequired}}', '{{$lang->errorUserEmail}}')"
-                    oninput="IsEmail(this, '{{$lang->errorUserEmailRequired}}', '{{$lang->errorUserEmail}}')">
+                    >
             </div>
             <div class="form-group">
                 <label for="password">{{$lang->label3}}</label>
@@ -76,6 +75,26 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/login.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+        $('#email').on('input invalid', function() {
+            if (this.validity.valueMissing)
+                this.setCustomValidity(@json($lang->errorUserEmailRequired));
+            else if (this.validity.typeMismatch)
+                this.setCustomValidity(@json($lang->errorUserEmail));
+            else
+                this.setCustomValidity('');
+        });
+        function closeModel(lang, id){
+            closeForm(id);
+            if($('.flexCheck:checked').val() !== lang)
+                setLanguage(lang);
+        }
+        function setLanguage(element){
+            $('.flexCheck').each(function(idx, el){
+                el.checked = element == el.value;
+            });
+        }
+
+    </script>
 </body>
 </html>

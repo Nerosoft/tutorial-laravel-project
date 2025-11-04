@@ -9,12 +9,8 @@ use Illuminate\Validation\Rule;
 class LoginRegister extends SettingPage
 {
     function __construct($state, ViewLanguage $obj){
-        $this->errorUserEmail = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserEmail'];
-        $this->errorUserEmailRequired = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserEmailRequired'];
-        $this->errorUserPassword = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserPassword'];
-        $this->errorUserPasswordRequired = $obj->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']][$state]['UserPasswordRequired'];
-        if(Route::currentRouteName() === 'makeLogin' || Route::currentRouteName() === 'makeRegister'){
-            parent::__construct(isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language']);
+        if(Route::currentRouteName() === 'makeLogin' && isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))]) || Route::currentRouteName() === 'makeRegister' && isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))])){
+            parent::__construct(unserialize(request()->cookie($obj->getDb()['_id'])));
             $this->roll = [
                 'id' => ['required', Rule::in($obj->getDb()['_id'])],
                 'email' => ['required', 'email'],
@@ -23,11 +19,30 @@ class LoginRegister extends SettingPage
             $this->message = [
                 'id.required'=>$obj->getDb()[$this->language][$state]['IdReq'],
                 'id.in'=>$obj->getDb()[$this->language][$state]['IdInv'],
-                'email.email' => $this->errorUserEmail ,
-                'email.required' => $this->errorUserEmailRequired,
+                'email.email' => $obj->getDb()[$this->language][$state]['UserEmail'],
+                'email.required' => $obj->getDb()[$this->language][$state]['UserEmailRequired'],
     
-                'password.min' => $this->errorUserPassword ,
-                'password.required' => $this->errorUserPasswordRequired,
+                'password.min' => $obj->getDb()[$this->language][$state]['UserPassword'],
+                'password.required' => $obj->getDb()[$this->language][$state]['UserPasswordRequired'],
+            ];
+            $this->users = (array)$obj->getDb()['User'];
+            $this->successfully = $obj->getDb()[$this->language][$state]['AdminLogin'];
+            $obj->makeValidation();
+        }else if(Route::currentRouteName() === 'makeLogin' || Route::currentRouteName() === 'makeRegister'){
+            parent::__construct($obj->getDb()['Setting']['Language']);
+            $this->roll = [
+                'id' => ['required', Rule::in($obj->getDb()['_id'])],
+                'email' => ['required', 'email'],
+                'password' => ['required', 'min:8'],
+            ];
+            $this->message = [
+                'id.required'=>$obj->getDb()[$this->language][$state]['IdReq'],
+                'id.in'=>$obj->getDb()[$this->language][$state]['IdInv'],
+                'email.email' => $obj->getDb()[$this->language][$state]['UserEmail'],
+                'email.required' => $obj->getDb()[$this->language][$state]['UserEmailRequired'],
+    
+                'password.min' => $obj->getDb()[$this->language][$state]['UserPassword'],
+                'password.required' => $obj->getDb()[$this->language][$state]['UserPasswordRequired'],
             ];
             $this->users = (array)$obj->getDb()['User'];
             $this->successfully = $obj->getDb()[$this->language][$state]['AdminLogin'];
@@ -36,6 +51,10 @@ class LoginRegister extends SettingPage
             parent::__construct(unserialize(request()->cookie($obj->getDb()['_id'])),
             $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))][$state]['Title'],
             $obj->getDb()[unserialize(request()->cookie($obj->getDb()['_id']))]['Html']['Direction']);
+            $this->errorUserEmail = $obj->getDb()[$this->language][$state]['UserEmail'];
+            $this->errorUserEmailRequired = $obj->getDb()[$this->language][$state]['UserEmailRequired'];
+            $this->errorUserPassword = $obj->getDb()[$this->language][$state]['UserPassword'];
+            $this->errorUserPasswordRequired = $obj->getDb()[$this->language][$state]['UserPasswordRequired'];
             $obj->setupViewLang();
             $this->button1 = $obj->getDb()[$this->language][$state]['ButtonLanguage'];
             $this->button2 = $obj->getDb()[$this->language][$state]['ButtonSaveLanguage'];
@@ -53,6 +72,10 @@ class LoginRegister extends SettingPage
             parent::__construct($obj->getDb()['Setting']['Language'],
             $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['Title'],
             $obj->getDb()[$obj->getDb()['Setting']['Language']]['Html']['Direction']);
+            $this->errorUserEmail = $obj->getDb()[$this->language][$state]['UserEmail'];
+            $this->errorUserEmailRequired = $obj->getDb()[$this->language][$state]['UserEmailRequired'];
+            $this->errorUserPassword = $obj->getDb()[$this->language][$state]['UserPassword'];
+            $this->errorUserPasswordRequired = $obj->getDb()[$this->language][$state]['UserPasswordRequired'];
             $obj->setupViewLang();
             $this->button1 = $obj->getDb()[$this->language][$state]['ButtonLanguage'];
             $this->button2 = $obj->getDb()[$this->language][$state]['ButtonSaveLanguage'];

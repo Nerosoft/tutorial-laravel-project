@@ -35,6 +35,5 @@
             else
                 this.setCustomValidity('');
         });
-        
     </script>
 @endsection
