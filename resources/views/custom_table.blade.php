@@ -35,6 +35,26 @@
         </tfoot>
     </table>
 </div>
-<script src="{{asset('js/custom_table.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+    let setting = [
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': false }
+];
+function displayEditForm(id, name){
+    removeClass(id);
+    openForm(id);
+    $(id).find('#name').val(name);
+}
+ $('#input_number').on('input invalid', function() {
+    if (this.validity.valueMissing)
+        this.setCustomValidity(@json($lang->error3));
+    else if (this.value < 1 || this.value > 8)
+        this.setCustomValidity(@json($lang->error4));
+    else
+        this.setCustomValidity('');
+});
+
+</script>
 @include('table_setting')
 @endsection

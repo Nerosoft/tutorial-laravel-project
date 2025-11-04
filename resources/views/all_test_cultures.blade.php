@@ -44,6 +44,27 @@
         
 </table>
 </div>
-<script src="{{asset('js/all_test_cultures.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+let setting = [
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': false, className: "text-left" },
+];
+
+function displayEditForm(id, name, shortcut, price, input_output_lab, nameTset, shortcutTest, priceTest, inputOutputLabTest){
+    removeClass(id);
+    openForm(id);
+    name.val(nameTset);
+    shortcut.val(shortcutTest);
+    price.val(priceTest);
+    input_output_lab.each(function(idx, el){
+        if($(this).html() === inputOutputLabTest)
+            $(this).prop('selected', true);
+    });
+}
+</script>
 @include('table_setting')
 @endsection

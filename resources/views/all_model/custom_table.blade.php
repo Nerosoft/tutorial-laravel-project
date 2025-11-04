@@ -18,8 +18,6 @@
     min="1" 
     max="8" 
     required
-    oninvalid="handleInputCustomTable(this ,'{{$lang->error3}}', '{{$lang->error4}}')"
-    oninput="handleInputCustomTable(this ,'{{$lang->error3}}', '{{$lang->error4}}')"
     type="number" name="input_number" id="input_number" value="{{$inputNumber}}" placeholder='{{$lang->HintInputNumber}}' class="form-control">
 </div>
 @endif

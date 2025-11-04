@@ -107,6 +107,8 @@ class DbSeeder extends Seeder
                         'InputHint'=>'Enter name value',
                         'InputErrorsMessageReq'=>'error name reqired',
                         'InputErrorsMessageInv'=>'error name invalid',
+                        'SelectBranchBox'=>'Select Branch Box',
+                        'SelectTestBox'=>'Select Test Box'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',
@@ -179,7 +181,6 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete branch',
                     ],
                     'SelectBranchBox'=>[
-                        'MYTITLE'=>'branch box',
                         'WithoutRays'=>'Without rays',
                         'WithRays'=>'With rays'
                     ],
@@ -366,7 +367,6 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'SelectTestBox'=>[
-                        'MYTITLE'=>'Text box',
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
                     ],
@@ -512,6 +512,8 @@ class DbSeeder extends Seeder
                         'InputHint'=>'Enter name value',
                         'InputErrorsMessageReq'=>'error name reqired',
                         'InputErrorsMessageInv'=>'error name invalid',
+                        'SelectBranchBox'=>'Select Branch Box',
+                        'SelectTestBox'=>'Select Test Box'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',
@@ -584,7 +586,6 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete branch',
                     ],
                     'SelectBranchBox'=>[
-                        'MYTITLE'=>'branch box',
                         'WithoutRays'=>'Without rays',
                         'WithRays'=>'With rays'
                     ],
@@ -771,7 +772,6 @@ class DbSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'SelectTestBox'=>[
-                        'MYTITLE'=>'Text box',
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
                     ],

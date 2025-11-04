@@ -68,6 +68,18 @@
             
         </table>
     </div>
-<script src="{{asset('js/change_language.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+    let setting = [
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': true, className: "text-left" },
+    { 'searchable': false }
+];
+
+function displayModel(id, value){
+    removeClass(id);
+    openForm(id);
+    $(id).find('#lang_name').val(value);
+}
+</script>
 @include('table_setting')
 @endsection
