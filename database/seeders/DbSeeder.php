@@ -108,7 +108,8 @@ class DbSeeder extends Seeder
                         'InputErrorsMessageReq'=>'error name reqired',
                         'InputErrorsMessageInv'=>'error name invalid',
                         'SelectBranchBox'=>'Select Branch Box',
-                        'SelectTestBox'=>'Select Test Box'
+                        'SelectTestBox'=>'Select Test Box',
+                        'Html'=>'Html'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',
@@ -371,7 +372,6 @@ class DbSeeder extends Seeder
                         'TestOutput'=>'Output',
                     ],
                     'Html'=>[
-                        'MYTITLE'=>'Html',
                         'Direction'=>'ltr',
                     ],
                     'CustomTable'=>[
@@ -513,7 +513,8 @@ class DbSeeder extends Seeder
                         'InputErrorsMessageReq'=>'error name reqired',
                         'InputErrorsMessageInv'=>'error name invalid',
                         'SelectBranchBox'=>'Select Branch Box',
-                        'SelectTestBox'=>'Select Test Box'
+                        'SelectTestBox'=>'Select Test Box',
+                        'Html'=>'Html'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',
@@ -776,7 +777,6 @@ class DbSeeder extends Seeder
                         'TestOutput'=>'Output',
                     ],
                     'Html'=>[
-                        'MYTITLE'=>'Html',
                         'Direction'=>'ltr',
                     ],
                     'CustomTable'=>[
