@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
 class Controller extends BaseController
 {
-    protected function generateUniqueIdentifier($length = 8){
-        return Str::random($length - 6) . substr(uniqid(), -6);
+    protected function generateUniqueIdentifier($length = 2){
+        return Str::random($length) . substr(uniqid(), -6);
     }
 }
