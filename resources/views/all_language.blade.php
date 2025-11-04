@@ -106,7 +106,6 @@
         inputValue.val(value);
     }
     function displayEditForm2(id, selectBox, value){
-        removeClass(id);
         openForm(id);
         selectBox.each(function(idx, el){
             if($(this).val() == value)
