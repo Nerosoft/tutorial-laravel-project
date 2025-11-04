@@ -49,7 +49,7 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="SettingLanguage">{{$lang->label1}}</h5>
-                <button type="button" onClick="closeModel('{{ $lang->language }}', '#exampleModal')" class="btn btn-dark">
+                <button type="button" onClick="closeModel('#exampleModal')" class="btn btn-dark">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -84,10 +84,10 @@
             else
                 this.setCustomValidity('');
         });
-        function closeModel(lang, id){
+        function closeModel(id){
             closeForm(id);
-            if($('.flexCheck:checked').val() !== lang)
-                setLanguage(lang);
+            if($('.flexCheck:checked').val() !== @json($lang->language))
+                setLanguage(@json($lang->language));
         }
         function setLanguage(element){
             $('.flexCheck').each(function(idx, el){
