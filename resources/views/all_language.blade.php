@@ -101,13 +101,15 @@
                 { 'searchable': false }
             ]
     function displayEditForm(id, inputValue, value){
+        removeClass(id);
         openForm(id);
         inputValue.val(value);
     }
     function displayEditForm2(id, selectBox, value){
+        removeClass(id);
         openForm(id);
         selectBox.each(function(idx, el){
-            if($(this).val() === value)
+            if($(this).val() == value)
                 $(this).prop('selected', true);
         });
 }

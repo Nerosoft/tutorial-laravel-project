@@ -1,5 +1,5 @@
 <th>
-    <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#word'), '{{$items}}')"/> 
+    <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm2('#editModel{{$index}}', $('#editForm{{$index}}').find('#mySelectBox option'), '{{$items}}')"/> 
     @include('all_model.start_model')
     <h3>{{$lang->label4}} <span id="label" class="badge text-bg-secondary"></span></h3>
         <select id="mySelectBox" name="word" class="form-select" aria-label="Default select example">

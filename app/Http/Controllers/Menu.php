@@ -20,7 +20,7 @@ class Menu
             $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
             $arr = array();
             foreach (array_keys($ob->getDb()[$language]) as $key => $value) 
-                if($value === 'AllNamesLanguage' || $value === 'MyFlexTables' || $value === 'SelectBranchBox' || $value === 'SelectTestBox' || $value === 'HTML')
+                if($value === 'AllNamesLanguage' || $value === 'MyFlexTables' || $value === 'SelectBranchBox' || $value === 'SelectTestBox' || $value === 'Html')
                     $arr[$value] = $ob->getDb()[$language]['AppSettingAdmin'][$value];
                 else
                     $arr[$value] = $ob->getDb()[$language][$value][array_key_first($ob->getDb()[$language][$value])];
