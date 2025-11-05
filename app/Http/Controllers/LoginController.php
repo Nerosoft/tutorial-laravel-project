@@ -12,7 +12,7 @@ class LoginController extends LoginRegister implements ViewLanguage
         ]);
     }
     function __construct(){
-        $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):(mydb::find(request()->input('id'))?mydb::find(request()->input('id')):mydb::first());
+        $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):(mydb::find(request()->input('userAdmin'))?mydb::find(request()->input('userAdmin')):mydb::first());
         parent::__construct('Login', $this);
     }
     function getDb(){
@@ -30,8 +30,8 @@ class LoginController extends LoginRegister implements ViewLanguage
         if(!empty($this->users))
             foreach ($this->users as $key => $user)
                 if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
-                    request()->session()->put('userId', request()->input('id'));
-                    request()->session()->put('superId', request()->input('id'));
+                    request()->session()->put('userId', request()->input('userAdmin'));
+                    request()->session()->put('superId', request()->input('userAdmin'));
                     return redirect()->route('Home')->with('success', $this->successfully);
                 }         
         // return error email exsist

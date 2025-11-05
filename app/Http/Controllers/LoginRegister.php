@@ -12,13 +12,13 @@ class LoginRegister extends SettingPage
         if(Route::currentRouteName() === 'makeLogin' && isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))]) || Route::currentRouteName() === 'makeRegister' && isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))])){
             parent::__construct(unserialize(request()->cookie($obj->getDb()['_id'])));
             $this->roll = [
-                'id' => ['required', Rule::in($obj->getDb()['_id'])],
+                'userAdmin' => ['required', Rule::in($obj->getDb()['_id'])],
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
             ];
             $this->message = [
-                'id.required'=>$obj->getDb()[$this->language][$state]['IdReq'],
-                'id.in'=>$obj->getDb()[$this->language][$state]['IdInv'],
+                'userAdmin.required'=>$obj->getDb()[$this->language][$state]['IdReq'],
+                'userAdmin.in'=>$obj->getDb()[$this->language][$state]['IdInv'],
                 'email.email' => $obj->getDb()[$this->language][$state]['UserEmail'],
                 'email.required' => $obj->getDb()[$this->language][$state]['UserEmailRequired'],
     

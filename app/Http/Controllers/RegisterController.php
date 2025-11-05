@@ -18,7 +18,7 @@ class RegisterController extends LoginRegister implements ViewLanguage
         ]);
     }
     function __construct(){
-        $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):(mydb::find(request()->input('id'))?mydb::find(request()->input('id')):mydb::first());
+        $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):(mydb::find(request()->input('userAdmin'))?mydb::find(request()->input('userAdmin')):mydb::first());
         $this->UserRepeatPassword = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserRepeatPassword'];
         $this->UserRepeatPasswordRequired = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserRepeatPasswordRequired'];
         $this->error7 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserPasswordDntMatch'];
@@ -31,8 +31,8 @@ class RegisterController extends LoginRegister implements ViewLanguage
     }
     function makeRegister(){
         $this->getDb()->save();
-        request()->session()->put('userId', request()->input('id'));
-        request()->session()->put('superId', request()->input('id'));
+        request()->session()->put('userId', request()->input('userAdmin'));
+        request()->session()->put('superId', request()->input('userAdmin'));
         return redirect()->route('Home')->with('success',  $this->successfully);
     }
     function getDb(){
