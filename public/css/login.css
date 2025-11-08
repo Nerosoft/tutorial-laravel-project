@@ -5,25 +5,20 @@ body {
     background-position: center;
 }
 .login {
-    margin: 0;
-    background: #fafafa; /* Warna latar belakang abu-abu muda */
-    color: #333;
+    background: #fafafa;
     padding: 20px;
     width: 55%;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    height:100vh;
+    height:100%;
 }
 h4{
     text-align: center;
-    color: #333;
 }
-
 .login button{
     margin-top: 10px;
 }
