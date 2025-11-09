@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Route;
 class Menu
 {
     private $Home;
@@ -13,37 +14,37 @@ class Menu
     /**
      * Create a new class instance.
      */
-    public function __construct(MyDatabase $ob, $state, $language)
+    public function __construct(MyDatabase $ob)
     {
-        if($state === 'SystemLang'){
-            $this->Home = $ob->getDb()[$language]['Menu']['Home'];
-            $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
+        if(Route::currentRouteName() === 'SystemLang'){
+            $this->Home = $ob->getDb()[$ob->language]['Menu']['Home'];
+            $this->SystemLang = $ob->getDb()[$ob->language]['Menu']['SystemLang'];
             $arr = array();
-            foreach (array_keys($ob->getDb()[$language]) as $key => $value) 
+            foreach (array_keys($ob->getDb()[$ob->language]) as $key => $value) 
                 if($value === 'AllNamesLanguage' || $value === 'MyFlexTables' || $value === 'SelectBranchBox' || $value === 'SelectTestBox' || $value === 'Html')
-                    $arr[$value] = $ob->getDb()[$language]['AppSettingAdmin'][$value];
+                    $arr[$value] = $ob->getDb()[$ob->language]['AppSettingAdmin'][$value];
                 else
-                    $arr[$value] = $ob->getDb()[$language][$value][array_key_first($ob->getDb()[$language][$value])];
-            foreach ($ob->getDb()[$language]['AllNamesLanguage'] as $key => $value)
+                    $arr[$value] = $ob->getDb()[$ob->language][$value][array_key_first($ob->getDb()[$ob->language][$value])];
+            foreach ($ob->getDb()[$ob->language]['AllNamesLanguage'] as $key => $value)
                 $this->CustomMenu[$key] = new MenuItem($value, $arr);
         }
-        else if(isset($ob->getDb()[$language]['MyFlexTables']) && !empty($ob->getDb()[$language]['MyFlexTables'])){
-            $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
-            $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
-            $this->Home = $ob->getDb()[$language]['Menu']['Home'];
-            $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
+        else if(isset($ob->getDb()[$ob->language]['MyFlexTables']) && !empty($ob->getDb()[$ob->language]['MyFlexTables'])){
+            $this->ChangeLanguage = $ob->getDb()[$ob->language]['Menu']['ChangeLanguage'];
+            $this->SystemLang = $ob->getDb()[$ob->language]['Menu']['SystemLang'];
+            $this->Home = $ob->getDb()[$ob->language]['Menu']['Home'];
+            $allTest = $ob->getDb()[$ob->language]['Menu']['TestCultures'];
             $this->TestCultures = new MenuItem(array_shift($allTest), $allTest);
-            $this->FlexTable = new MenuItem($ob->getDb()[$language]['Menu']['MyFlexTables'], $ob->getDb()[$language]['MyFlexTables']);
-            $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
-            $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
+            $this->FlexTable = new MenuItem($ob->getDb()[$ob->language]['Menu']['MyFlexTables'], $ob->getDb()[$ob->language]['MyFlexTables']);
+            $this->Branches = $ob->getDb()[$ob->language]['Menu']['Branches'];
+            $this->CustomTable = $ob->getDb()[$ob->language]['Menu']['CustomTable'];
         }else{
-            $this->ChangeLanguage = $ob->getDb()[$language]['Menu']['ChangeLanguage'];
-            $this->SystemLang = $ob->getDb()[$language]['Menu']['SystemLang'];
-            $this->Home = $ob->getDb()[$language]['Menu']['Home'];
-            $allTest = $ob->getDb()[$language]['Menu']['TestCultures'];
+            $this->ChangeLanguage = $ob->getDb()[$ob->language]['Menu']['ChangeLanguage'];
+            $this->SystemLang = $ob->getDb()[$ob->language]['Menu']['SystemLang'];
+            $this->Home = $ob->getDb()[$ob->language]['Menu']['Home'];
+            $allTest = $ob->getDb()[$ob->language]['Menu']['TestCultures'];
             $this->TestCultures = new MenuItem(array_shift($allTest), $allTest);
-            $this->Branches = $ob->getDb()[$language]['Menu']['Branches'];
-            $this->CustomTable = $ob->getDb()[$language]['Menu']['CustomTable'];
+            $this->Branches = $ob->getDb()[$ob->language]['Menu']['Branches'];
+            $this->CustomTable = $ob->getDb()[$ob->language]['Menu']['CustomTable'];
         }
     }
     function getMenu(){

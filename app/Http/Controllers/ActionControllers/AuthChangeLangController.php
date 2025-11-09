@@ -15,7 +15,7 @@ class AuthChangeLangController extends Page implements ViewLanguage2
     }
     function makeValidation(){
         $this->roll['userAdmin']=['required', Rule::in($this->getDb()['_id']), function ($attribute, $value, $fail){
-            if(@unserialize(request()->cookie(request()->input('userAdmin'))) === request()->input('id'))
+            if(@unserialize(request()->cookie(request()->input('userAdmin'))) === request()->input('id') || request()->input('id') === $this->getDb()['Setting']['Language'] && !request()->hasCookie(request()->input('userAdmin')))
                 $fail($this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used']);
         }];
         $this->message['userAdmin.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['UserIdIsReq'];
