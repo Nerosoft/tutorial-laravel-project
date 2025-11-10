@@ -22,17 +22,21 @@ class MainBranchController extends Page implements ViewLanguage2
         request()->session()->put('userId', request()->input('id'));
     }
     function __construct(){
-        $this->ob = mydb::find(request()->session()->get('userId'));
         if(request()->session()->get('superId') === request()->input('id') && request()->input('id') === request()->session()->get('userId')){
+            $this->ob = mydb::find(request()->session()->get('userId'));
             parent::__construct($this);
             $this->successfulyMessage = $this->MyInfo()['Branches']['BranchesChange'].' '.$this->MyInfo()['AppSettingAdmin']['BranchMain'];
         }
         else if(request()->session()->get('superId') === request()->input('id')){
-            $this->successfulyMessage = mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['Branches']['BranchesChange'].' '.mydb::find(request()->input('id'))[mydb::find(request()->input('id'))['Setting']['Language']]['AppSettingAdmin']['BranchMain'];
+            $this->ob = mydb::find(request()->input('id'));
+            parent::__construct($this);
+            $this->successfulyMessage = $this->MyInfo()['Branches']['BranchesChange'].' '.$this->MyInfo()['AppSettingAdmin']['BranchMain'];
             request()->session()->put('userId', request()->input('id'));
         }
-        else
+        else{
+            $this->ob = mydb::find(request()->session()->get('userId'));
             parent::__construct($this, 'Branches');
+        }
     }
     function makeChangeBranch(){
         return back()->with('success', $this->successfulyMessage);
