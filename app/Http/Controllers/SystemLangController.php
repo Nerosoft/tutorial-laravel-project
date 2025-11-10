@@ -12,17 +12,9 @@ class SystemLangController extends TableInformation implements ViewLanguage
 {
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
-        if(Route::currentRouteName() === 'edit.editAllLanguage'){
-            parent::__construct($this);
-            $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
-            $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
-            $this->makeValidation();
-        }else{
-            parent::__construct($this, 'SystemLang');
-            $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
-            $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
-        }
-
+        parent::__construct($this, Route::currentRouteName() === 'edit.editAllLanguage' ? null : 'SystemLang');
+        $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
+        $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
     }
     public function index($nameLanguage = null, $id = null){
         return view('all_language', $nameLanguage === null?[
@@ -86,6 +78,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
         $this->successfulyMessage = $this->MyInfo()['SystemLang']['AllLanguageEdit'];
     }
     function makeEditLanguage($lang, $id, $name, $item = null){
+        $this->makeValidation();
         Validator::make([...request()->all(), 'myLang'=>$lang, 'id'=>$id, 'name'=>$name, 'item'=>$item], $this->roll, $this->message)->validate();
         $var1 = $this->getDb()[$lang];
         if($item === null)
