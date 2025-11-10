@@ -63,6 +63,7 @@ class CustomFlexTableController extends Page implements TableData
             $lang = $this->getDb()[$code];
             $lang['MyFlexTables'][$key] = request()->input('name');
             $lang[$key] = $lang['TablePage'];
+            $lang[$key]['MYTITLE'] = request()->input('name');
             foreach ($myInputKey as $key2){
                 $lang[$key]['TableHead'][$key2] = $lang['AppSettingAdmin']['InputNameTable'];
                 $lang[$key]['Label'][$key2] = $lang['AppSettingAdmin']['InputLabel'];
