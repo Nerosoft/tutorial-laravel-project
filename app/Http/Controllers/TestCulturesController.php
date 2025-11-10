@@ -11,22 +11,25 @@ class TestCulturesController extends Page implements TableData
     public function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     public function getDataTable(){
         return is_null($this->getDb()[request()->route('id')])? array():Test::fromArray(array_reverse($this->getDb()[request()->route('id')]), $this->inputOutPut);
     }
     public function setupViewLang(){
-        $this->table8 = $this->getDb()[$this->language][request()->route('id')]['TableName'];
-        $this->table9 = $this->getDb()[$this->language][request()->route('id')]['TablePrice'];
-        $this->table10 = $this->getDb()[$this->language][request()->route('id')]['TableInputOutput'];
-        $this->table12 = $this->getDb()[$this->language][request()->route('id')]['TableShortcut'];
-        $this->label3 = $this->getDb()[$this->language][request()->route('id')]['LabelName'];
-        $this->label4 = $this->getDb()[$this->language][request()->route('id')]['LabelPrice'];
-        $this->label5 = $this->getDb()[$this->language][request()->route('id')]['LabelInputOutLab'];
-        $this->label7 = $this->getDb()[$this->language][request()->route('id')]['LabelShortcut'];
-        $this->selectBox1 = $this->getDb()[$this->language][request()->route('id')]['InputOutLab'];
-        $this->hint1 = $this->getDb()[$this->language][request()->route('id')]['HintName'];
-        $this->hint2 = $this->getDb()[$this->language][request()->route('id')]['HintPrice'];
-        $this->hint3 = $this->getDb()[$this->language][request()->route('id')]['HintShortcut'];
+        $this->table8 = $this->MyInfo()[request()->route('id')]['TableName'];
+        $this->table9 = $this->MyInfo()[request()->route('id')]['TablePrice'];
+        $this->table10 = $this->MyInfo()[request()->route('id')]['TableInputOutput'];
+        $this->table12 = $this->MyInfo()[request()->route('id')]['TableShortcut'];
+        $this->label3 = $this->MyInfo()[request()->route('id')]['LabelName'];
+        $this->label4 = $this->MyInfo()[request()->route('id')]['LabelPrice'];
+        $this->label5 = $this->MyInfo()[request()->route('id')]['LabelInputOutLab'];
+        $this->label7 = $this->MyInfo()[request()->route('id')]['LabelShortcut'];
+        $this->selectBox1 = $this->MyInfo()[request()->route('id')]['InputOutLab'];
+        $this->hint1 = $this->MyInfo()[request()->route('id')]['HintName'];
+        $this->hint2 = $this->MyInfo()[request()->route('id')]['HintPrice'];
+        $this->hint3 = $this->MyInfo()[request()->route('id')]['HintShortcut'];
     }
     public function makeValidation(){
         $this->roll['name'] = ['required', 'min:3'];
@@ -38,15 +41,14 @@ class TestCulturesController extends Page implements TableData
         $this->message['shortcut.required'] = $this->error9;
         $this->message['shortcut.min'] = $this->error10;
         $this->message['price.required'] = $this->error3;
-        $this->message['price.integer'] = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['PriceInvalid'];
+        $this->message['price.integer'] = $this->MyInfo()[request()->route('id')]['PriceInvalid'];
         $this->message['input-output-lab.required'] = $this->error4;
-        $this->message['input-output-lab.in'] = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
+        $this->message['input-output-lab.in'] = $this->MyInfo()[request()->route('id')]['InputOutputLabInvalid'];
         $arr = (array)$this->getDb()[request()->route('id')];
-        if(Route::currentRouteName() === 'createTest'){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelCreate'];
+        if(Route::currentRouteName() === 'createTest')
             $arr[$this->generateUniqueIdentifier()] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
-        }else{
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
+        else{
+            $this->successfulyMessage = $this->MyInfo()[request()->route('id')]['MessageModelEdit'];
             $arr[request()->input('id')] = array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'));
         }
         $this->getDb()[request()->route('id')] = $arr;
@@ -65,7 +67,7 @@ class TestCulturesController extends Page implements TableData
     }
     public function index($id){
         return view('all_test_cultures',[
-                'lang'=> $this,
+            'lang'=> $this,
         ]);
     }
     public function makeAddEditTest(){

@@ -14,6 +14,9 @@ class HomeController extends AdminMenu implements MyDatabase
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function index(){
         return view('home',[
             'lang'=> $this,

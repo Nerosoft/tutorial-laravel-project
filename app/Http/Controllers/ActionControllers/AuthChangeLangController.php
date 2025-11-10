@@ -13,13 +13,16 @@ class AuthChangeLangController extends Page implements ViewLanguage2
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function makeValidation(){
         $this->roll['userAdmin']=['required', Rule::in($this->getDb()['_id']), function ($attribute, $value, $fail){
-            if(@unserialize(request()->cookie(request()->input('userAdmin'))) === request()->input('id') || request()->input('id') === $this->getDb()['Setting']['Language'] && !request()->hasCookie(request()->input('userAdmin')))
-                $fail($this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used']);
+            if(@unserialize(request()->cookie(request()->input('userAdmin'))) === request()->input('id') || request()->input('id') === $this->language && !request()->hasCookie(request()->input('userAdmin')))
+                $fail($this->MyInfo()['ChangeLanguage']['Used']);
         }];
-        $this->message['userAdmin.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['UserIdIsReq'];
-        $this->message['userAdmin.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['UserIdIsInv'];
+        $this->message['userAdmin.required'] = $this->MyInfo()['ChangeLanguage']['UserIdIsReq'];
+        $this->message['userAdmin.in'] = $this->MyInfo()['ChangeLanguage']['UserIdIsInv'];
     
         request()->validate($this->roll, $this->message);
         $this->messageServer = $this->getDb()[request()->input('id')]['ChangeLanguage']['ChangeLang'].$this->getDb()[request()->input('id')]['AllNamesLanguage'][request()->input('id')];

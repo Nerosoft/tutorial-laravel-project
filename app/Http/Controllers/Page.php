@@ -9,12 +9,15 @@ use App\Models\mydb;
 
 class Page extends TableInformation
 {
-    function __construct(TableData | ViewLanguage2 $obj, $state){
-        if(Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
+    function __construct(TableData | ViewLanguage2 $obj, $state = null){
+        if(is_null($state))
+            parent::__construct($obj);
+        else if(Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
+            parent::__construct($obj);
             $this->message = [
-                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
-                'not_in'=> $obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['Used']
+                'id.required'=>$obj->MyInfo()[$state]['IdIsReq'],
+                'id.in'=>$obj->MyInfo()[$state]['IdIsInv'],
+                'not_in'=> $obj->MyInfo()[$state]['Used']
             ];
             $obj->ob = mydb::find(request()->session()->get('superId'));
             $this->roll = [
@@ -22,39 +25,43 @@ class Page extends TableInformation
             ];
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editBranchRays'){
+            parent::__construct($obj);
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys((array)mydb::find(request()->session()->get('superId'))[$state]))]
             ];
             $this->message = [
-                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
+                'id.required'=>$obj->MyInfo()[$state]['IdIsReq'],
+                'id.in'=>$obj->MyInfo()[$state]['IdIsInv']
             ];
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editTest' || Route::currentRouteName() === 'deleteItem' || Route::currentRouteName() === 'editFlexTable' || Route::currentRouteName() === 'branch.delete'){
+            parent::__construct($obj);
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys((array)$obj->getDb()[$state]))]
             ];
             $this->message = [
-                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
+                'id.required'=>$obj->MyInfo()[$state]['IdIsReq'],
+                'id.in'=>$obj->MyInfo()[$state]['IdIsInv']
             ];
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'makeChangeLanguage' || Route::currentRouteName() === 'language.change' || Route::currentRouteName() === 'language.delete' || Route::currentRouteName() === 'language.copy'){
+            parent::__construct($obj);
             $this->roll = [
-                'id'=>['required', Rule::in(array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['AllNamesLanguage']))]
+                'id'=>['required', Rule::in(array_keys($obj->MyInfo()['AllNamesLanguage']))]
             ];
             $this->message = [
-                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv']
+                'id.required'=>$obj->MyInfo()[$state]['IdIsReq'],
+                'id.in'=>$obj->MyInfo()[$state]['IdIsInv']
             ];
             $obj->makeValidation();
         }else if(Route::currentRouteName() === 'editTable' || Route::currentRouteName() === 'deleteTable'){
+            parent::__construct($obj);
             $this->roll = [
-                'id'=>['required', Rule::in(isset($obj->getDb()[$obj->getDb()['Setting']['Language']]['MyFlexTables'])?array_keys($obj->getDb()[$obj->getDb()['Setting']['Language']]['MyFlexTables']):null)]
+                'id'=>['required', Rule::in(isset($obj->MyInfo()['MyFlexTables'])?array_keys($obj->MyInfo()['MyFlexTables']):null)]
             ];
             $this->message = [
-                'id.required'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$obj->getDb()[$obj->getDb()['Setting']['Language']][$state]['IdIsInv'],
+                'id.required'=>$obj->MyInfo()[$state]['IdIsReq'],
+                'id.in'=>$obj->MyInfo()[$state]['IdIsInv'],
             ];
             $obj->makeValidation();
         }else if(
@@ -62,21 +69,24 @@ class Page extends TableInformation
         Route::currentRouteName() === 'addBranchRays'||
         Route::currentRouteName() === 'createTest'||
         Route::currentRouteName() === 'createFlexTable'||
-        Route::currentRouteName() === 'addTable')
+        Route::currentRouteName() === 'addTable'){
+            parent::__construct($obj);
+            $this->successfulyMessage = $obj->myInfo()[$state]['MessageModelCreate'];
             $obj->makeValidation();
+        }
         else{
             parent::__construct($obj, $state);
-            $this->title2 = $obj->getDb()[$this->language][$state]['ScreenModelCreate'];
-            $this->title3 = $obj->getDb()[$this->language][$state]['ScreenModelEdit'];
-            $this->button1 = $obj->getDb()[$this->language][$state]['ButtonModelCreate'];
-            $this->button2 = $obj->getDb()[$this->language][$state]['ButtonModelAdd'];
-            $this->button3 = $obj->getDb()[$this->language][$state]['ButtonModelEdit'];
-            $this->table7 = $obj->getDb()[$this->language][$state]['TableId'];
-            $this->table11 = $obj->getDb()[$this->language][$state]['TabelEvent'];
-            $this->titleModelDelete = $obj->getDb()[$this->language][$state]['ScreenModelDelete'];
-            $this->messageModelDelete = $obj->getDb()[$this->language][$state]['MessageModelDelete'];
-            $this->buttonModelDelete = $obj->getDb()[$this->language][$state]['ButtonModelDelete'];
-            $this->successfully1 = $obj->getDb()[$this->language][$state]['LoadMessage'];
+            $this->title2 = $obj->MyInfo()[$state]['ScreenModelCreate'];
+            $this->title3 = $obj->MyInfo()[$state]['ScreenModelEdit'];
+            $this->button1 = $obj->MyInfo()[$state]['ButtonModelCreate'];
+            $this->button2 = $obj->MyInfo()[$state]['ButtonModelAdd'];
+            $this->button3 = $obj->MyInfo()[$state]['ButtonModelEdit'];
+            $this->table7 = $obj->MyInfo()[$state]['TableId'];
+            $this->table11 = $obj->MyInfo()[$state]['TabelEvent'];
+            $this->titleModelDelete = $obj->MyInfo()[$state]['ScreenModelDelete'];
+            $this->messageModelDelete = $obj->MyInfo()[$state]['MessageModelDelete'];
+            $this->buttonModelDelete = $obj->MyInfo()[$state]['ButtonModelDelete'];
+            $this->successfully1 = $obj->MyInfo()[$state]['LoadMessage'];
         }
     }
 }

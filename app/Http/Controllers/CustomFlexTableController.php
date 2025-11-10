@@ -11,20 +11,22 @@ class CustomFlexTableController extends Page implements TableData
     public function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     public function getDataTable(){
-        return isset($this->getDb()[$this->language]['MyFlexTables'])?array_reverse(CustomTable::fromArray($this->getDb()[$this->language]['MyFlexTables'])):array();
+        return isset($this->MyInfo()['MyFlexTables'])?array_reverse(CustomTable::fromArray($this->MyInfo()['MyFlexTables'])):array();
     }
     public function setupViewLang(){
-        $this->model2 = $this->getDb()[$this->language]['CustomTable']['ScreenModelCreate'];
-        $this->button2 = $this->getDb()[$this->language]['CustomTable']['ButtonModelCreate'];
-        $this->model3 = $this->getDb()[$this->language]['CustomTable']['ScreenModelEdit'];
-        $this->button3 = $this->getDb()[$this->language]['CustomTable']['ButtonModelEdit'];
-        $this->TableName = $this->getDb()[$this->language]['CustomTable']['NameTable'];
-        $this->LabelName = $this->getDb()[$this->language]['CustomTable']['LabelName'];
-        $this->HintName = $this->getDb()[$this->language]['CustomTable']['HintName'];
-
-        $this->LabelInputNumber = $this->getDb()[$this->language]['CustomTable']['LabelInputNumber'];
-        $this->HintInputNumber = $this->getDb()[$this->language]['CustomTable']['HintInputNumber'];
+        $this->model2 = $this->MyInfo()['CustomTable']['ScreenModelCreate'];
+        $this->button2 = $this->MyInfo()['CustomTable']['ButtonModelCreate'];
+        $this->model3 = $this->MyInfo()['CustomTable']['ScreenModelEdit'];
+        $this->button3 = $this->MyInfo()['CustomTable']['ButtonModelEdit'];
+        $this->TableName = $this->MyInfo()['CustomTable']['NameTable'];
+        $this->LabelName = $this->MyInfo()['CustomTable']['LabelName'];
+        $this->HintName = $this->MyInfo()['CustomTable']['HintName'];
+        $this->LabelInputNumber = $this->MyInfo()['CustomTable']['LabelInputNumber'];
+        $this->HintInputNumber = $this->MyInfo()['CustomTable']['HintInputNumber'];
     }
     public function makeValidation(){
         $this->roll['name'] = ['required', 'min:3'];
@@ -35,9 +37,8 @@ class CustomFlexTableController extends Page implements TableData
             $this->message['input_number.required'] =  $this->error3;
             $this->message['input_number.integer'] =  $this->error4;
             $this->message['input_number.between'] =  $this->error4;
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['MessageModelCreate'];
         }else
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['CustomTable']['MessageModelEdit'];
+            $this->successfulyMessage = $this->MyInfo()['CustomTable']['MessageModelEdit'];
         request()->validate($this->roll, $this->message);
     }
     function __construct(){
@@ -58,7 +59,7 @@ class CustomFlexTableController extends Page implements TableData
         $myInputKey = array();
             for ($i=0; $i < request()->input('input_number'); $i++)
             array_push($myInputKey, $this->generateUniqueIdentifier());
-        foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $code => $value) {
+        foreach ($this->MyInfo()['AllNamesLanguage'] as $code => $value) {
             $lang = $this->getDb()[$code];
             $lang['MyFlexTables'][$key] = request()->input('name');
             $lang[$key] = $lang['TablePage'];
@@ -75,7 +76,7 @@ class CustomFlexTableController extends Page implements TableData
         return back()->with('success', $this->successfulyMessage);
     }
     function makeEditTable(){
-        foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key => $value) {
+        foreach ($this->MyInfo()['AllNamesLanguage'] as $key => $value) {
             $lang = $this->getDb()[$key];
             $lang['MyFlexTables'][request()->input('id')] = request()->input('name');
             $this->getDb()[$key] = $lang;

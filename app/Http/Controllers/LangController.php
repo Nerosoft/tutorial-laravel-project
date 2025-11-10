@@ -25,16 +25,19 @@ class LangController extends Page implements TableData
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function setupViewLang(){
-        $this->NameLangaue = $this->getDb()[$this->language]['ChangeLanguage']['NameLangaue'];
-        $this->label3 = $this->getDb()[$this->language]['ChangeLanguage']['LanguageInfo'];     
-        $this->label4 = $this->getDb()[$this->language]['ChangeLanguage']['LanguageSelect'];
-        $this->label5 = $this->getDb()[$this->language]['ChangeLanguage']['LabelChangeLanguageMessage'];
-        $this->LabelNameLanguage = $this->getDb()[$this->language]['ChangeLanguage']['LabelCreateLanguage'];
-        $this->label7 = $this->getDb()[$this->language]['ChangeLanguage']['LabelNewLangName'];
-        $this->hint1 = $this->getDb()[$this->language]['ChangeLanguage']['HintNewLangName'];
-        $this->button4 = $this->getDb()[$this->language]['ChangeLanguage']['ButtonChangeLanguageMessage'];
-        $this->title2 = $this->getDb()[$this->language]['ChangeLanguage']['TitleChangeLanguageMessage'];
+        $this->NameLangaue = $this->MyInfo()['ChangeLanguage']['NameLangaue'];
+        $this->label3 = $this->MyInfo()['ChangeLanguage']['LanguageInfo'];     
+        $this->label4 = $this->MyInfo()['ChangeLanguage']['LanguageSelect'];
+        $this->label5 = $this->MyInfo()['ChangeLanguage']['LabelChangeLanguageMessage'];
+        $this->LabelNameLanguage = $this->MyInfo()['ChangeLanguage']['LabelCreateLanguage'];
+        $this->label7 = $this->MyInfo()['ChangeLanguage']['LabelNewLangName'];
+        $this->hint1 = $this->MyInfo()['ChangeLanguage']['HintNewLangName'];
+        $this->button4 = $this->MyInfo()['ChangeLanguage']['ButtonChangeLanguageMessage'];
+        $this->title2 = $this->MyInfo()['ChangeLanguage']['TitleChangeLanguageMessage'];
         $this->view = view('change_language', [
             'lang'=>$this,
         ]);
@@ -44,7 +47,6 @@ class LangController extends Page implements TableData
         $this->message['lang_name.required'] = $this->error1;
         $this->message['lang_name.min'] = $this->error2;
         if(Route::currentRouteName() === 'lang.createLanguage'){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelCreate'];
             $this->newKey = $this->generateUniqueIdentifier();
             foreach ($this->allNames as $key=>$value) {
                 $myLang = $this->getDb()[$key];
@@ -52,7 +54,7 @@ class LangController extends Page implements TableData
                 $this->getDb()[$key] = $myLang;
             }
         }else{
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
+            $this->successfulyMessage = $this->MyInfo()['ChangeLanguage']['MessageModelEdit'];
             foreach ($this->allNames as $key=>$value) {
                 $myLang = $this->getDb()[$key];
                 $myLang['AllNamesLanguage'][request()->input('id')] = request()->input('lang_name');
@@ -63,11 +65,11 @@ class LangController extends Page implements TableData
     }
     function makeAddLanguage(){
         $myLanguage = $this->getDb()['MyLanguage'];
-        $myLanguage['AllNamesLanguage'] = $this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'];
-        if(isset($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']) && !empty($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables']))
-            foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['MyFlexTables'] as $key => $value){ 
+        $myLanguage['AllNamesLanguage'] = $this->MyInfo()['AllNamesLanguage'];
+        if(isset($this->MyInfo()['MyFlexTables']) && !empty($this->MyInfo()['MyFlexTables']))
+            foreach ($this->MyInfo()['MyFlexTables'] as $key => $value){ 
                 $myLanguage['MyFlexTables'][$key] = $value;
-                $myLanguage[$key] = $this->getDb()[$this->getDb()['Setting']['Language']][$key];   
+                $myLanguage[$key] = $this->MyInfo()[$key];   
             } 
         $this->getDb()[$this->newKey] = $myLanguage;
         return $this->makeEditLanguage();

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\mydb;
 use Illuminate\Validation\Rule;
-class RegisterController extends LoginRegister implements MyInfo
+class RegisterController extends LoginRegister implements ViewLanguage
 {
     function setupViewLang(){
-        $this->labelUserRepeatPassword = $this->MyInfo()['LabelUserRepeatPassword'];
-        $this->labelUserCodePassword = $this->MyInfo()['LabelUserCodePassword'];
-        $this->hintUserRepeatPassword = $this->MyInfo()['HintUserRepeatPassword'];
-        $this->hintUserCodePassword = $this->MyInfo()['HintUserCodePassword'];
+        $this->labelUserRepeatPassword = $this->MyInfo()['Register']['LabelUserRepeatPassword'];
+        $this->labelUserCodePassword = $this->MyInfo()['Register']['LabelUserCodePassword'];
+        $this->hintUserRepeatPassword = $this->MyInfo()['Register']['HintUserRepeatPassword'];
+        $this->hintUserCodePassword = $this->MyInfo()['Register']['HintUserCodePassword'];
         $this->myView = view('register',[
             'lang'=>$this,
             'action'=>route('makeRegister')
@@ -24,7 +24,7 @@ class RegisterController extends LoginRegister implements MyInfo
         $this->error7 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserPasswordDntMatch'];
         $this->error8 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserCodePasswordRequired'];
         $this->error9 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserCodePassword'];
-        parent::__construct($this, isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))]) ? unserialize(request()->cookie($this->getDb()['_id'])) : $this->getDb()['Setting']['Language']);
+        parent::__construct(isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))]) ? unserialize(request()->cookie($this->getDb()['_id'])) : $this->getDb()['Setting']['Language'], $this, 'Register');
     }
     function index(){
         return $this->myView;
@@ -38,8 +38,8 @@ class RegisterController extends LoginRegister implements MyInfo
     function getDb(){
         return $this->ob;
     }
-    function MyInfo($key = 'Register'){
-        return $this->ob[$this->language][$key];
+    function MyInfo(){
+        return $this->ob[$this->language];
     }
     function makeValidation(){
         array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
@@ -48,7 +48,7 @@ class RegisterController extends LoginRegister implements MyInfo
         array_push($this->roll['password'], 'confirmed');
         $this->roll['password_confirmation'] = ['required', 'min:8'];
         $this->roll['codePassword'] = ['required', 'min:8'];
-        $this->message['email.not_in'] = $this->MyInfo()['UserEmailExist'];
+        $this->message['email.not_in'] = $this->MyInfo()['Register']['UserEmailExist'];
         $this->message['password_confirmation.min'] = $this->UserRepeatPassword;
         $this->message['password_confirmation.required'] = $this->UserRepeatPasswordRequired;
         $this->message['codePassword.min'] = $this->error9;

@@ -10,7 +10,11 @@ class DeleteController extends Page implements ViewLanguage2
      public function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     public function makeValidation(){
+        $this->successfully1 = $this->MyInfo()[request()->route('id')]['Delete'];
         $arr = $this->getDb()[request()->route('id')];
         unset($arr[request()->input('id')]);
         if(empty($arr))
@@ -20,7 +24,6 @@ class DeleteController extends Page implements ViewLanguage2
     }
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
-        $this->successfully1 = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['Delete'];
         parent::__construct($this, request()->route('id'));
         request()->validate($this->roll, $this->message);
     }

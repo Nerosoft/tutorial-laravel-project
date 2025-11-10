@@ -12,12 +12,16 @@ class SystemLangController extends TableInformation implements ViewLanguage
 {
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
-        $this->error1 = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['TextRequired'];
-        $this->error2 = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['TextLenght'];
         if(Route::currentRouteName() === 'edit.editAllLanguage'){
+            parent::__construct($this);
+            $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
+            $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
             $this->makeValidation();
-        }else
+        }else{
             parent::__construct($this, 'SystemLang');
+            $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
+            $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
+        }
 
     }
     public function index($nameLanguage = null, $id = null){
@@ -33,7 +37,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
             return $this->getDb()[request()->route('lang')][request()->route('id')];
         else if(is_null(request()->route('lang')) && is_null(request()->route('id'))){
             $tableData = array();
-            foreach ($this->getDb()[$this->language]['AllNamesLanguage'] as $key=>$value)
+            foreach ($this->MyInfo()['AllNamesLanguage'] as $key=>$value)
                 $tableData[$key] = $this->getDb()[$key];
             return $tableData;
         }
@@ -41,45 +45,45 @@ class SystemLangController extends TableInformation implements ViewLanguage
             return array();
     }
     function setupViewLang(){
-        $this->Left = $this->getDb()[$this->language]['SystemLang']['ltr'];
-        $this->Right = $this->getDb()[$this->language]['SystemLang']['rtl'];
-        $this->label3 = $this->getDb()[$this->language]['SystemLang']['Text'];
-        $this->label4 = $this->getDb()[$this->language]['SystemLang']['DirectionPage']; 
-        $this->table7 = $this->getDb()[$this->language]['SystemLang']['LanguageValue'];
-        $this->table8 = $this->getDb()[$this->language]['SystemLang']['LanguageEvent'];
-        $this->table9 = $this->getDb()[$this->language]['SystemLang']['LanguageId'];
-        $this->table10 = $this->getDb()[$this->language]['SystemLang']['LanguageName'];
-        $this->model1 = $this->getDb()[$this->language]['SystemLang']['Title'];
-        $this->model2 = $this->getDb()[$this->language]['SystemLang']['TitleDirection'];
-        $this->button2 = $this->getDb()[$this->language]['SystemLang']['SaveDirection'];
-        $this->button3 = $this->getDb()[$this->language]['SystemLang']['SaveText'];
-        $this->WordHint = $this->getDb()[$this->language]['SystemLang']['WordHint'];
+        $this->Left = $this->MyInfo()['SystemLang']['ltr'];
+        $this->Right = $this->MyInfo()['SystemLang']['rtl'];
+        $this->label3 = $this->MyInfo()['SystemLang']['Text'];
+        $this->label4 = $this->MyInfo()['SystemLang']['DirectionPage']; 
+        $this->table7 = $this->MyInfo()['SystemLang']['LanguageValue'];
+        $this->table8 = $this->MyInfo()['SystemLang']['LanguageEvent'];
+        $this->table9 = $this->MyInfo()['SystemLang']['LanguageId'];
+        $this->table10 = $this->MyInfo()['SystemLang']['LanguageName'];
+        $this->model1 = $this->MyInfo()['SystemLang']['Title'];
+        $this->model2 = $this->MyInfo()['SystemLang']['TitleDirection'];
+        $this->button2 = $this->MyInfo()['SystemLang']['SaveDirection'];
+        $this->button3 = $this->MyInfo()['SystemLang']['SaveText'];
+        $this->WordHint = $this->MyInfo()['SystemLang']['WordHint'];
     }
     function makeValidation(){
         $this->roll = [
-            'id'=>['required', Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]))],
+            'id'=>['required', Rule::in(array_keys($this->MyInfo()))],
         ];
         $this->message = [
-            'id.required'=>$this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditTableRequired'],
-            'id.in'=>$this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditTableInvalid'],
+            'id.required'=>$this->MyInfo()['SystemLang']['EditTableRequired'],
+            'id.in'=>$this->MyInfo()['SystemLang']['EditTableInvalid'],
         ];
         $this->roll['word' ] = ['required', request()->route('id') !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])];
-        $this->roll['myLang'] = ['required', Rule::in(array_keys($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage']))];
+        $this->roll['myLang'] = ['required', Rule::in(array_keys($this->MyInfo()['AllNamesLanguage']))];
         $this->roll['name'] = ['required', function ($attribute, $value, $fail){
             if(request()->route('item') !== null && !isset($this->getDb()[request()->route('lang')][request()->route('id')][request()->route('name')][request()->route('item')])){
-                $fail($this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
-                $fail($this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
+                $fail($this->MyInfo()['SystemLang']['EditKeyInvalid']);
+                $fail($this->MyInfo()['SystemLang']['EditKey2Invalid']);
             }else if(!isset($this->getDb()[request()->route('lang')][request()->route('id')][request()->route('name')]))
-                $fail($this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
+                $fail($this->MyInfo()['SystemLang']['EditKeyInvalid']);
         }];
         $this->message['word.required'] = $this->error1;
         $this->message['word.'.(request()->route('id') !== 'Html' ?'min':'in')] = $this->error2;
-        $this->message['myLang.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditLanguageRequired'];
-        $this->message['myLang.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditLanguageInvalid'];
-        $this->message['id.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditTableRequired'];
-        $this->message['id.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditTableInvalid'];
-        $this->message['name.required'] = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['EditKeyRequired'];
-        $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['SystemLang']['AllLanguageEdit'];
+        $this->message['myLang.required'] = $this->MyInfo()['SystemLang']['EditLanguageRequired'];
+        $this->message['myLang.in'] = $this->MyInfo()['SystemLang']['EditLanguageInvalid'];
+        $this->message['id.required'] = $this->MyInfo()['SystemLang']['EditTableRequired'];
+        $this->message['id.in'] = $this->MyInfo()['SystemLang']['EditTableInvalid'];
+        $this->message['name.required'] = $this->MyInfo()['SystemLang']['EditKeyRequired'];
+        $this->successfulyMessage = $this->MyInfo()['SystemLang']['AllLanguageEdit'];
     }
     function makeEditLanguage($lang, $id, $name, $item = null){
         Validator::make([...request()->all(), 'myLang'=>$lang, 'id'=>$id, 'name'=>$name, 'item'=>$item], $this->roll, $this->message)->validate();
@@ -94,5 +98,8 @@ class SystemLangController extends TableInformation implements ViewLanguage
     }
     function getDb(){
         return $this->ob;
+    }
+    function MyInfo(){
+        return $this->ob[$this->language];
     }
 }

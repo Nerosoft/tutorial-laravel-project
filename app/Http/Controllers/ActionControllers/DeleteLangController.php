@@ -12,11 +12,14 @@ class DeleteLangController extends Page implements ViewLanguage2
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function makeValidation(){
-        array_push($this->roll['id'], Rule::notIn($this->getDb()['Setting']['Language']));
-        $this->messageServer = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'];
-        $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used'];
-        foreach ($this->getDb()[$this->getDb()['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
+        array_push($this->roll['id'], Rule::notIn($this->language));
+        $this->messageServer = $this->MyInfo()['ChangeLanguage']['DeleteLanguage'];
+        $this->message['not_in'] = $this->MyInfo()['ChangeLanguage']['Used'];
+        foreach ($this->MyInfo()['AllNamesLanguage'] as $key=>$value) {
             $myLang = $this->getDb()[$key];
             unset($myLang['AllNamesLanguage'][request()->input('id')]);
             $this->getDb()[$key] = $myLang;

@@ -13,9 +13,12 @@ class AdminChangeLangController extends Page implements ViewLanguage2
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function makeValidation(){
-        array_push($this->roll['id'], Rule::notIn($this->getDb()['Setting']['Language']));
-        $this->message['not_in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['ChangeLanguage']['Used'];
+        array_push($this->roll['id'], Rule::notIn($this->language));
+        $this->message['not_in'] = $this->MyInfo()['ChangeLanguage']['Used'];
         $setting = $this->getDb()['Setting'];
         $setting['Language'] = request()->input('id');
         $this->getDb()['Setting'] = $setting;

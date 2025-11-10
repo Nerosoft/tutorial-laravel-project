@@ -39,33 +39,36 @@ class BranchesController extends Page implements TableData
         if(is_null($this->getDb()['Branches']) && is_null(mydb::find(request()->session()->get('superId'))['Branches']))
             return array();
         else if(isset($this->getDb()['Branches']))
-            return Branch::fromArray(array_reverse($this->getDb()['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
+            return Branch::fromArray(array_reverse($this->getDb()['Branches']), $this->MyInfo()['SelectBranchBox']);
         else
-            return Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->getDb()[$this->language]['SelectBranchBox']);
+            return Branch::fromArray(array_reverse(mydb::find(request()->session()->get('superId'))['Branches']), $this->MyInfo()['SelectBranchBox']);
     }
     function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     function setupViewLang(){
-        $this->table8 = $this->getDb()[$this->language]['Branches']['BranchStreet'];
-        $this->table9 = $this->getDb()[$this->language]['Branches']['BranchName'];
-        $this->table10 = $this->getDb()[$this->language]['Branches']['BranchPhone'];
-        $this->table16 = $this->getDb()[$this->language]['Branches']['BranchGovernments'];
-        $this->table17 = $this->getDb()[$this->language]['Branches']['BranchCity'];
-        $this->table12 = $this->getDb()[$this->language]['Branches']['BranchBuilding'];
-        $this->table13 = $this->getDb()[$this->language]['Branches']['BranchAddress'];
-        $this->table14 = $this->getDb()[$this->language]['Branches']['BranchCountry'];
-        $this->table15 = $this->getDb()[$this->language]['Branches']['BranchFollow'];
+        $this->table8 = $this->MyInfo()['Branches']['BranchStreet'];
+        $this->table9 = $this->MyInfo()['Branches']['BranchName'];
+        $this->table10 = $this->MyInfo()['Branches']['BranchPhone'];
+        $this->table16 = $this->MyInfo()['Branches']['BranchGovernments'];
+        $this->table17 = $this->MyInfo()['Branches']['BranchCity'];
+        $this->table12 = $this->MyInfo()['Branches']['BranchBuilding'];
+        $this->table13 = $this->MyInfo()['Branches']['BranchAddress'];
+        $this->table14 = $this->MyInfo()['Branches']['BranchCountry'];
+        $this->table15 = $this->MyInfo()['Branches']['BranchFollow'];
         //get all hint
-        $this->hint1 = $this->getDb()[$this->language]['Branches']['BranchRaysName'];
-        $this->hint2 = $this->getDb()[$this->language]['Branches']['BranchRaysPhone'];
-        $this->hint3 = $this->getDb()[$this->language]['Branches']['BranchRaysCountry'];
-        $this->hint4 = $this->getDb()[$this->language]['Branches']['BranchRaysGovernments'];
-        $this->hint5 = $this->getDb()[$this->language]['Branches']['BranchRaysCity'];
-        $this->hint6 = $this->getDb()[$this->language]['Branches']['BranchRaysStreet'];
-        $this->hint7 = $this->getDb()[$this->language]['Branches']['BranchRaysBuilding'];
-        $this->hint8 = $this->getDb()[$this->language]['Branches']['BranchRaysAddress'];
-        $this->selectBox1 = $this->getDb()[$this->language]['Branches']['WithRaysOut'];
+        $this->hint1 = $this->MyInfo()['Branches']['BranchRaysName'];
+        $this->hint2 = $this->MyInfo()['Branches']['BranchRaysPhone'];
+        $this->hint3 = $this->MyInfo()['Branches']['BranchRaysCountry'];
+        $this->hint4 = $this->MyInfo()['Branches']['BranchRaysGovernments'];
+        $this->hint5 = $this->MyInfo()['Branches']['BranchRaysCity'];
+        $this->hint6 = $this->MyInfo()['Branches']['BranchRaysStreet'];
+        $this->hint7 = $this->MyInfo()['Branches']['BranchRaysBuilding'];
+        $this->hint8 = $this->MyInfo()['Branches']['BranchRaysAddress'];
+        $this->selectBox1 = $this->MyInfo()['Branches']['WithRaysOut'];
         $this->view = view('Branch', [
             'lang'=>$this,
         ]);
@@ -108,22 +111,20 @@ class BranchesController extends Page implements TableData
         $this->message['brance_rays_country.min'] = $this->error17;
         $this->message['brance_rays_country.required'] = $this->error8;
         $this->message['brance_rays_follow.required'] = $this->error9;
-        $this->message['brance_rays_follow.in'] = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['BranceRaysFollowValue'];
+        $this->message['brance_rays_follow.in'] = $this->MyInfo()['Branches']['BranceRaysFollowValue'];
         if(Route::currentRouteName() === 'addBranchRays' && request()->session()->get('superId') === request()->session()->get('userId')){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
             $arr = (array)$this->getDb()['Branches'];
             $arr[Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
         }else if(Route::currentRouteName() === 'editBranchRays' && request()->session()->get('superId') === request()->session()->get('userId')){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+            $this->successfulyMessage = $this->MyInfo()['Branches']['MessageModelEdit'];
             $arr = (array)$this->getDb()['Branches'];
             $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
         }else if(Route::currentRouteName() === 'addBranchRays'){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelCreate'];
             $this->ob = mydb::find(request()->session()->get('superId'));
             $arr = (array)$this->getDb()['Branches'];
             $arr[Str::uuid()->toString()] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
         }else{
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']]['Branches']['MessageModelEdit'];
+            $this->successfulyMessage = $this->MyInfo()['Branches']['MessageModelEdit'];
             $this->ob = mydb::find(request()->session()->get('superId'));
             $arr = (array)$this->getDb()['Branches'];
             $arr[request()->input('id')] = array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'),'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));

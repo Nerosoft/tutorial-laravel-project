@@ -10,13 +10,16 @@ class FlexTableController extends Page implements TableData
     public function getDb(){
         return $this->ob;
     }
+    function MyInfo(){
+        return $this->ob[$this->language];
+    }
     public function getDataTable(){
         return is_null($this->getDb()[request()->route('id')])?array():array_reverse($this->getDb()[request()->route('id')]);
     }
     public function setupViewLang(){
-        $this->TableHead = $this->getDb()[$this->language][request()->route('id')]['TableHead'];
-        $this->Label = $this->getDb()[$this->language][request()->route('id')]['Label'];
-        $this->Hint = $this->getDb()[$this->language][request()->route('id')]['Hint'];
+        $this->TableHead = $this->MyInfo()[request()->route('id')]['TableHead'];
+        $this->Label = $this->MyInfo()[request()->route('id')]['Label'];
+        $this->Hint = $this->MyInfo()[request()->route('id')]['Hint'];
     }
     public function makeValidation(){
         foreach ($this->ErrorsMessageReq as $key => $value) {
@@ -25,15 +28,14 @@ class FlexTableController extends Page implements TableData
             $this->message[$key.'.min'] = $this->ErrorsMessageInv[$key];
         }
         $arr = (array)$this->getDb()[request()->route('id')];
-        if(Route::currentRouteName() === 'createFlexTable'){
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelCreate'];
+        if(Route::currentRouteName() === 'createFlexTable')
             $arr[$this->generateUniqueIdentifier()] = array();
-        }else{
-            $this->successfulyMessage = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
+        else{
+            $this->successfulyMessage = $this->MyInfo()[request()->route('id')]['MessageModelEdit'];
             $arr[request()->input('id')] = array();
         }
         request()->validate($this->roll, $this->message);
-        foreach ($this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['TableHead'] as $key => $value)
+        foreach ($this->MyInfo()[request()->route('id')]['TableHead'] as $key => $value)
             $arr[array_key_last($arr)][$key] = request()->input($key);
         $this->getDb()[request()->route('id')] = $arr;
     }
