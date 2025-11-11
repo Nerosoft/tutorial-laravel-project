@@ -73,8 +73,4 @@ class Branch
                 $allBranch[$key] = new Branch($branch['Name']); 
         return $allBranch;
     }
-    static function makeBranch2($branchMain){
-        return array(request()->session()->get('superId')=>new Branch($branchMain));
-    }
-
 }
