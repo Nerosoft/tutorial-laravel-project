@@ -9,6 +9,10 @@ use Illuminate\Validation\Rule;
 class LoginRegister extends SettingPage
 {
     function __construct($lang, ViewLanguage $obj, $state){
+        $this->errorUserEmail = $obj->getDb()[$lang][$state]['UserEmail'];
+        $this->errorUserEmailRequired = $obj->getDb()[$lang][$state]['UserEmailRequired'];
+        $this->errorUserPassword = $obj->getDb()[$lang][$state]['UserPassword'];
+        $this->errorUserPasswordRequired = $obj->getDb()[$lang][$state]['UserPasswordRequired'];
         if(Route::currentRouteName() === 'makeLogin' || Route::currentRouteName() === 'makeRegister'){
             parent::__construct($lang);
             $this->roll = [
@@ -19,21 +23,17 @@ class LoginRegister extends SettingPage
             $this->message = [
                 'userAdmin.required'=>$obj->MyInfo()[$state]['IdReq'],
                 'userAdmin.in'=>$obj->MyInfo()[$state]['IdInv'],
-                'email.email' => $obj->MyInfo()[$state]['UserEmail'],
-                'email.required' => $obj->MyInfo()[$state]['UserEmailRequired'],
+                'email.email' => $this->errorUserEmail,
+                'email.required' => $this->errorUserEmailRequired,
     
-                'password.min' => $obj->MyInfo()[$state]['UserPassword'],
-                'password.required' => $obj->MyInfo()[$state]['UserPasswordRequired'],
+                'password.min' => $this->errorUserPassword,
+                'password.required' => $this->errorUserPasswordRequired,
             ];
             $this->users = (array)$obj->getDb()['User'];
             $this->successfully = $obj->MyInfo()[$state]['AdminLogin'];
             $obj->makeValidation();
         }else{
             parent::__construct($lang, $obj, $state);
-            $this->errorUserEmail = $obj->MyInfo()[$state]['UserEmail'];
-            $this->errorUserEmailRequired = $obj->MyInfo()[$state]['UserEmailRequired'];
-            $this->errorUserPassword = $obj->MyInfo()[$state]['UserPassword'];
-            $this->errorUserPasswordRequired = $obj->MyInfo()[$state]['UserPasswordRequired'];
             $obj->setupViewLang();
             $this->button1 = $obj->MyInfo()[$state]['ButtonLanguage'];
             $this->button2 = $obj->MyInfo()[$state]['ButtonSaveLanguage'];
