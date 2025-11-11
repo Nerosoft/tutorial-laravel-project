@@ -32,4 +32,9 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            
+            @yield('menu')
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
