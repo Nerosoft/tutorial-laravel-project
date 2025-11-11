@@ -28,7 +28,7 @@ class Menu
             foreach ($ob->MyInfo()['AllNamesLanguage'] as $key => $value)
                 $this->CustomMenu[$key] = new MenuItem($value, $arr);
         }
-        else if(isset($ob->MyInfo()['MyFlexTables']) && !empty($ob->MyInfo()['MyFlexTables'])){
+        else if(isset($ob->MyInfo()['MyFlexTables'])){
             $this->ChangeLanguage = $ob->MyInfo()['Menu']['ChangeLanguage'];
             $this->SystemLang = $ob->MyInfo()['Menu']['SystemLang'];
             $this->Home = $ob->MyInfo()['Menu']['Home'];
