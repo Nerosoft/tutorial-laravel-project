@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\mydb;
 class Branch
 {
     /**
@@ -62,10 +63,14 @@ class Branch
                 $branch['Country'], $inout[$branch['Follow']]);        
         return $allBranch;
     }
-    static function makeBranch($branch, $branchMain){
-        $allBranch = Branch::makeBranch2($branchMain);
-        foreach ($branch as $key => $branch)
-            $allBranch[$key] = new Branch($branch['Name']);        
+    static function makeBranch($obj){
+        $allBranch = array(request()->session()->get('superId')=>new Branch($obj->MyInfo()['AppSettingAdmin']['BranchMain']));
+        if(isset($obj->getDb()['Branches']))
+            foreach ($obj->getDb()['Branches'] as $key => $branch)
+                $allBranch[$key] = new Branch($branch['Name']);       
+        else if(isset(mydb::find(request()->session()->get('superId'))['Branches']))
+            foreach (mydb::find(request()->session()->get('superId'))['Branches'] as $key => $branch)
+                $allBranch[$key] = new Branch($branch['Name']); 
         return $allBranch;
     }
     static function makeBranch2($branchMain){

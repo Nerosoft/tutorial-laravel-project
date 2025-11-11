@@ -15,12 +15,7 @@ class AdminMenu extends SettingPage
             $this->label1 = $obj->MyInfo()['AppSettingAdmin']['Logout'];
             $this->label2 = $obj->MyInfo()['AppSettingAdmin']['AdminDashboard'];
             $this->myMenuApp =  new Menu($obj);
-            if(is_null($obj->getDb()['Branches']) && is_null(mydb::find(request()->session()->get('superId'))['Branches']))
-                $this->MyBranch = Branch::makeBranch2($obj->MyInfo()['AppSettingAdmin']['BranchMain']);
-            else if(isset($obj->getDb()['Branches']))
-                $this->MyBranch = Branch::makeBranch($obj->getDb()['Branches'],$obj->MyInfo()['AppSettingAdmin']['BranchMain']);
-            else
-                $this->MyBranch = Branch::makeBranch(mydb::find(request()->session()->get('superId'))['Branches'],$obj->MyInfo()['AppSettingAdmin']['BranchMain']);
+            $this->MyBranch = Branch::makeBranch($obj);
         }
     }
 }
