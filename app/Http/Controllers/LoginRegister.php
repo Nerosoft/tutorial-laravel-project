@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\Rule;
 class LoginRegister extends SettingPage
 {
-    function __construct($lang, ViewLanguage $obj, $state){
+    function __construct(ViewLanguage $obj, $state){
+        $lang = isset($obj->getDb()[@unserialize(request()->cookie($obj->getDb()['_id']))]) ? unserialize(request()->cookie($obj->getDb()['_id'])) : $obj->getDb()['Setting']['Language'];
         $this->errorUserEmail = $obj->getDb()[$lang][$state]['UserEmail'];
         $this->errorUserEmailRequired = $obj->getDb()[$lang][$state]['UserEmailRequired'];
         $this->errorUserPassword = $obj->getDb()[$lang][$state]['UserPassword'];

@@ -24,7 +24,7 @@ class RegisterController extends LoginRegister implements ViewLanguage
         $this->error7 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserPasswordDntMatch'];
         $this->error8 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserCodePasswordRequired'];
         $this->error9 = $this->getDb()[isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))])?unserialize(request()->cookie($this->getDb()['_id'])):$this->getDb()['Setting']['Language']]['Register']['UserCodePassword'];
-        parent::__construct(isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))]) ? unserialize(request()->cookie($this->getDb()['_id'])) : $this->getDb()['Setting']['Language'], $this, 'Register');
+        parent::__construct($this, 'Register');
     }
     function index(){
         return $this->myView;

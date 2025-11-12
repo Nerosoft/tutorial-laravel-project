@@ -13,7 +13,7 @@ class LoginController extends LoginRegister implements ViewLanguage
     }
     function __construct(){
         $this->ob = mydb::find(request()->route('id'))?mydb::find(request()->route('id')):(mydb::find(request()->input('userAdmin'))?mydb::find(request()->input('userAdmin')):mydb::first());
-        parent::__construct(isset($this->getDb()[@unserialize(request()->cookie($this->getDb()['_id']))]) ? unserialize(request()->cookie($this->getDb()['_id'])) : $this->getDb()['Setting']['Language'], $this, 'Login');
+        parent::__construct($this, 'Login');
     }
     function getDb(){
         return $this->ob;
