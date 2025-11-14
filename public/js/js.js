@@ -39,18 +39,4 @@ function handleInputSelect(event, error1) {
     else
         event.setCustomValidity('');
 }
-function makeMessage(){
-    $('body').append(
-        $('<div>', {
-            id:'toastContainer',
-            css:{
-                position: 'fixed',
-                top: '0px',
-                right: '10px',
-                zIndex: 9999,
-                maxHeight: '90vh',
-                overflowY: 'auto'
-            }
-        })
-    );
-}
+
