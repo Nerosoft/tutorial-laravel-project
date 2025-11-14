@@ -5,20 +5,19 @@
 </head>
 <body>
   @if ($errors->any())
-  @include('toastContainer')
-      <script>
-        @json($errors->all()).forEach((text) => createToast(text, 'danger'));
-      </script>
+    <div id="toastContainer" style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">
+        @foreach($errors->all() as $key=>$toast)
+            @include('toastContainer', ['type'=>'danger'])   
+        @endforeach
+    </div>
   @elseif(session('success'))
-    @include('toastContainer')
-      <script>
-        createToast(@json(session('success')), 'success');
-      </script>
+     <div id="toastContainer" style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">
+        @include('toastContainer', ['type'=>'success','key'=>'toastId', 'toast'=>session('success')])
+    </div>
   @elseif(isset($lang->successfully1))
-    @include('toastContainer')
-      <script>
-        createToast(@json($lang->successfully1), 'success');
-      </script>
+    <div id="toastContainer" style="position: fixed; top: 0px; right: 10px; z-index: 9999; max-height: 90vh; overflow-y: auto;">
+        @include('toastContainer', ['type'=>'success','key'=>'toastId', 'toast'=>$lang->successfully1])
+    </div>
   @endif
   @yield('containt')
 </body>
