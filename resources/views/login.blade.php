@@ -5,7 +5,7 @@
     @if ($errors->any())
         @section('toast')
         @foreach($errors->all() as $key=>$toast)
-        @include('toast_message', ['type'=>'danger','key'=>$key, 'toast'=>$toast])
+        @include('toast_message', ['type'=>'danger'])
         @endforeach
         @endsection
         @include('toastContainer')
