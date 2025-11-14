@@ -6,37 +6,19 @@
 <body>
   @if ($errors->any())
     @section('toast')
-        @foreach($errors->all() as $key=>$toast)
-            <div id="{{$key}}" class="toast align-items-center text-bg-danger border-0 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
-                <script>(new bootstrap.Toast($('#'+@json($key)).on("hidden.bs.toast", function () {$(this).remove();}), { delay: 10000 })).show();</script>
-                <div class="d-flex">
-                    <div class="toast-body">{{$toast}}</div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>
-        @endforeach
+    @foreach($errors->all() as $key=>$toast)
+    @include('toast_message', ['type'=>'danger','key'=>$key, 'toast'=>$toast])
+    @endforeach
     @endsection
     @include('toastContainer')
   @elseif(session('success'))
-     @section('toast')
-    <div id="toastMessage" class="toast align-items-center text-bg-success border-0 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
-        <script>(new bootstrap.Toast($('#toastMessage').on("hidden.bs.toast", function () {$(this).remove();}), { delay: 10000 })).show();</script>
-        <div class="d-flex">
-            <div class="toast-body">{{ session('success') }}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
+    @section('toast')
+    @include('toast_message', ['type'=>'success','key'=>'toastId', 'toast'=>session('success')])
     @endsection
     @include('toastContainer')
   @elseif(isset($lang->successfully1))
     @section('toast')
-    <div id="toastMessage" class="toast align-items-center text-bg-success border-0 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
-        <script>(new bootstrap.Toast($('#toastMessage').on("hidden.bs.toast", function () {$(this).remove();}), { delay: 10000 })).show();</script>
-        <div class="d-flex">
-            <div class="toast-body">{{ $lang->successfully1 }}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
+    @include('toast_message', ['type'=>'success','key'=>'toastId', 'toast'=>$lang->successfully1])
     @endsection
     @include('toastContainer')
   @endif
