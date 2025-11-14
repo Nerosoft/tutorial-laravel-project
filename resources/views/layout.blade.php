@@ -5,22 +5,19 @@
 </head>
 <body>
   @if ($errors->any())
+  @include('toastContainer')
       <script>
-          $(document).ready(function () {
-              @json($errors->all()).forEach((text) => createToast(text, 'danger'));
-          });
+        @json($errors->all()).forEach((text) => createToast(text, 'danger'));
       </script>
   @elseif(session('success'))
+    @include('toastContainer')
       <script>
-          $(document).ready(function () {
-              createToast(@json(session('success')), 'success');
-          });
+        createToast(@json(session('success')), 'success');
       </script>
   @elseif(isset($lang->successfully1))
+    @include('toastContainer')
       <script>
-          $(document).ready(function () {
-              createToast(@json($lang->successfully1), 'success');
-          });
+        createToast(@json($lang->successfully1), 'success');
       </script>
   @endif
   @yield('containt')

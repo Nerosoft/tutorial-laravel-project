@@ -63,8 +63,7 @@ function handleInputSelect(event, error1) {
     else
         event.setCustomValidity('');
 }
-
-$(document).ready(function(){
+function makeMessage(){
     $('body').append(
         $('<div>', {
             id:'toastContainer',
@@ -75,7 +74,7 @@ $(document).ready(function(){
                 zIndex: 9999,
                 maxHeight: '90vh',
                 overflowY: 'auto'
-            }        
+            }
         })
     );
-});
+}
