@@ -31,7 +31,7 @@ use App\Http\Middleware\Auth;
 |
 */
 Route::controller(LoginController::class)->group(function (){
-    Route::get('/login/{id?}','index')->middleware(Auth::class);
+    Route::get('/login/{id?}','index')->name('mylogin')->middleware(Auth::class);
     Route::post('/makeLogin','makeLogin')->name('makeLogin')->middleware(Auth::class);
 });
 Route::controller(RegisterController::class)->group(function (){

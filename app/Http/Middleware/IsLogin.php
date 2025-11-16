@@ -35,7 +35,7 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'flex')
             return redirect()->route('Home');
         else
-            return redirect('/login');
+            return redirect()->route('mylogin');
     }
     function getKeyTables(){
         return in_array(request()->route('id'), array_keys((array)mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['MyFlexTables']));
