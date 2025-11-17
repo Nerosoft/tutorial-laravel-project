@@ -42,9 +42,11 @@
             @yield('containt')
         </form>
         <button form='login' type='submit' class="btn btn-primary" onclick="validForm('#login')">{{$lang->button3}}</button>
-        <button type="button" onClick="openForm('#exampleModal')" class="btn btn-success">{{$lang->button1}}</button>
+        <button type="button" onClick="openForm('#createModel')" class="btn btn-success">{{$lang->button1}}</button>
         <!-- Modal -->
-        @include('all_model.start_model', ['idModel'=>'exampleModal', 'title'=>$lang->label1, 'idForm'=>'myForm', 'action'=>route('makeChangeLanguage')])
+        @include('all_model.start_model', [
+            'title'=>$lang->label1, 
+            'action'=>route('makeChangeLanguage')])
         @csrf
         @include('my_id2')
         @foreach ($lang->myRadios as $key =>$radios)
@@ -55,7 +57,7 @@
             </label>
             </div>
         @endforeach
-        @include('all_model.end_model', ['idForm'=>'myForm', 'button'=>$lang->button2])
+        @include('all_model.end_model', ['button'=>$lang->button2])
 
 
     </div>
@@ -70,7 +72,7 @@
             this.setCustomValidity('');
     });
     $('#close_button').on('click', function() {
-        closeForm('#exampleModal');
+        closeForm('#createModel');
         if($('.flexCheck:checked').val() !== @json($lang->language))
             setLanguage(@json($lang->language));
     });

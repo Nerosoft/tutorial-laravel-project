@@ -11,7 +11,7 @@
     required
     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-    type="text" class="form-control" id="name" name="name" value="{{$name}}" placeholder="{{$lang->hint1}}">
+    type="text" class="form-control" id="name" name="name" value="{{$name??$test->getName()}}" placeholder="{{$lang->hint1}}">
 </div>
 <div class="mb-3">
     <label for="shortcut" class="form-label">{{$lang->label7}}</label>
@@ -21,7 +21,7 @@
     required
     oninvalid="handleInput(this ,'{{$lang->error9}}', '{{$lang->error10}}')"
     oninput="handleInput(this ,'{{$lang->error9}}', '{{$lang->error10}}')"
-    type="text" class="form-control" id="shortcut" name="shortcut" value="{{$shortcut}}" placeholder="{{$lang->hint3}}">
+    type="text" class="form-control" id="shortcut" name="shortcut" value="{{$shortcut??$test->getShortcut()}}" placeholder="{{$lang->hint3}}">
 </div>
 <div class="mb-3">
     <label for="price" class="form-label">{{$lang->label4}}</label>
@@ -30,7 +30,7 @@
     required
     oninvalid="handleInputSelect(this, '{{$lang->error3}}')"
     oninput="handleInputSelect(this, '{{$lang->error3}}')"
-    type="number" class="form-control" id="price" min="0" name="price" value="{{$price}}" placeholder="{{$lang->hint2}}">
+    type="number" class="form-control" id="price" min="0" name="price" value="{{$price??$test->getPrice()}}" placeholder="{{$lang->hint2}}">
 </div>
 <div class="mb-3">
     <label for="input-output-lab" class="form-label">{{$lang->label5}}</label>
@@ -42,11 +42,12 @@
     class="form-select" id="input-output-lab" name="input-output-lab">
     <option value="" selected disabled>{{$lang->selectBox1}}</option>
     @foreach($lang->inputOutPut as $key=>$inp)
-    <option {{$inputOutputLabId === $inp ? 'selected' : ''}} value="{{$key}}">{{$inp}}</option>
+    <option {{isset($index) && $test->getInputOutputLabId() === $inp ? 'selected' : ''}} value="{{$key}}">{{$inp}}</option>
     @endforeach
     </select>
 </div>
 @include('all_model.end_model')
+
 
 
 

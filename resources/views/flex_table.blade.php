@@ -3,7 +3,11 @@
 @include('nav_admin')
 <div class="start-page container">
 <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
-@include('all_model.create_edit_flex_table',['idModel'=>'createModel', 'title'=>$lang->title2, 'idForm'=>'createForm', 'action'=>route('createFlexTable', request()->route('id')), 'arr'=>$lang->Hint, 'button'=>$lang->button2])
+@include('all_model.create_edit_flex_table',[
+    'title'=>$lang->title2, 
+    'action'=>route('createFlexTable', request()->route('id')), 
+    'arr'=>$lang->Hint, 
+    'button'=>$lang->button2])
 <table id="example" class="table table-striped">
     <thead>
             <tr>

@@ -3,8 +3,10 @@
 @include('nav_admin')
     <div class="start-page container">
         <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
-        @include('all_model.model_change_language', ['idModel'=>'createModel', 'title'=>$lang->title2,
-        'idForm'=>'createForm', 'action'=>route('lang.createLanguage'), 'lang_name'=>'',
+        @include('all_model.model_change_language', [
+        'title'=>$lang->title2,
+        'action'=>route('lang.createLanguage'),
+        'lang_name'=>'',
         'button'=>$lang->button2])
         <div class=""> 
             <h1 id="greeting" class="text-center">{{$lang->label3}}</h1>
@@ -26,7 +28,7 @@
                     <th>
                         <img class="style_icon_menu pointer" src="{{asset('/lib/icons/copy.svg')}}" onclick="displayModel('#editModel{{$index}}', '{{$myLang->getName()}}')"/>
                        @include('all_model.model_change_language', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3,
-                        'idForm'=>'editForm'.$index, 'action'=>route('language.copy'), 'lang_name'=>$myLang->getName(),
+                        'idForm'=>'editForm'.$index, 'action'=>route('language.copy'),
                         'button'=>$lang->button3])
                         <img class="style_icon_menu pointer" src="{{asset('/lib/icons/'.($index === $lang->language ? 'lightbulb-fill.svg' : 'lightbulb.svg'))}}" onclick="openForm('#selectLanguage{{$index}}')"></i>
                         <div class="modal" id="selectLanguage{{$index}}" tabindex="-1" role="dialog">

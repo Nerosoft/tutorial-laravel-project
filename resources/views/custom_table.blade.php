@@ -3,7 +3,12 @@
 @include('nav_admin')
 <div class="start-page container">
     <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
-   @include('all_model.custom_table', ['idModel'=>'createModel', 'idForm'=>'createForm', 'action'=>route('addTable'), 'name'=>'', 'inputNumber'=>'', 'title'=>$lang->model2, 'button'=>$lang->button2])
+   @include('all_model.custom_table', [
+    'action'=>route('addTable'), 
+    'name'=>'', 
+    'inputNumber'=>'', 
+    'title'=>$lang->model2, 
+    'button'=>$lang->button2])
 
     <table id="example" class="table table-striped" >
         <thead>
@@ -21,7 +26,7 @@
                 <td>
                     @include('model_delete', ['name'=>$item->getName(), 'actionDelete'=>route('deleteTable')])
                    <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', '{{$item->getName()}}')"/>
-                   @include('all_model.custom_table', ['idModel'=>'editModel'.$index, 'idForm'=>'editForm'.$index, 'action'=>route('editTable'), 'name'=>$item->getName(), 'title'=>$lang->model3, 'button'=>$lang->button3])
+                   @include('all_model.custom_table', ['idModel'=>'editModel'.$index, 'idForm'=>'editForm'.$index, 'action'=>route('editTable'), 'title'=>$lang->model3, 'button'=>$lang->button3])
                 </td>
             </tr>
             @endforeach            

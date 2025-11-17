@@ -9,7 +9,7 @@
     required
     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-    type="text" name="name" id="name" value="{{$name}}" placeholder='{{$lang->HintName}}' class="form-control">
+    type="text" name="name" id="name" value="{{$name??$item->getName()}}" placeholder='{{$lang->HintName}}' class="form-control">
 </div>
 @if(!isset($index))
 <div class="form-group">
