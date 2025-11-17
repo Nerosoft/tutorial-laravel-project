@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="SettingLanguage">{{$title}}</h5>
-        <button type="button" onclick="closeForm('#{{$idModel}}')" class="btn btn-dark">
+        <button type="button" id="close_button" onclick="closeForm('#{{$idModel}}')" class="btn btn-dark">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
