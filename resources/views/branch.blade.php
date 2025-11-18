@@ -6,14 +6,6 @@
     @include('all_model.model_branch', [
         'title'=>$lang->title2,
         'action'=>route('addBranchRays'),
-        'brance_rays_name'=>'',
-        'brance_rays_phone'=>'',
-        'brance_rays_country'=>'',
-        'brance_rays_governments'=>'',
-        'brance_rays_city'=>'',
-        'brance_rays_street'=>'',
-        'brance_rays_building'=>'',
-        'brance_rays_address'=>'',
         'button'=>$lang->button2])
    
     <table id="example" class="table table-striped" >

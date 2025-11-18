@@ -5,8 +5,6 @@
     <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
    @include('all_model.custom_table', [
     'action'=>route('addTable'), 
-    'name'=>'', 
-    'inputNumber'=>'', 
     'title'=>$lang->model2, 
     'button'=>$lang->button2])
 

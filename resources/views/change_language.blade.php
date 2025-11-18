@@ -6,7 +6,6 @@
         @include('all_model.model_change_language', [
         'title'=>$lang->title2,
         'action'=>route('lang.createLanguage'),
-        'lang_name'=>'',
         'button'=>$lang->button2])
         <div class=""> 
             <h1 id="greeting" class="text-center">{{$lang->label3}}</h1>

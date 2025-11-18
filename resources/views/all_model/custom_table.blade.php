@@ -9,7 +9,7 @@
     required
     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-    type="text" name="name" id="name" value="{{$name??$item->getName()}}" placeholder='{{$lang->HintName}}' class="form-control">
+    type="text" name="name" id="name" value="{{$item?->getName()??''}}" placeholder='{{$lang->HintName}}' class="form-control">
 </div>
 @if(!isset($index))
 <div class="form-group">
@@ -18,7 +18,7 @@
     min="1" 
     max="8" 
     required
-    type="number" name="input_number" id="input_number" value="{{$inputNumber}}" placeholder='{{$lang->HintInputNumber}}' class="form-control">
+    type="number" name="input_number" id="input_number"  placeholder='{{$lang->HintInputNumber}}' class="form-control">
 </div>
 @endif
 @include('all_model.end_model')

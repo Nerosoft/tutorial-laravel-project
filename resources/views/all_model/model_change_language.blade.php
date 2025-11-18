@@ -9,6 +9,6 @@
     required
     oninvalid="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
     oninput="handleInput(this ,'{{$lang->error1}}', '{{$lang->error2}}')"
-    type="text" name="lang_name" id="lang_name" value="{{$lang_name??$myLang->getName()}}" placeholder='{{$lang->hint1}}' class="form-control">
+    type="text" name="lang_name" id="lang_name" value="{{$myLang?->getName()??''}}" placeholder='{{$lang->hint1}}' class="form-control">
 </div>
 @include('all_model.end_model')

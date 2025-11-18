@@ -5,10 +5,7 @@
 <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
 @include('all_model.create_edit_tests', [
     'title'=>$lang->title2, 
-    'action'=>route('createTest', request()->route('id')), 
-    'name'=>'', 
-    'shortcut'=>'', 
-    'price'=>'', 
+    'action'=>route('createTest', request()->route('id')),
     'button'=>$lang->button2])
 <table id="example" class="table table-striped">
     <thead>
