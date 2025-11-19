@@ -22,7 +22,7 @@
         $('#password').on('input invalid', function() {
             if(this.value !== $('#password_confirmation').val() && $('#password_confirmation').val() !== '')
                 $('#password_confirmation')[0].setCustomValidity(@json($lang->error7));
-            else if(this.value === $('#password_confirmation').val())
+            else
                 $('#password_confirmation')[0].setCustomValidity('');
         });
         $('#password_confirmation').on('input invalid', function() {
