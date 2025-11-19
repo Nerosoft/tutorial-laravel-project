@@ -36,8 +36,15 @@
                     title="{{$lang->hint2}}"
                     minlength="8" 
                     required 
+                    @if(Route::currentRouteName() === 'mylogin')
                     oninvalid="handleInput(this ,'{{$lang->errorUserPasswordRequired}}', '{{$lang->errorUserPassword}}')"
-                    oninput="handleInput(this ,'{{$lang->errorUserPasswordRequired}}', '{{$lang->errorUserPassword}}')">
+                    oninput="handleInput(this ,'{{$lang->errorUserPasswordRequired}}', '{{$lang->errorUserPassword}}')"
+                    @else
+                    oninvalid="handleInputPassConfirmPass(this ,'{{$lang->errorUserPasswordRequired}}', '{{$lang->errorUserPassword}}', 'password_confirmation')"
+                    oninput="handleInputPassConfirmPass(this ,'{{$lang->errorUserPasswordRequired}}', '{{$lang->errorUserPassword}}', 'password_confirmation')"
+                    @endif
+                    
+                    >
             </div>
             @yield('containt')
         </form>
