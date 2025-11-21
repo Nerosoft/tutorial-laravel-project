@@ -26,14 +26,16 @@
                 event.setCustomValidity(req);
             else if (event.validity.tooShort)
                 event.setCustomValidity(inv);
-            else if(event.value !== $('#'+id).val() && $('#'+id).val().length >= 8)
-                event.setCustomValidity(@json($lang->error7));
             else if(event.value === $('#'+id).val()){
                 event.setCustomValidity('');
                 $('#'+id)[0].setCustomValidity('');
             }
-            else
+            else if($(event).attr('id') === 'password' && event.value !== $('#'+id).val()){
                 event.setCustomValidity('');
+                $('#'+id)[0].setCustomValidity(@json($lang->error7));
+            }
+            else if(event.value !== $('#'+id).val())
+                event.setCustomValidity(@json($lang->error7));
         }
     </script>
 @endsection
