@@ -30,12 +30,14 @@
                 event.setCustomValidity('');
                 $('#'+id)[0].setCustomValidity('');
             }
-            else if($(event).attr('id') === 'password' && event.value !== $('#'+id).val()){
+            else if($(event).attr('id') === 'password' && event.value !== $('#'+id).val() && $('#'+id).val().length >=8){
                 event.setCustomValidity('');
                 $('#'+id)[0].setCustomValidity(@json($lang->error7));
             }
-            else if(event.value !== $('#'+id).val())
+            else if(event.value !== $('#'+id).val() && $('#'+id).val().length >=8)
                 event.setCustomValidity(@json($lang->error7));
+            else if($(event).attr('id') === 'password')
+                event.setCustomValidity('');
         }
     </script>
 @endsection
