@@ -42,7 +42,7 @@ class RegisterController extends LoginRegister implements ViewLanguage
         return $this->ob[$this->language];
     }
     function makeValidation(){
-        array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
+        array_push($this->roll['email'], Rule::notIn(array_map(function($users) {return $users['Email'];}, $this->users)));
         $this->users[$this->generateUniqueIdentifier()] = array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
         $this->getDb()['User'] = $this->users;
         array_push($this->roll['password'], 'confirmed');
