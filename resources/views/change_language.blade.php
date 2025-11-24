@@ -53,7 +53,13 @@
                             </div>
                         </div>
                         @if($index !== $lang->language)
-                        @include('model_delete', ['name'=>$myLang->getName(), 'actionDelete'=>route('language.delete')])
+                        @include('model_delete', [
+                        'name'=>$myLang->getName(),
+                        'action'=>route('language.delete'), 
+                        'idModel'=>'deleteModel'.$index, 
+                        'idForm'=>'deleteForm'.$index, 
+                        'button'=>$lang->buttonModelDelete, 
+                        'title'=>$lang->titleModelDelete])
                         @endif
                     </th>
                 </tr>

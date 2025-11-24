@@ -27,7 +27,13 @@
                 <th>{{$test->getPrice()}}</th>
                 <th>{{$test->getInputOutputLabId()}}</th>
                 <th>
-                @include('model_delete', ['name'=>$test->getName(), 'actionDelete'=>route('deleteItem', request()->route('id'))])
+                @include('model_delete', [
+                'name'=>$test->getName(), 
+                'action'=>route('deleteItem', request()->route('id')), 
+                'idModel'=>'deleteModel'.$index, 
+                'idForm'=>'deleteForm'.$index, 
+                'button'=>$lang->buttonModelDelete, 
+                'title'=>$lang->titleModelDelete])
                 <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', $('#editForm{{$index}}').find('#name'), $('#editForm{{$index}}').find('#shortcut'), $('#editForm{{$index}}').find('#price'), $('#editForm{{$index}}').find('#input-output-lab option'), '{{$test->getName()}}', '{{$test->getShortcut()}}', '{{$test->getPrice()}}', '{{$test->getInputOutputLabId()}}')"/>
                 @include('all_model.create_edit_tests', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'action'=>route('editTest', request()->route('id')),  'button'=>$lang->button3])
                 </th>
