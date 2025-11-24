@@ -20,3 +20,6 @@
 .text-left{
     text-align: left!important;
 }
+.offcanvas-header{
+    padding: 13px!important;
+}
