@@ -18,9 +18,7 @@ function handleInput(event, error1, error2) {
 
 
 
-function validForm(form){
-    $(form).addClass('was-validated');
-}
+
 function removeClass(id){
     $(id).find('form').removeClass('was-validated');
 }
