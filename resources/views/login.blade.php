@@ -86,9 +86,14 @@
     function setLanguage(element){
         $('.flexCheck').each(function(idx, el){
             el.checked = element == el.value;
+            (el).setCustomValidity('');
         });
     }
 
+function validForm(id){
+    if($(id).find('.flexCheck:checked').val() === @json($lang->language))
+        $(id).find('.flexCheck:checked')[0].setCustomValidity(@json($lang->LangUsed));
+}
 </script>
 </body>
 </html>
