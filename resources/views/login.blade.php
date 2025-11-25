@@ -64,7 +64,14 @@
             </label>
             </div>
         @endforeach
-        @include('all_model.end_model', ['button'=>$lang->button2])
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" form="createForm" class="btn btn-primary" onclick="validLanguage()">{{$lang->button2}}</button>
+        </div>
+        </div>
+    </div>
+    </div>
 
 
     </div>
@@ -90,10 +97,10 @@
         });
     }
 
-function validForm(id){
-    if($(id).find('.flexCheck:checked').val() === @json($lang->language))
-        $(id).find('.flexCheck:checked')[0].setCustomValidity(@json($lang->LangUsed));
-}
+    function validLanguage(){
+        if($('.flexCheck:checked').val() === @json($lang->language))
+            $('.flexCheck:checked')[0].setCustomValidity(@json($lang->LangUsed));
+    }
 </script>
 </body>
 </html>

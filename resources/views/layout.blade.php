@@ -2,7 +2,6 @@
 <link href="{{asset('lib/dataTables.bootstrap5.css')}}" rel="stylesheet">
 <script src="{{asset('lib/dataTables.js')}}" type="text/javascript"></script>
 <script src="{{asset('lib/dataTables.bootstrap5.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/admin.js')}}" type="text/javascript"></script>
 </head>
 <body>
   @if ($errors->any())
