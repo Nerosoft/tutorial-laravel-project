@@ -49,7 +49,7 @@
             @yield('containt')
         </form>
         <button form='login' type='submit' class="btn btn-primary" onclick="validForm('#login')">{{$lang->button3}}</button>
-        <button type="button" onClick="openForm('#createModel')" class="btn btn-success">{{$lang->button1}}</button>
+        <button type="button" onclick="openForm('#createModel')" class="btn btn-success">{{$lang->button1}}</button>
         <!-- Modal -->
         @include('all_model.start_model', [
             'title'=>$lang->label1, 
@@ -58,22 +58,13 @@
         @include('my_id2')
         @foreach ($lang->myRadios as $key =>$radios)
             <div class="form-check">
-            <input name="id" class="flexCheck form-check-input" value="{{$key}}" onClick="setLanguage(this.value)" {{$key === $lang->language ? 'checked' : ''}} type="checkbox">
+            <input name="id" class="flexCheck form-check-input" value="{{$key}}" onclick="setLanguage(this.value)" {{$key === $lang->language ? 'checked' : ''}} type="checkbox">
             <label  class="form-check-label">
             {{$radios->getName()}}
             </label>
             </div>
         @endforeach
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" form="createForm" class="btn btn-primary" onclick="validLanguage()">{{$lang->button2}}</button>
-        </div>
-        </div>
-    </div>
-    </div>
-
-
+        @include('all_model.button_modal', ['button'=>$lang->button2])
     </div>
 </div>
 <script type="text/javascript">
@@ -97,10 +88,10 @@
         });
     }
 
-    function validLanguage(){
+    $('#click_button').on('click', function(){
         if($('.flexCheck:checked').val() === @json($lang->language))
             $('.flexCheck:checked')[0].setCustomValidity(@json($lang->LangUsed));
-    }
+    });
 </script>
 </body>
 </html>
