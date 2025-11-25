@@ -113,5 +113,4 @@
         });
 }
 </script>
-@include('table_setting')
 @endsection

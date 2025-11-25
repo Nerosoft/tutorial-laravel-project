@@ -98,5 +98,4 @@ function displayEditForm(brance_rays_name, brance_rays_phone, brance_rays_countr
     });
 }
 </script>
-@include('table_setting')
 @endsection

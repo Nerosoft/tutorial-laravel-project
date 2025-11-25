@@ -59,5 +59,4 @@ function displayEditForm(id, name){
 });
 
 </script>
-@include('table_setting')
 @endsection

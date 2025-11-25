@@ -58,5 +58,4 @@
             $(id).find('#'+key).val(myObj[key]);
     }
 </script>
-@include('table_setting')
 @endsection

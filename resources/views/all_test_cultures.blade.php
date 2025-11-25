@@ -69,5 +69,4 @@ function displayEditForm(id, name, shortcut, price, input_output_lab, nameTset, 
     });
 }
 </script>
-@include('table_setting')
 @endsection

@@ -23,5 +23,8 @@
     @include('toastContainer')
   @endif
   @yield('containt')
+  @if(Route::currentRouteName() !== 'Home')
+  @include('table_setting')
+  @endif
 </body>
 </html>

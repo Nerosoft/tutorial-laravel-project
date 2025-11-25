@@ -82,5 +82,4 @@ function displayModel(id, value){
     $(id).find('#lang_name').val(value);
 }
 </script>
-@include('table_setting')
 @endsection
