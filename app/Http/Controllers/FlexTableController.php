@@ -28,15 +28,19 @@ class FlexTableController extends Page implements TableData
             $this->message[$key.'.min'] = $this->ErrorsMessageInv[$key];
         }
         $arr = (array)$this->getDb()[request()->route('id')];
-        if(Route::currentRouteName() === 'createFlexTable')
-            $arr[$this->generateUniqueIdentifier()] = array();
+        if(Route::currentRouteName() === 'createFlexTable'){
+            $keyId = $this->generateUniqueIdentifier();
+            $arr[$keyId] = array();
+            foreach ($this->MyInfo()[request()->route('id')]['TableHead'] as $key => $value)
+                $arr[$keyId][$key] = request()->input($key);
+        }
         else{
             $this->successfulyMessage = $this->MyInfo()[request()->route('id')]['MessageModelEdit'];
             $arr[request()->input('id')] = array();
+            foreach ($this->MyInfo()[request()->route('id')]['TableHead'] as $key => $value)
+                $arr[request()->input('id')][$key] = request()->input($key);
         }
         request()->validate($this->roll, $this->message);
-        foreach ($this->MyInfo()[request()->route('id')]['TableHead'] as $key => $value)
-            $arr[array_key_last($arr)][$key] = request()->input($key);
         $this->getDb()[request()->route('id')] = $arr;
     }
     function __construct(){
