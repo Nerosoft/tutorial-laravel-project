@@ -58,13 +58,13 @@
         @include('my_id2')
         @foreach ($lang->myRadios as $key =>$radios)
             <div class="form-check">
-            <input name="id" class="flexCheck form-check-input" value="{{$key}}" {{$key === $lang->language ? 'checked' : ''}} type="radio">
+            <input name="id" class="flexCheck form-check-input" require value="{{$key}}" {{$key === $lang->language ? 'checked' : ''}} type="radio">
             <label  class="form-check-label">
             {{$radios->getName()}}
             </label>
             </div>
         @endforeach
-        @include('all_model.button_modal', ['button'=>$lang->button2])
+        @include('all_model.end_model', ['button'=>$lang->button2])
     </div>
 </div>
 <script type="text/javascript">
@@ -77,6 +77,7 @@
             this.setCustomValidity('');
     });
     $('#close_button').on('click', function() {
+        removeClass('#createModel');
         if($('.flexCheck:checked').val() !== @json($lang->language))
             $('.flexCheck').each(function(idx, el){
                 el.checked = @json($lang->language) == el.value;
