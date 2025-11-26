@@ -58,6 +58,7 @@ class DbSeeder extends Seeder
                         'ButtonLoginUser'=>'Login admin',
                         'AdminLogin'=>'seccessfully login admin',
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
+                        'ChangeLang'=>'language is used'
                     ],
                     'Register'=>[
                         'MYTITLE'=>'Register',
@@ -87,7 +88,8 @@ class DbSeeder extends Seeder
                         'HintUserRepeatPassword'=>'Enter Repeat Password',
                         'HintUserCodePassword'=>'Enter code',
                         'UserEmailExist'=>'This email already exists.',
-                        'AdminLogin'=>'seccessfully register admin'
+                        'AdminLogin'=>'seccessfully register admin',
+                        'ChangeLang'=>'language is used'
                     ],
                     'Admin'=>[
                         'MYTITLE'=>'Admin',
@@ -463,6 +465,7 @@ class DbSeeder extends Seeder
                         'ButtonLoginUser'=>'Login admin',
                         'AdminLogin'=>'seccessfully login admin',
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
+                        'ChangeLang'=>'language is used'
                     ],
                     'Register'=>[
                         'MYTITLE'=>'Register',
@@ -492,7 +495,8 @@ class DbSeeder extends Seeder
                         'HintUserRepeatPassword'=>'Enter Repeat Password',
                         'HintUserCodePassword'=>'Enter code',
                         'UserEmailExist'=>'This email already exists.',
-                        'AdminLogin'=>'seccessfully register admin'
+                        'AdminLogin'=>'seccessfully register admin',
+                        'ChangeLang'=>'language is used'
                     ],
                     'Admin'=>[
                         'MYTITLE'=>'Admin',

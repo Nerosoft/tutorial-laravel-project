@@ -46,7 +46,7 @@ class LoginRegister extends SettingPage
             $this->label4 = $obj->MyInfo()[$state]['LabelLoginUser'];
             $this->hint1 = $obj->MyInfo()[$state]['HintUserEmail'];
             $this->hint2 = $obj->MyInfo()[$state]['HintUserPassword'];
-            $this->LangUsed = $obj->MyInfo()['ChangeLanguage']['Used'];
+            $this->LangUsed = $obj->MyInfo()[$state]['ChangeLang'];
             $this->myRadios = MyLanguage::fromArray($obj->MyInfo()['AllNamesLanguage']);
         }
     }

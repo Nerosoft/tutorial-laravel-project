@@ -77,13 +77,12 @@
             this.setCustomValidity('');
     });
     $('#close_button').on('click', function() {
-        closeForm('#createModel');
         if($('.flexCheck:checked').val() !== @json($lang->language))
-            setLanguage(@json($lang->language));
+            setLanguage();
     });
-    function setLanguage(element){
+    function setLanguage(lang = @json($lang->language)){
         $('.flexCheck').each(function(idx, el){
-            el.checked = element == el.value;
+            el.checked = lang == el.value;
             (el).setCustomValidity('');
         });
     }
