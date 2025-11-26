@@ -58,7 +58,7 @@
         @include('my_id2')
         @foreach ($lang->myRadios as $key =>$radios)
             <div class="form-check">
-            <input name="id" class="flexCheck form-check-input" value="{{$key}}" onclick="setLanguage(this.value)" {{$key === $lang->language ? 'checked' : ''}} type="checkbox">
+            <input name="id" class="flexCheck form-check-input" value="{{$key}}" {{$key === $lang->language ? 'checked' : ''}} type="radio">
             <label  class="form-check-label">
             {{$radios->getName()}}
             </label>
@@ -78,18 +78,14 @@
     });
     $('#close_button').on('click', function() {
         if($('.flexCheck:checked').val() !== @json($lang->language))
-            setLanguage();
+            $('.flexCheck').each(function(idx, el){
+                el.checked = @json($lang->language) == el.value;
+            });
     });
-    function setLanguage(lang = @json($lang->language)){
-        $('.flexCheck').each(function(idx, el){
-            el.checked = lang == el.value;
-            (el).setCustomValidity('');
-        });
-    }
-
     $('#click_button').on('click', function(){
-        if($('.flexCheck:checked').val() === @json($lang->language))
-            $('.flexCheck:checked')[0].setCustomValidity(@json($lang->LangUsed));
+        $('.flexCheck').each(function(idx, el){
+            this.setCustomValidity(this.checked && this.value === @json($lang->language)?@json($lang->LangUsed):'');
+        });
     });
 </script>
 </body>
