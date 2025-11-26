@@ -25,7 +25,7 @@
   @yield('containt')
   @if(Route::currentRouteName() !== 'Home')
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
+    $(document).ready(function() {
         new DataTable('#example',{
             "oLanguage": {
                 "sSearch": @json($lang->table1),
