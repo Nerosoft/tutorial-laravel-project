@@ -58,7 +58,7 @@
         @include('my_id2')
         @foreach ($lang->myRadios as $key =>$radios)
             <div class="form-check">
-            <input name="id" class="flexCheck form-check-input" require value="{{$key}}" {{$key === $lang->language ? 'checked' : ''}} type="radio">
+            <input name="id" class="form-check-input {{$key === $lang->language ? 'flexCheck' : ''}}" require value="{{$key}}" {{$key === $lang->language ? 'checked' : ''}} type="radio">
             <label  class="form-check-label">
             {{$radios->getName()}}
             </label>
@@ -78,24 +78,22 @@
     });
     $('#close_button').on('click', function() {
         removeClass('#createModel');
-        if($('.flexCheck:checked').val() !== @json($lang->language))
-            $('.flexCheck').each(function(){
+        if($('input[name="id"]:checked').val() !== @json($lang->language))
+            $('input[name="id"]').each(function(){
                 this.checked = @json($lang->language) == this.value;
             });
     });
-    $('.flexCheck').on('change', function(){
+    $('input[name="id"]').on('change', function(){
         validForm('#createForm');
-        validRadio();
+        if(this.value !== @json($lang->language))
+            $('.flexCheck')[0].setCustomValidity('');
+        else
+            this.setCustomValidity(@json($lang->language));
     });
     $('#click_button').on('click', function(){
-        validRadio();
+        if($('input[name="id"]:checked').val() === @json($lang->language))
+            $('input[name="id"]:checked')[0].setCustomValidity(@json($lang->LangUsed));
     });
-
-    function validRadio(){
-        $('.flexCheck').each(function(){
-            this.setCustomValidity(this.checked && this.value === @json($lang->language)?@json($lang->LangUsed):'');
-        });
-    }
 </script>
 </body>
 </html>
