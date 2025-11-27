@@ -63,7 +63,7 @@ function displayEditForm(id, name, shortcut, price, input_output_lab, nameTset, 
     name.val(nameTset);
     shortcut.val(shortcutTest);
     price.val(priceTest);
-    input_output_lab.each(function(idx, el){
+    input_output_lab.each(function(){
         if($(this).html() === inputOutputLabTest)
             $(this).prop('selected', true);
     });

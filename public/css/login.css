@@ -22,3 +22,7 @@ h4{
 .login button{
     margin-top: 10px;
 }
+.flexCheck:checked {
+    background-color: #FF9800;
+    border-color: #FF9800;
+}

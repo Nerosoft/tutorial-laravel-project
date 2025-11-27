@@ -92,7 +92,7 @@ function displayEditForm(brance_rays_name, brance_rays_phone, brance_rays_countr
     brance_rays_street.val(streetTest);
     brance_rays_building.val(buildingTest);
     brance_rays_address.val(addressTest);
-    brance_rays_follow.each(function(idx, el){
+    brance_rays_follow.each(function(){
         if($(this).html() === followTest)
             $(this).prop('selected', true);
     });

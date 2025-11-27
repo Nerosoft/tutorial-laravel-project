@@ -79,15 +79,23 @@
     $('#close_button').on('click', function() {
         removeClass('#createModel');
         if($('.flexCheck:checked').val() !== @json($lang->language))
-            $('.flexCheck').each(function(idx, el){
-                el.checked = @json($lang->language) == el.value;
+            $('.flexCheck').each(function(){
+                this.checked = @json($lang->language) == this.value;
             });
     });
+    $('.flexCheck').on('change', function(){
+        validForm('#createForm');
+        validRadio();
+    });
     $('#click_button').on('click', function(){
-        $('.flexCheck').each(function(idx, el){
+        validRadio();
+    });
+
+    function validRadio(){
+        $('.flexCheck').each(function(){
             this.setCustomValidity(this.checked && this.value === @json($lang->language)?@json($lang->LangUsed):'');
         });
-    });
+    }
 </script>
 </body>
 </html>

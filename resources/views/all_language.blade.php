@@ -107,7 +107,7 @@
     }
     function displayEditForm2(id, selectBox, value){
         openForm(id);
-        selectBox.each(function(idx, el){
+        selectBox.each(function(){
             if($(this).val() == value)
                 $(this).prop('selected', true);
         });
