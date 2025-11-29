@@ -79,7 +79,7 @@
     $('#close_button').on('click', function() {
         removeClass('#createModel');
         if($('input[name="id"]:checked').val() !== @json($lang->language))
-           $('.flexCheck')[0].checked = true;
+           $('.flexCheck').prop('checked', true);
     });
     $('input[name="id"]').on('change', function(){
         validForm('#createForm');
