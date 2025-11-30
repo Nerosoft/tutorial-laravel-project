@@ -86,7 +86,7 @@
         if(this.value !== @json($lang->language))
             $('.flexCheck')[0].setCustomValidity('');
         else
-            this.setCustomValidity(@json($lang->language));
+            this.setCustomValidity(@json($lang->LangUsed));
     });
     $('#click_button').on('click', function(){
         if($('input[name="id"]:checked').val() === @json($lang->language))
