@@ -4,6 +4,8 @@
 <div class="start-page container">
     <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
     @include('all_model.model_branch', [
+        'idModel'=>'createModel',
+        'idForm'=>'createForm',
         'title'=>$lang->title2,
         'action'=>route('addBranchRays'),
         'button'=>$lang->button2])

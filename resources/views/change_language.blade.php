@@ -4,6 +4,8 @@
     <div class="start-page container">
         <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
         @include('all_model.model_change_language', [
+        'idModel'=>'createModel',
+        'idForm'=>'createForm',
         'title'=>$lang->title2,
         'action'=>route('lang.createLanguage'),
         'button'=>$lang->button2])

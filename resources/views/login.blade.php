@@ -52,6 +52,8 @@
         <button type="button" onclick="openForm('#createModel')" class="btn btn-success">{{$lang->button1}}</button>
         <!-- Modal -->
         @include('all_model.start_model', [
+            'idModel'=>'createModel',
+            'idForm'=>'createForm',
             'title'=>$lang->label1, 
             'action'=>route('makeChangeLanguage')])
         @csrf
@@ -64,7 +66,7 @@
             </label>
             </div>
         @endforeach
-        @include('all_model.end_model', ['button'=>$lang->button2])
+        @include('all_model.end_model', ['idForm'=>'createForm', 'button'=>$lang->button2])
     </div>
 </div>
 <script type="text/javascript">

@@ -4,6 +4,8 @@
 <div class="start-page container">
 <button class="btn btn-primary" onClick="openForm('#createModel')">{{$lang->button1}}</button>
 @include('all_model.create_edit_flex_table',[
+    'idModel'=>'createModel',
+    'idForm'=>'createForm',
     'title'=>$lang->title2, 
     'action'=>route('createFlexTable', request()->route('id')), 
     'arr'=>$lang->Hint, 
