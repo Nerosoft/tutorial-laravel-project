@@ -3,7 +3,7 @@
  @isset($index)
   @include('my_id')
 @endisset
-@foreach($arr as $key=>$value)
+@foreach($items??$lang->Hint as $key=>$value)
   <div class="mb-3">
       <label for="name" class="form-label">{{$lang->Label[$key]}}</label>
       <input 
