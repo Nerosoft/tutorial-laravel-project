@@ -20,9 +20,11 @@ class DeleteLangController extends Page implements ViewLanguage2
         $this->messageServer = $this->MyInfo()['ChangeLanguage']['DeleteLanguage'];
         $this->message['not_in'] = $this->MyInfo()['ChangeLanguage']['Used'];
         foreach ($this->MyInfo()['AllNamesLanguage'] as $key=>$value) {
-            $myLang = $this->getDb()[$key];
-            unset($myLang['AllNamesLanguage'][request()->input('id')]);
-            $this->getDb()[$key] = $myLang;
+            if($key !== request()->input('id')){
+                $myLang = $this->getDb()[$key];
+                unset($myLang['AllNamesLanguage'][request()->input('id')]);
+                $this->getDb()[$key] = $myLang;
+            }
         }
         unset($this->getDb()[request()->input('id')]);
     }
