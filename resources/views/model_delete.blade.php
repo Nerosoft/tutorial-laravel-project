@@ -3,11 +3,4 @@
 {{ $lang->messageModelDelete }}<spam>-{{ $name }}</spam>
 @csrf
 @include('my_id')
-</div>
-<div class="modal-footer">
-    <button id="click_button" type="submit" class="btn btn-primary">{{$lang->buttonModelDelete}}</button>
-</div>
-</form>
-    </div>
-    </div>
-</div>
+@include('all_model.end_model', ['button'=>$lang->buttonModelDelete])
