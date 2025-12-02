@@ -7,8 +7,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form id="{{$idForm}}" action="{{$action}}" method="POST">
       <div class="modal-body">
-        <form id="{{$idForm}}" action="{{$action}}" method="POST">
           @csrf
 
          

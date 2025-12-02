@@ -6,8 +6,8 @@
 </div>
 <div class="modal-footer">
     <button id="click_button" type="submit" class="btn btn-primary">{{$lang->buttonModelDelete}}</button>
+</div>
 </form>
-        </div>
     </div>
     </div>
 </div>
