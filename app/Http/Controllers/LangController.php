@@ -37,7 +37,7 @@ class LangController extends Page implements TableData
         $this->label7 = $this->MyInfo()['ChangeLanguage']['LabelNewLangName'];
         $this->hint1 = $this->MyInfo()['ChangeLanguage']['HintNewLangName'];
         $this->button4 = $this->MyInfo()['ChangeLanguage']['ButtonChangeLanguageMessage'];
-        $this->title2 = $this->MyInfo()['ChangeLanguage']['TitleChangeLanguageMessage'];
+        $this->TitleChangeLanguageMessage = $this->MyInfo()['ChangeLanguage']['TitleChangeLanguageMessage'];
         $this->view = view('change_language', [
             'lang'=>$this,
         ]);
