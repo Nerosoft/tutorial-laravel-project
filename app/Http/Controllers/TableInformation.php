@@ -17,6 +17,11 @@ class TableInformation extends AdminMenu
             $this->table4 = $obj->MyInfo()['TableInfo']['Info'];
             $this->table5 = $obj->MyInfo()['TableInfo']['LengthMenu'];
             $this->table6 = $obj->MyInfo()['TableInfo']['InfoFiltered'];
+            $this->table7 = $obj->MyInfo()[$state]['TableId'];
+            $this->table11 = $obj->MyInfo()[$state]['TabelEvent'];
+            $this->button3 = $obj->MyInfo()[$state]['ButtonModelEdit'];
+            $this->title3 = $obj->MyInfo()[$state]['ScreenModelEdit'];
+
             $obj->setupViewLang();
         }
     }

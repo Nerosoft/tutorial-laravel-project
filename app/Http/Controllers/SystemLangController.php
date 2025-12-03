@@ -41,14 +41,10 @@ class SystemLangController extends TableInformation implements ViewLanguage
         $this->Right = $this->MyInfo()['SystemLang']['rtl'];
         $this->label3 = $this->MyInfo()['SystemLang']['Text'];
         $this->label4 = $this->MyInfo()['SystemLang']['DirectionPage']; 
-        $this->table7 = $this->MyInfo()['SystemLang']['LanguageValue'];
-        $this->table8 = $this->MyInfo()['SystemLang']['LanguageEvent'];
-        $this->table9 = $this->MyInfo()['SystemLang']['LanguageId'];
+        $this->LanguageValue = $this->MyInfo()['SystemLang']['LanguageValue'];
         $this->table10 = $this->MyInfo()['SystemLang']['LanguageName'];
-        $this->model1 = $this->MyInfo()['SystemLang']['Title'];
         $this->model2 = $this->MyInfo()['SystemLang']['TitleDirection'];
         $this->button2 = $this->MyInfo()['SystemLang']['SaveDirection'];
-        $this->button3 = $this->MyInfo()['SystemLang']['SaveText'];
         $this->WordHint = $this->MyInfo()['SystemLang']['WordHint'];
     }
     function makeValidation(){

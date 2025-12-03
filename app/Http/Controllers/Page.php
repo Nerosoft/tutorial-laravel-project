@@ -77,12 +77,8 @@ class Page extends TableInformation
         else{
             parent::__construct($obj, $state);
             $this->title2 = $obj->MyInfo()[$state]['ScreenModelCreate'];
-            $this->title3 = $obj->MyInfo()[$state]['ScreenModelEdit'];
             $this->button1 = $obj->MyInfo()[$state]['ButtonModelCreate'];
             $this->button2 = $obj->MyInfo()[$state]['ButtonModelAdd'];
-            $this->button3 = $obj->MyInfo()[$state]['ButtonModelEdit'];
-            $this->table7 = $obj->MyInfo()[$state]['TableId'];
-            $this->table11 = $obj->MyInfo()[$state]['TabelEvent'];
             $this->titleModelDelete = $obj->MyInfo()[$state]['ScreenModelDelete'];
             $this->messageModelDelete = $obj->MyInfo()[$state]['MessageModelDelete'];
             $this->buttonModelDelete = $obj->MyInfo()[$state]['ButtonModelDelete'];

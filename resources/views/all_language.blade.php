@@ -5,12 +5,12 @@
     <table id="example" class="table table-striped" >
         <thead>
             <tr>
-                <th>{{$lang->table9}}</th>
+                <th>{{$lang->table7}}</th>
                 @if(isset($active))
                 <th>{{$lang->table10}}</th>
                 @endif
-                <th>{{$lang->table7}}</th>
-                <th>{{$lang->table8}}</th>
+                <th>{{$lang->LanguageValue}}</th>
+                <th>{{$lang->table11}}</th>
             </tr>
         </thead>
         @php
@@ -27,7 +27,7 @@
                                         <th>{{$index++}}</th>
                                         <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                         <th>{{$item}}</th>
-                                        @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2, 'item'=>$key3])])
+                                        @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2, 'item'=>$key3])])
                                     </tr>
                                 @endforeach
                             @elseif($key === 'Html')
@@ -42,7 +42,7 @@
                                     <th>{{$index++}}</th>
                                     <th>{{$lang->getDataTable()[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                     <th>{{$items}}</th>
-                                    @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2])])
+                                    @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2])])
                                 </tr>
                             @endif
                         @endforeach
@@ -56,7 +56,7 @@
                             <tr>
                                 <th>{{$index++}}</th>
                                 <th>{{$item}}</th>
-                                @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key, 'item'=>$key3])])
+                                @include('all_model.menu_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key, 'item'=>$key3])])
                             </tr>
                         @endforeach
                     @elseif(request()->route('id') === 'Html')
@@ -70,7 +70,7 @@
                         <tr>
                             <th>{{$index++}}</th>
                             <th>{{$items}}</th>
-                            @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->model1, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key])])                            
+                            @include('all_model.table_array', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'button'=>$lang->button3, 'action'=>route('edit.editAllLanguage', ['lang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>$key])])                            
                         </tr>
                     @endif
                 @endforeach
@@ -78,12 +78,12 @@
         </tbody>       
         <tfoot>
             <tr>
-                <th>{{$lang->table9}}</th>
+                <th>{{$lang->table7}}</th>
                 @if(isset($active))
                 <th>{{$lang->table10}}</th>
                 @endif
-                <th>{{$lang->table7}}</th>
-                <th>{{$lang->table8}}</th>
+                <th>{{$lang->LanguageValue}}</th>
+                <th>{{$lang->table11}}</th>
             </tr>
         </tfoot>
         </table>
