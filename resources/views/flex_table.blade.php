@@ -27,7 +27,13 @@
                     <th>{{$item}}</th>
                 @endforeach
                 <th>
-                    @include('model_delete', ['name'=>$items[array_key_first($items)], 'action'=>route('deleteItem', request()->route('id'))])
+                        <img class="style_icon_menu pointer" src="{{asset('/lib/icons/trash3.svg')}}" onclick="openForm('#deleteModel{{$index}}')"/>
+                        @include('model_delete', [
+                        'idModel'=>'deleteModel'.$index, 
+                        'message'=>$lang->messageModelDelete,
+                        'title'=>$lang->titleModelDelete,
+                        'button'=>$lang->buttonModelDelete,
+                        'name'=>$items[array_key_first($items)], 'action'=>route('deleteItem', request()->route('id'))])
                     <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', '{{json_encode($items)}}')"/>
                     @include('all_model.create_edit_flex_table', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3, 'idForm'=>'editForm'.$index, 'action'=>route('editFlexTable', request()->route('id')), 'button'=>$lang->button3])
                 </th>

@@ -31,17 +31,28 @@
                        @include('all_model.model_change_language', ['idModel'=>'editModel'.$index, 'title'=>$lang->title3,
                         'idForm'=>'editForm'.$index, 'action'=>route('language.copy'),
                         'button'=>$lang->button3])
+
+
                         <img class="style_icon_menu pointer" src="{{asset('/lib/icons/'.($index === $lang->language ? 'lightbulb-fill.svg' : 'lightbulb.svg'))}}" onclick="openForm('#selectLanguage{{$index}}')"></i>
-                        @include('all_model.start_model', [
+                        @include('model_delete', [
                         'idModel'=>'selectLanguage'.$index,
-                        'idForm'=>'selectLanguageForm'.$index,
+                        'message'=>$lang->label5,
                         'title'=>$lang->TitleChangeLanguageMessage,
+                        'button'=>$lang->button4,
+                        'name'=>$myLang->getName(),
                         'action'=>route('language.change')])
-                        @include('my_id')
-                        {{$lang->label5}}<spam>-{{$myLang->getName()}}</spam>
-                        @include('all_model.end_model', ['button'=>$lang->button4])
+
+
+
+
                         @if($index !== $lang->language)
-                        @include('model_delete', ['name'=>$myLang->getName(), 'action'=>route('language.delete')])
+                            <img class="style_icon_menu pointer" src="{{asset('/lib/icons/trash3.svg')}}" onclick="openForm('#deleteModel{{$index}}')"/>
+                            @include('model_delete', [
+                            'idModel'=>'deleteModel'.$index, 
+                            'message'=>$lang->messageModelDelete,
+                            'title'=>$lang->titleModelDelete,
+                            'button'=>$lang->buttonModelDelete,
+                            'name'=>$myLang->getName(), 'action'=>route('language.delete')])
                         @endif
                     </th>
                 </tr>

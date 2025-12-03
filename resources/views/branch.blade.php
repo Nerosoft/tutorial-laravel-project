@@ -41,7 +41,13 @@
                 <td>{{$branch->getFollowId()}}</td>
                 <td>
                     @if($index !== request()->session()->get('userId'))
-                        @include('model_delete', ['name'=>$branch->getName(), 'action'=>route('branch.delete', 'Branches')])
+                        <img class="style_icon_menu pointer" src="{{asset('/lib/icons/trash3.svg')}}" onclick="openForm('#deleteModel{{$index}}')"/>
+                        @include('model_delete', [
+                        'idModel'=>'deleteModel'.$index, 
+                        'message'=>$lang->messageModelDelete,
+                        'title'=>$lang->titleModelDelete,
+                        'button'=>$lang->buttonModelDelete,
+                        'name'=>$branch->getName(), 'action'=>route('branch.delete', 'Branches')])
                     @endif
                     <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm($('#editForm{{$index}}').find('#brance-rays-name'), $('#editForm{{$index}}').find('#brance-rays-phone'), $('#editForm{{$index}}').find('#brance-rays-country'), $('#editForm{{$index}}').find('#brance-rays-governments'), $('#editForm{{$index}}').find('#brance-rays-city'), $('#editForm{{$index}}').find('#brance-rays-street'), $('#editForm{{$index}}').find('#brance-rays-building'), $('#editForm{{$index}}').find('#brance-rays-address'), $('#editForm{{$index}}').find('#brance-rays-follow option'), '#editModel{{$index}}', '{{$branch->getName()}}', '{{$branch->getPhone()}}', '{{$branch->getGovernments()}}', '{{$branch->getCity()}}', '{{$branch->getStreet()}}', '{{$branch->getBuilding()}}', '{{$branch->getAddress()}}', '{{$branch->getCountry()}}', '{{$branch->getFollowId()}}')"/>
                     @include('all_model.model_branch', [

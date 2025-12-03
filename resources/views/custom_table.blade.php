@@ -24,7 +24,13 @@
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$item->getName()}}</td>
                 <td>
-                   @include('model_delete', ['name'=>$item->getName(), 'action'=>route('deleteTable')])
+                   <img class="style_icon_menu pointer" src="{{asset('/lib/icons/trash3.svg')}}" onclick="openForm('#deleteModel{{$index}}')"/>
+                    @include('model_delete', [
+                    'idModel'=>'deleteModel'.$index, 
+                    'message'=>$lang->messageModelDelete,
+                    'title'=>$lang->titleModelDelete,
+                    'button'=>$lang->buttonModelDelete,
+                    'name'=>$item->getName(), 'action'=>route('deleteTable')])
                     <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', '{{$item->getName()}}')"/>
                    @include('all_model.custom_table', ['idModel'=>'editModel'.$index, 'idForm'=>'editForm'.$index, 'action'=>route('editTable'), 'title'=>$lang->model3, 'button'=>$lang->button3])
                 </td>
