@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <th>{{$lang->table7}}</th>
-                @if(isset($active))
+                @if(!request()->route('lang') && !request()->route('id'))
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->LanguageValue}}</th>
@@ -17,7 +17,7 @@
             $index = 1
         @endphp
         <tbody id="table-data">
-            @if(isset($active))
+            @if(!request()->route('lang') && !request()->route('id'))
                 @foreach($lang->getDataTable() as $myNameLang=>$data)
                     @foreach($data as $key=>$myData)
                         @foreach($myData as $key2=>$items)
@@ -79,7 +79,7 @@
         <tfoot>
             <tr>
                 <th>{{$lang->table7}}</th>
-                @if(isset($active))
+                @if(!request()->route('lang') && !request()->route('id'))
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->LanguageValue}}</th>
@@ -89,7 +89,7 @@
         </table>
 </div>
 <script type="text/javascript">
-    let setting = @json(isset($active)) ? [
+    let setting = @json(!request()->route('lang') && !request()->route('id')) ? [
                 { 'searchable': true },
                 { 'searchable': false },
                 { 'searchable': true },
