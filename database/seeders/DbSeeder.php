@@ -21,7 +21,6 @@ class DbSeeder extends Seeder
                 ],
                 'MyLanguage'=>[
                     'Menu'=>[
-                        'MYTITLE'=>'Menu',
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'Branches'=>'Branches',
@@ -111,7 +110,8 @@ class DbSeeder extends Seeder
                         'InputErrorsMessageInv'=>'error name invalid',
                         'SelectBranchBox'=>'Select Branch Box',
                         'SelectTestBox'=>'Select Test Box',
-                        'Html'=>'Html'
+                        'Html'=>'Html',
+                        'Menu'=>'Menu'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',
@@ -429,7 +429,6 @@ class DbSeeder extends Seeder
                 ],
                 'english'=>[
                     'Menu'=>[
-                        'MYTITLE'=>'Menu',
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'Branches'=>'Branches',
@@ -519,7 +518,8 @@ class DbSeeder extends Seeder
                         'InputErrorsMessageInv'=>'error name invalid',
                         'SelectBranchBox'=>'Select Branch Box',
                         'SelectTestBox'=>'Select Test Box',
-                        'Html'=>'Html'
+                        'Html'=>'Html',
+                        'Menu'=>'Menu'
                     ],
                     'TableInfo'=>[
                         'MYTITLE'=>'table info',

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('containt')
-@include('nav_language')  
+@include('nav_admin')
 <div class="start-page container">
     <table id="example" class="table table-striped" >
         <thead>

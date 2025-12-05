@@ -71,7 +71,7 @@ Route::controller(TestCulturesController::class)->group(function () {
     Route::post('/editTest/{id?}', 'makeAddEditTest')->name('editTest')->middleware(IsLogin::class.':test');
 });
 Route::controller(FlexTableController::class)->group(function () {
-    Route::get('/flextable/{id?}', 'index')->name('FlexTable')->middleware(IsLogin::class.':flex');
+    Route::get('/flextable/{id?}', 'index')->name('MyFlexTables')->middleware(IsLogin::class.':flex');
     Route::post('/createFlexTable/{id?}', 'makeAddEditFlexTable')->name('createFlexTable')->middleware(IsLogin::class.':flex');
     Route::post('/editFlexTable/{id?}', 'makeAddEditFlexTable')->name('editFlexTable')->middleware(IsLogin::class.':flex');
 });
