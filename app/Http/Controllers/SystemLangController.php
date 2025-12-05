@@ -16,7 +16,7 @@ class SystemLangController extends TableInformation implements ViewLanguage
         $this->error1 = $this->MyInfo()['SystemLang']['TextRequired'];
         $this->error2 = $this->MyInfo()['SystemLang']['TextLenght'];
     }
-    public function index($nameLanguage = null, $id = null){
+    public function index(){
         return view('all_language', [
             'lang'=> $this,
         ]);
