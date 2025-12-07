@@ -16,7 +16,7 @@ class AdminMenu extends SettingPage
             $this->title101 = $obj->MyInfo()['AppSettingAdmin']['Offcanvas'];
             $this->label1 = $obj->MyInfo()['AppSettingAdmin']['Logout'];
             $this->label2 = $obj->MyInfo()['AppSettingAdmin']['AdminDashboard'];
-            $this->MyBranch = Branch::makeBranch($obj);
+            $this->MyBranch = Branch::fromArray($obj);
             if(Route::currentRouteName() === 'SystemLang'){
                 $this->myMenuApp = array('Home'=>$obj->MyInfo()['Menu']['Home'], 'SystemLang'=>$obj->MyInfo()['Menu']['SystemLang']);
                 foreach ($obj->MyInfo()['AllNamesLanguage'] as $key => $value){
@@ -24,8 +24,7 @@ class AdminMenu extends SettingPage
                     foreach (array_keys($obj->MyInfo()) as $key2 => $table) 
                         $this->myMenuApp[$key][$table] = $obj?->MyInfo()[$table]['MYTITLE']??$obj->MyInfo()['AppSettingAdmin'][$table];
                 }
-            }
-            else if(isset($obj->MyInfo()['MyFlexTables'])){
+            }else if(isset($obj->MyInfo()['MyFlexTables'])){
                $this->myMenuApp = $obj->MyInfo()['Menu'];
                $arr = $obj->MyInfo()['MyFlexTables'];
                array_unshift($arr, $this->myMenuApp['MyFlexTables']);

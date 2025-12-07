@@ -55,22 +55,18 @@ class Branch
     function getFollowId(){
         return $this->Follow;
     }
-    static function fromArray($branch, $inout){
-        $allBranch = array();
-        foreach ($branch as $key => $branch)
-            $allBranch[$key] = new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
-                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
-                $branch['Country'], $inout[$branch['Follow']]);        
-        return $allBranch;
-    }
-    static function makeBranch($obj){
-        $allBranch = array(request()->session()->get('superId')=>new Branch($obj->MyInfo()['AppSettingAdmin']['BranchMain']));
+    static function fromArray($obj, $state = null){
+        $allBranch = is_null($state) ? array(request()->session()->get('superId')=>new Branch($obj->MyInfo()['AppSettingAdmin']['BranchMain'])) : array();
         if(isset($obj->getDb()['Branches']))
             foreach ($obj->getDb()['Branches'] as $key => $branch)
-                $allBranch[$key] = new Branch($branch['Name']);       
+                $allBranch[$key] = is_null($state)?new Branch($branch['Name']):new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
+                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
+                $branch['Country'], $state[$branch['Follow']]);       
         else if(isset(mydb::find(request()->session()->get('superId'))['Branches']))
             foreach (mydb::find(request()->session()->get('superId'))['Branches'] as $key => $branch)
-                $allBranch[$key] = new Branch($branch['Name']); 
+                $allBranch[$key] = is_null($state)?new Branch($branch['Name']):new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
+                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
+                $branch['Country'], $state[$branch['Follow']]); 
         return $allBranch;
     }
 }
