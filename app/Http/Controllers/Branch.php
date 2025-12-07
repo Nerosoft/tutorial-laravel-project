@@ -57,16 +57,11 @@ class Branch
     }
     static function fromArray(MyDatabase $obj, $state = null){
         $allBranch = array();
-        if(isset($obj->getDb()['Branches']))
-            foreach ($obj->getDb()['Branches'] as $key => $branch)
+        if(isset($obj->getDb()['Branches']) || isset(mydb::find(request()->session()->get('superId'))['Branches']))
+            foreach ($obj?->getDb()['Branches']??mydb::find(request()->session()->get('superId'))['Branches'] as $key => $branch)
                 $allBranch[$key] = is_null($state)?new Branch($branch['Name']):new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
                 $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
-                $branch['Country'], $state[$branch['Follow']]);       
-        else if(isset(mydb::find(request()->session()->get('superId'))['Branches']))
-            foreach (mydb::find(request()->session()->get('superId'))['Branches'] as $key => $branch)
-                $allBranch[$key] = is_null($state)?new Branch($branch['Name']):new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
-                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
-                $branch['Country'], $state[$branch['Follow']]); 
+                $branch['Country'], $state[$branch['Follow']]);
         return $allBranch;
     }
 }
