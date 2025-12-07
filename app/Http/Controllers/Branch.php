@@ -56,7 +56,7 @@ class Branch
         return $this->Follow;
     }
     static function fromArray($obj, $state = null){
-        $allBranch = is_null($state) ? array(request()->session()->get('superId')=>new Branch($obj->MyInfo()['AppSettingAdmin']['BranchMain'])) : array();
+        $allBranch = array();
         if(isset($obj->getDb()['Branches']))
             foreach ($obj->getDb()['Branches'] as $key => $branch)
                 $allBranch[$key] = is_null($state)?new Branch($branch['Name']):new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],

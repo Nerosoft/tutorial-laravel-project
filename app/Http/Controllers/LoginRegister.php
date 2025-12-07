@@ -30,7 +30,7 @@ class LoginRegister extends SettingPage
                 'password.min' => $this->errorUserPassword,
                 'password.required' => $this->errorUserPasswordRequired,
             ];
-            $this->users = Users::fromArray($obj);
+            $this->users = isset($obj->getDb()['User']) ? Users::fromArray($obj) : array();
             $this->successfully = $obj->MyInfo()[$state]['AdminLogin'];
             $obj->makeValidation();
         }else{

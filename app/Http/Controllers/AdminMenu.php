@@ -16,7 +16,7 @@ class AdminMenu extends SettingPage
             $this->title101 = $obj->MyInfo()['AppSettingAdmin']['Offcanvas'];
             $this->label1 = $obj->MyInfo()['AppSettingAdmin']['Logout'];
             $this->label2 = $obj->MyInfo()['AppSettingAdmin']['AdminDashboard'];
-            $this->MyBranch = Branch::fromArray($obj);
+            $this->MyBranch = array(request()->session()->get('superId')=>new Branch($obj->MyInfo()['AppSettingAdmin']['BranchMain']), ...Branch::fromArray($obj));
             if(Route::currentRouteName() === 'SystemLang'){
                 $this->myMenuApp = array('Home'=>$obj->MyInfo()['Menu']['Home'], 'SystemLang'=>$obj->MyInfo()['Menu']['SystemLang']);
                 foreach ($obj->MyInfo()['AllNamesLanguage'] as $key => $value){
