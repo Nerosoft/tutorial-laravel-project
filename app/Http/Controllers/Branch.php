@@ -55,7 +55,7 @@ class Branch
     function getFollowId(){
         return $this->Follow;
     }
-    static function fromArray($obj, $state = null){
+    static function fromArray(MyDatabase $obj, $state = null){
         $allBranch = array();
         if(isset($obj->getDb()['Branches']))
             foreach ($obj->getDb()['Branches'] as $key => $branch)
