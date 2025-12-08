@@ -24,9 +24,9 @@ class Users
     function getKey(){
         return $this->Key;
     }
-    static function fromArray(MyDatabase $obj){
+    static function fromArray($users){
         $arr = array();
-        foreach ($obj->getDb()['User'] as $key => $user)
+        foreach ($users as $key => $user)
             $arr[$key] = new Users($user['Email'], $user['Password'], $user['Key']);
         return $arr;
     }

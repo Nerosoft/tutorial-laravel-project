@@ -36,7 +36,7 @@ class AdminMenu extends SettingPage
         }
     }
 
-        public function getIconByKey($key){
+    public function getIconByKey($key){
         if($key === 'Home')//--
             return 'box-arrow-left.svg';
         else if($key === 'SystemLang')
