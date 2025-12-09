@@ -20,7 +20,7 @@
       </li>
     @else
       <li class="nav-item">
-        <a class="nav-link {{!request()->route('lang') && !request()->route('id') && $key !== 'Home' &&  Route::currentRouteName() === 'SystemLang'|| $key === Route::currentRouteName() && Route::currentRouteName() !== 'SystemLang'?'my_active':''}}" aria-current="page" href="{{route($key)}}">
+        <a class="nav-link {{$key === Route::currentRouteName() && !request()->route('lang') && !request()->route('id')?'my_active':''}}" aria-current="page" href="{{route($key)}}">
         <img class="style_icon_menu" src="{{asset('/lib/icons/'.$lang->getIconByKey($key))}}"/>
         {{$item}}
         </a>
