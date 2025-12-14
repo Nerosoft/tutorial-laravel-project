@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
-class SystemLangController extends TableInformation implements ViewLanguage
+class SystemLangController extends TableInformation implements TableData
 {
     public function __construct(){
         $this->ob = mydb::find(request()->session()->get('userId'));
