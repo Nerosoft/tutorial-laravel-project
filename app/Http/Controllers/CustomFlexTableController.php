@@ -56,20 +56,18 @@ class CustomFlexTableController extends Page implements TableData
     }
     function makeAddTable(){
         $key = $this->generateUniqueIdentifier();
-        $myInputKey = array();
-            for ($i=0; $i < request()->input('input_number'); $i++)
-            array_push($myInputKey, $this->generateUniqueIdentifier());
         foreach ($this->MyInfo()['AllNamesLanguage'] as $code => $value) {
             $lang = $this->getDb()[$code];
             $lang['MyFlexTables'][$key] = request()->input('name');
             $lang[$key] = $lang['TablePage'];
             $lang[$key]['MYTITLE'] = request()->input('name');
-            foreach ($myInputKey as $key2){
-                $lang[$key]['TableHead'][$key2] = $lang['AppSettingAdmin']['InputNameTable'];
-                $lang[$key]['Label'][$key2] = $lang['AppSettingAdmin']['InputLabel'];
-                $lang[$key]['Hint'][$key2] = $lang['AppSettingAdmin']['InputHint'];
-                $lang[$key]['ErrorsMessageReq'][$key2] = $lang['AppSettingAdmin']['InputErrorsMessageReq'];
-                $lang[$key]['ErrorsMessageInv'][$key2] = $lang['AppSettingAdmin']['InputErrorsMessageInv'];
+            for ($i=0; $i < request()->input('input_number'); $i++){
+                $myInputKey = $this->generateUniqueIdentifier();
+                $lang[$key]['TableHead'][$myInputKey] = $lang['AppSettingAdmin']['InputNameTable'];
+                $lang[$key]['Label'][$myInputKey] = $lang['AppSettingAdmin']['InputLabel'];
+                $lang[$key]['Hint'][$myInputKey] = $lang['AppSettingAdmin']['InputHint'];
+                $lang[$key]['ErrorsMessageReq'][$myInputKey] = $lang['AppSettingAdmin']['InputErrorsMessageReq'];
+                $lang[$key]['ErrorsMessageInv'][$myInputKey] = $lang['AppSettingAdmin']['InputErrorsMessageInv'];
             }
             $this->getDb()[$code] = $lang;
         }
