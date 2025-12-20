@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class SettingPage extends Controller
 {
-    function __construct($language, $obj = null, $state = null){
+    function __construct($language, MyDatabase $obj = null, $state = null){
         if(is_null($obj)){
             $this->language = $language;
         }else{

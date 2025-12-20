@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class TableInformation extends AdminMenu
 {
-    function __construct(TableData | ViewLanguage | ViewLanguage2 $obj, $state = null){
+    function __construct(ViewLanguage | ViewLanguage2 $obj, $state = null){
         if(is_null($state))
             parent::__construct($obj); 
         else{

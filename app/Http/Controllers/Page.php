@@ -9,7 +9,7 @@ use App\Models\mydb;
 
 class Page extends TableInformation
 {
-    function __construct(TableData | ViewLanguage2 $obj, $state = null){
+    function __construct(ViewLanguage | ViewLanguage2 $obj, $state = null){
         if(is_null($state))
             parent::__construct($obj);
         else if(Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete' && request()->session()->get('superId') !== request()->session()->get('userId')){
