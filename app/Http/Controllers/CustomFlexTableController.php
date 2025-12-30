@@ -18,10 +18,6 @@ class CustomFlexTableController extends Page implements TableData
         return isset($this->MyInfo()['MyFlexTables'])?array_reverse(CustomTable::fromArray($this->MyInfo()['MyFlexTables'])):array();
     }
     public function setupViewLang(){
-        $this->model2 = $this->MyInfo()['CustomTable']['ScreenModelCreate'];
-        $this->button2 = $this->MyInfo()['CustomTable']['ButtonModelCreate'];
-        $this->model3 = $this->MyInfo()['CustomTable']['ScreenModelEdit'];
-        $this->button3 = $this->MyInfo()['CustomTable']['ButtonModelEdit'];
         $this->TableName = $this->MyInfo()['CustomTable']['NameTable'];
         $this->LabelName = $this->MyInfo()['CustomTable']['LabelName'];
         $this->HintName = $this->MyInfo()['CustomTable']['HintName'];

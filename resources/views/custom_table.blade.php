@@ -7,7 +7,7 @@
     'idModel'=>'createModel',
     'idForm'=>'createForm',
     'action'=>route('addTable'), 
-    'title'=>$lang->model2, 
+    'title'=>$lang->title2, 
     'button'=>$lang->button2])
 
     <table id="example" class="table table-striped" >
@@ -32,7 +32,7 @@
                     'button'=>$lang->buttonModelDelete,
                     'name'=>$item->getName(), 'action'=>route('deleteTable')])
                     <img class="style_icon_menu pointer" src="{{asset('/lib/icons/wrench-adjustable.svg')}}" onclick="displayEditForm('#editModel{{$index}}', '{{$item->getName()}}')"/>
-                   @include('all_model.custom_table', ['idModel'=>'editModel'.$index, 'idForm'=>'editForm'.$index, 'action'=>route('editTable'), 'title'=>$lang->model3, 'button'=>$lang->button3])
+                   @include('all_model.custom_table', ['idModel'=>'editModel'.$index, 'idForm'=>'editForm'.$index, 'action'=>route('editTable'), 'title'=>$lang->title3, 'button'=>$lang->button3])
                 </td>
             </tr>
             @endforeach            

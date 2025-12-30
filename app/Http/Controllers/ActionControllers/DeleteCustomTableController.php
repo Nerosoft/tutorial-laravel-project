@@ -15,8 +15,8 @@ class DeleteCustomTableController extends Page implements ViewLanguage2
         return $this->ob[$this->language];
     }
     function makeValidation(){
+        request()->validate($this->roll, $this->message);
         foreach ($this->MyInfo()['AllNamesLanguage'] as $key => $value) {
-            request()->validate($this->roll, $this->message);
             $lang = $this->getDb()[$key];
             if(count($lang['MyFlexTables']) === 1)
                 unset($lang[request()->input('id')], $lang['MyFlexTables']);
