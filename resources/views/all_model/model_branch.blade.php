@@ -26,8 +26,6 @@
                 <input 
                 pattern="^[0-9]{11}$" 
                 required
-                oninvalid="handleInputPhone(this ,'{{$lang->error2}}', '{{$lang->error11}}')"
-                oninput="handleInputPhone(this ,'{{$lang->error2}}', '{{$lang->error11}}')"
                 id="brance-rays-phone" inputmode="tel" class="form-control" name="brance_rays_phone" value="{{$branch?->getPhone()??''}}" title="{{$lang->hint2}}" placeholder="{{ $lang->hint2 }}">
             </div>
         </div>

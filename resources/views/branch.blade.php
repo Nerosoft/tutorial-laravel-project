@@ -105,5 +105,13 @@ function displayEditForm(brance_rays_name, brance_rays_phone, brance_rays_countr
             $(this).prop('selected', true);
     });
 }
+$('#brance-rays-phone').on('invalid input', function(){
+    if (this.validity.valueMissing)
+        this.setCustomValidity(@json($lang->error2));
+    else if (this.validity.patternMismatch)
+        this.setCustomValidity(@json($lang->error11));
+    else
+        this.setCustomValidity('');
+});
 </script>
 @endsection

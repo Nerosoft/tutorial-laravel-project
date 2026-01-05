@@ -24,15 +24,6 @@ function validForm(form){
 function removeClass(id){
     $(id).find('form').removeClass('was-validated');
 }
-
-function handleInputPhone(event, error1, error2) {
-    if (event.validity.valueMissing)
-        event.setCustomValidity(error1);
-    else if (event.validity.patternMismatch)
-        event.setCustomValidity(error2);
-    else
-        event.setCustomValidity('');
-}
 function handleInputSelect(event, error1) {
     if (event.validity.valueMissing)
         event.setCustomValidity(error1);
