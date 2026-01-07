@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App\Models\mydb;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\ViewLanguage2;
 class AdminChangeLangController extends Page implements ViewLanguage2

@@ -30,9 +30,7 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'flex' && isset(mydb::find(request()->session()->get('userId'))[mydb::find(request()->session()->get('userId'))['Setting']['Language']]['MyFlexTables']) && $this->getKeyTables()
         )
             return $next($request);
-        else if($request->session()->exists('userId') && $state === 'test' 
-        || $request->session()->exists('userId') && $state === 'delete'
-        || $request->session()->exists('userId') && $state === 'flex')
+        else if($request->session()->exists('userId'))
             return redirect()->route('Home');
         else
             return redirect()->route('mylogin');
