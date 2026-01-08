@@ -46,7 +46,7 @@ class FlexTableController extends Page implements TableData
         $this->ErrorsMessageInv = $this->getDb()[$this->getDb()['Setting']['Language']][request()->route('id')]['ErrorsMessageInv'];
         parent::__construct($this, request()->route('id'));
     }
-    function index($id){
+    function index(){
         return view('flex_table',[
             'lang'=> $this,
         ]);
