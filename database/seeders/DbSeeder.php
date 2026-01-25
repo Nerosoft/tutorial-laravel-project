@@ -34,9 +34,6 @@ class DbSeeder extends Seeder
                         ],
                         'MyFlexTables'=>'flex table'
                     ],
-                    'AllNamesLanguage'=>[
-                        'english'=>'English language',
-                    ],
                     'Login'=>[
                         'MYTITLE'=>'Login',
                         'IdReq'=>'id required',
